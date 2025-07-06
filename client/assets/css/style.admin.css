@@ -1,0 +1,57 @@
+@import url('/pages/admin/creator/creator.admin.css');
+
+/* Reset cơ bản */
+body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Lexend', sans-serif;
+      background-color: #f4f7fa;
+}
+
+/* Container chính sử dụng Flexbox để tạo layout 2 cột */
+#admin-container {
+      display: flex;
+      min-height: 100vh;
+}
+#admin-sidebar {
+      width: 200px; 
+      background-color: #212529; 
+      color: #ecf0f1; 
+      padding-top: 20px;
+      flex-shrink: 0; 
+}
+#admin-sidebar nav ul {
+      list-style-type: none; 
+      padding: 0;
+      margin: 0;
+}
+#admin-sidebar nav li a {
+      display: flex; 
+      align-items: center;
+      color: #ecf0f1;
+      text-decoration: none;
+      padding: 15px 20px;
+      transition: background-color 0.3s;
+}
+#admin-sidebar nav li a:hover {
+      background-color: white;
+      color: black; 
+}
+#admin-sidebar .active a {
+      background-color: white;
+      color: black; 
+}
+/* Định dạng cho icon */
+#admin-sidebar nav li a i {
+      width: 35px; /* Tạo khoảng cách giữa icon và text */
+      font-size: 1.1em;
+}
+
+
+/* Khu vực nội dung chính */
+#admin-root {
+      flex-grow: 1; /* Lấp đầy không gian còn lại */
+}
+#admin-root-container {
+      padding: 0 40px;
+}
