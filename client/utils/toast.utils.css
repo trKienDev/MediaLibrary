@@ -1,0 +1,46 @@
+/* Container cho tất cả các toast */
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Khoảng cách giữa các toast */
+}
+
+/* Kiểu dáng cơ bản của một toast */
+.toast {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    opacity: 0; /* Bắt đầu với trạng thái trong suốt */
+    transform: translateX(100%); /* Bắt đầu ở bên ngoài màn hình bên phải */
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Hiệu ứng mượt mà */
+}
+
+/* Trạng thái hiển thị của toast */
+.toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Trạng thái ẩn của toast trước khi xóa */
+.toast.hide {
+    opacity: 0;
+    transform: translateX(120%);
+}
+
+.toast .toast-icon {
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+/* Màu sắc cho từng loại toast */
+.toast.info { background-color: #007bff; }
+.toast.success { background-color: #28a745; }
+.toast.warning { background-color: #ffc107; color: #333; }
+.toast.error { background-color: #dc3545; }

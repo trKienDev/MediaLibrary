@@ -1,5 +1,5 @@
 @import url('/pages/admin/creator/creator.admin.css');
-
+@import url('/utils/toast.utils.css');
 /* Reset cơ bản */
 body, html {
       margin: 0;
