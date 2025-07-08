@@ -1,0 +1,120 @@
+/**** LAYOUT ****/
+.homepage-layout {
+      display: grid;
+      grid-template-areas: 
+            "header header"
+            "sidebar main";
+      grid-template-columns: 10% 1fr; /* Cột sidebar và cột nội dung chính */
+      grid-template-rows: 50px 1fr;
+      height: 100vh;
+      row-gap: 24px;
+}
+.main-header { grid-area: header; }
+.main-sidebar { grid-area: sidebar; }
+.app-root { grid-area: main; overflow-y: auto; } /* Cho phép cuộn nội dung */
+
+/**** HEADER ****/
+.main-header {
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      height: 56px;
+      background: #1e2024;
+}
+.search-form {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      justify-content: center;
+}
+    
+.search-group {
+      position: relative;
+      width: 550px;
+}
+
+.search-input {
+      width: 100%;
+      padding: 8px 16px;
+      border-radius: 24px;
+      border: 1px solid transparent;
+      font-family: 'Lexend';
+      font-size: 13px;
+}
+.search-input:focus-visible {
+      outline: none !important;
+}
+    
+.btn-advanced-search {
+      position: absolute;
+      right: 17px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+}
+.btn-advanced-search i {
+      font-size: 13px;
+}
+.btn-advanced-search:hover i {
+      color: var(--hot-pink);
+}
+.btn-advanced-search i:hover + .search-tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
+
+.search-tooltip {
+      visibility: hidden;
+      position: absolute;
+      bottom: 100%;
+      left: 320%;
+      transform: translateX(-50%) translateY(10px); /* Di chuyển tooltip lên và căn giữa icon */
+      background-color: var(--gold);
+      color: #000;
+      text-align: center;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      font-family:'Lexend', 'Courier New', Courier, monospace;
+      white-space: nowrap;
+      z-index: 10;
+      opacity: 0;
+      transition: opacity 0.3s;
+}
+/* ================================================= */
+
+/**** SIDEBAR ****/
+.main-sidebar ul {
+      list-style-type: none;
+      padding: 0;
+}
+.main-sidebar ul li {
+      border-radius: 10px;
+}
+.main-sidebar ul li a {
+      text-decoration: none;
+      color: #fff; 
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      padding: 15px 20px;
+} 
+.main-sidebar ul li a i {
+      margin-right: 20px; 
+}
+.sidebar-link a:hover {
+      background: linear-gradient(270deg,rgba(250, 94, 255, 0),rgba(255, 62, 189, 0.11) 66.15%,rgba(255, 4, 216, 0.3));
+      color: #FF9CCE;
+}
+.sidebar-link .active a {
+      background: linear-gradient(270deg,rgba(250, 94, 255, 0),rgba(255, 62, 189, 0.11) 66.15%,rgba(255, 4, 216, 0.3));
+      color: #FF9CCE;
+      font-weight: bold;
+}
+.sidebar-separator {
+      border-color: #454a57;
+      width: 99%;
+}

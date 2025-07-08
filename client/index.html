@@ -5,22 +5,86 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>My SPA Project</title>
             <link rel="stylesheet" href="/assets/css/style.main.css">
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
       </head>
-      <body>
-            <header>
-                  <nav>
-                  <a href="/" data-spa>Trang chủ</a>
-                  <a href="/about" data-spa>Giới thiệu</a>
-                  <a href="/products" data-spa>Sản phẩm</a>
-                  </nav>
+      <body class="homepage-layout">
+            <header class="main-header">
+                  <form class="search-form" role="search" action="/search" method="GET">
+                        <div class="search-group">
+                              <input type="search" name="q" class="search-input" placeholder="Search" aria-label="Tìm kiếm" required/>
+                              <button type="submit" class="btn-advanced-search" aria-label="Search">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <span class="search-tooltip">advance search</span>
+                              </button>
+                        </div>
+                  </form>
             </header>
 
-            <main id="app-root"></main>
+            <aside class="main-sidebar">
+                  <nav class="main-nav">
+                        <ul>
+                              <li class="sidebar-link active">
+                                    <a href="#"><i class="fa-solid fa-house"></i> Homes</a>
+                              </li>
+                              <hr class="sidebar-separator">
+                              <li class="sidebar-link">
+                                    <a href="sections/videos"><i class="fa-solid fa-circle-play"></i> Videos</a>
+                              </li>
+                              <li class="sidebar-link">
+                                    <a href="sections/films"><i class="fa-solid fa-clapperboard"></i> Films</a>
+                              </li>
+                              <li class="sidebar-link">
+                                    <a href="sections/homepage-animes"><i class="fa-solid fa-masks-theater"></i> Animes</a>
+                              </li>
+                              <li class="sidebar-link">
+                                    <a href="sections/homepage-mangas"><i class="fa-solid fa-images"></i> Mangas</a>
+                              </li>
+                              <li class="sidebar-link">
+                                    <a href="sections/homepage-images"><i class="fa-solid fa-image"></i> Images</a>
+                              </li>
+                              <li class="sidebar-link">
+                                    <a href="sections/homepage-shorts"><i class="fa-solid fa-tablet-screen-button"></i> Shorts</a>
+                              </li>
+                              <hr class="sidebar-separator">
+                              <li class="sidebar-link">
+                                    <a href="sections/studios"><i class="fa-solid fa-video"></i> Studios</a>
+                              </li>
+                              <li class="sidebar-link">
+                                    <a href="sections/creators"><i class="fa-solid fa-user"></i> Creators</a>
+                              </li>
+                              <li class="sidebar-link">
+                                    <a href="sections/tags"><i class="fa-solid fa-tag"></i> Tags</a>
+                              </li>
+                              <li class="sidebar-link">
+                                    <a href="sections/homepage_collections"><i class="fa-solid fa-folder"></i> Collections</a>
+                              </li>
+                              <li class="sidebar-link">
+                                    <a href="sections/homepage_playlists"><i class="fa-solid fa-floppy-disk"></i> Playlists</a>
+                              </li>
+                              <hr class="sidebar-separator">
+                              <li class="sidebar-link">
+                                    <a href="#"><i class="fa-solid fa-clock-rotate-left"></i> History</a>
+                              </li>
+                              <li class="sidebar-link">
+                                    <a href="#"><i class="fa-solid fa-thumbs-up"></i> Liked</a>
+                              </li>
+                        </ul>
+                  </nav>
+            </aside>
+            
+            <main id="app-root">
+                  <div class="app-root-container">
+                        <div id="app-root-content"></div>
+                  </div>
+            </main>
 
             <footer>
                   <p>© 2025 - Xây dựng với JS thuần</p>
             </footer>
 
-            <script src="./loader.app.js"></script>
+            <script type="module" src="/app.main.js"></script>
       </body>
 </html>

@@ -1,24 +1,34 @@
+@import url('/assets/css/homepage.main.css');
 :root {
       --neon-blue: #1F51FF;
+      --gold: #FFD700;
+      --hot-pink: #FF69B4;
+      --light-pink: #FFB6C1;
 }
 
 body, html {
       margin: 0;
       padding: 0;
+      background-color: #24262b;
+      color: white;
       font-family: 'Lexend', sans-serif;
+}
+a {
+      text-decoration: none;
+      color: #fff;
 }
 input, button {
       font-family: 'Lexend', sans-serif;
 }
 
+/* button */
 .btn {
       color: white; 
       border-radius: 0.25rem; 
       text-align: center; 
       cursor: pointer; 
       transition: all 0.2s ease-in-out;
-      border: none;
-      padding: 9px;
+      border: none; padding: 9px;
 }
 .btn:hover {
       filter: brightness(1.5);
@@ -38,3 +48,4 @@ input, button {
       background-color: #e2e6ea;
       filter: none !important;
 }
+

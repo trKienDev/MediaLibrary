@@ -36,6 +36,9 @@ App.spa.router = (function() {
 
             document.addEventListener('click', navigate);
             window.addEventListener('popstate', handleLocation);
+
+                  // Tải nội dung cho trang ban đầu
+            handleLocation();
       }
 
       return {
