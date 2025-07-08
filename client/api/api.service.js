@@ -1,4 +1,6 @@
+import { toastNotifier } from "../app.admin.js";
 import appConfigs from "../config/app.config.js";
+import NOTIFICATION_TYPES from "../constants/notification-types.constant.js";
 
 /**
  * Một hàm client API trung tâm, linh hoạt để xử lý các request.
@@ -9,7 +11,7 @@ import appConfigs from "../config/app.config.js";
  * @param {object|FormData|null} [options.data=null] - Dữ liệu cần gửi đi.
  * @returns {Promise<{success: boolean, data?: any, error?: string}>}
 */
-async function apiClient({ endpoint, method = 'GET', data = null }) {
+async function apiService({ endpoint, method = 'GET', data = null }) {
       const url = `${appConfigs.SERVER}${endpoint}`;
       
       const fetchOptions = {
@@ -34,11 +36,9 @@ async function apiClient({ endpoint, method = 'GET', data = null }) {
             const response = await fetch(url, fetchOptions);
 
             // Errors
-            if(response.ok) {
+            if(!response.ok) {
                   const errorData = await response.json();
-                  const errorMessage = errorData.error || 'An unknown error occurred';
-                  showToast(errorMessage, 'error');
-                  return { success: false, error: errorMessage };
+                  throw new Error(errorData);
             }
 
             // Success
@@ -47,23 +47,24 @@ async function apiClient({ endpoint, method = 'GET', data = null }) {
 
             return { success: true, data: result };
       } catch(error) {
-            console.error(`API Client Error [${method} - ${endpoint}]: `, error);
-            const errorMessage = `Network error or invalid response`;
-            showToast(errorMessage, 'error');
-            return { success: false, error: errorMessage};
+            // console.error(`API Client Error [${method} - ${endpoint}]: `, error);
+            // const errorMessage = `Network error or invalid response`;
+            // toastNotifier.show(errorMessage, NOTIFICATION_TYPES.ERROR);
+            console.error('Error in apiService: ', error);
+            return { success: false, error: error };
       }
 }
 
 // GET 
-export const apiGet = (endpoint) => apiClient({ endpoint });
+export const apiGet = (endpoint) => apiService({ endpoint });
 
 // DELETE
-export const apiDelete = (endpoint) => apiClient({ endpoint, method: 'DELETE' });
+export const apiDelete = (endpoint) => apiService({ endpoint, method: 'DELETE' });
 
 // CREATE
-export const createJson = (endpoint, data) => apiClient({ endpoint, method: 'POST', data });
-export const createForm = (endpoint, formData) => apiClient({ endpoint, method: 'POST', data: formData });
+export const createJson = (endpoint, data) => apiService({ endpoint, method: 'POST', data });
+export const createForm = (endpoint, formData) => apiService({ endpoint, method: 'POST', data: formData });
 
 // UPDATE
-export const updateJson = (endpoint, data) => apiClient({ endpoint, method: 'PUT', data});
-export const updateForm = (endpoint, formData) => apiClient({ endpoint, method: 'PUT', data: formData });
+export const updateJson = (endpoint, data) => apiService({ endpoint, method: 'PUT', data});
+export const updateForm = (endpoint, formData) => apiService({ endpoint, method: 'PUT', data: formData });

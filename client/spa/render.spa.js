@@ -30,12 +30,14 @@ App.spa.render = (function() {
                   
                   const html = await response.text();
                   _rootElement.innerHTML = html;
-                  
-                  // THAY ĐỔI: Gọi hàm mount của trang dựa trên context
-                  if (App.pages && App.pages[context] && typeof App.pages[context][pageName] === 'function') {
-                        App.pages[context][pageName]();
-                  }
 
+                  // Tạo & gắn thẻ script tường minh
+                  const script = document.createElement('script');
+                  script.id = 'page-specific-script';
+                  script.src = `/pages/${context}/${pageName}.js`;
+                  script.type = 'module';
+
+                  document.body.appendChild(script);
             } catch (error) {
                   _rootElement.innerHTML = '<h1>404 - Không tìm thấy trang</h1>';
                   throw new Error(`Lỗi render trang:', ${error}`);

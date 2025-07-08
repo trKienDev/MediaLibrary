@@ -1,0 +1,22 @@
+.tag-table {
+      width: 100%;
+      border-collapse: collapse; /* Gộp đường viền của các ô */
+}
+.tag-table th, .tag-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #e0e0e0;  /* Đường kẻ ngang giữa các dòng */
+}
+.tag-table th {
+      color: #6c757d;
+      font-weight: 500;
+}
+.tag-table tbody tr:last-child td {
+      border-bottom: none; /* Bỏ đường kẻ ở dòng cuối cùng */
+}
+.tag-table .btn + .btn {
+      margin-left: 0.25rem;
+}
+.btn-add {
+      width: 100%;
+}

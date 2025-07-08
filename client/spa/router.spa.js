@@ -8,7 +8,6 @@ App.spa.router = (function() {
       let _context = 'app';
 
       function handleLocation() {
-            console.log('run handleLocation');
             const path = window.location.pathname;
             const pageName = _routes[path] || '404'; 
             renderPage(pageName, _context);

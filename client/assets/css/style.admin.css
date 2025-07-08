@@ -1,10 +1,10 @@
 @import url('/pages/admin/creator/creator.admin.css');
-@import url('/utils/toast.utils.css');
+@import url('/pages/admin/tag/tag.admin.css');
+@import url('/utils/toast-notification/toast-notification.utils.css');
+@import url('/utils/alert-box/alert-box.utils.css');
+@import url('/assets/css/style.app.css');
 /* Reset cơ bản */
 body, html {
-      margin: 0;
-      padding: 0;
-      font-family: 'Lexend', sans-serif;
       background-color: #f4f7fa;
 }
 
@@ -52,6 +52,64 @@ body, html {
 #admin-root {
       flex-grow: 1; /* Lấp đầy không gian còn lại */
 }
-#admin-root-container {
-      padding: 0 40px;
+.admin-root-container {
+      padding: 20px 40px;
+}
+#admin-root-content {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+}
+
+/* Panel */
+.management-panel, .add-panel {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.management-panel h1 {
+      margin-top: 0;
+}
+.search-input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+      box-sizing: border-box;
+}
+/* add panel */
+.add-panel {
+      width: 250px; /* Chiều rộng cố định */
+      flex-shrink: 0; /* Không cho phép panel này co lại */
+}
+.add-panel h2 {
+      margin-top: 0;
+      font-weight: 500;
+}
+.add-panel .form-input {
+      display: block;
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      background-color: #f8f9fa; /* Màu nền cho input */
+      box-sizing: border-box;
+}
+.add-panel .add-button {
+      width: 100%;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 6px;
+      background-color: #5a67d8; /* Màu xanh tím */
+      color: white;
+      font-weight: 500;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.2s;
+}
+.add-panel .add-button:hover {
+    background-color: #4c58b6; /* Màu đậm hơn khi hover */
 }

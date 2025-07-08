@@ -1,0 +1,85 @@
+/* Lớp phủ toàn màn hình */
+.custom-alert__overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      opacity: 0;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+}
+.custom-alert__overlay.show {
+      opacity: 1;
+      visibility: visible;
+}
+
+/* Hộp thoại chính */
+.custom-alert__modal {
+      background-color: white;
+      padding: 25px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+      transform: scale(0.9);
+      transition: transform 0.2s ease-in-out;
+}
+.custom-alert__overlay.show .custom-alert__modal {
+      transform: scale(1);
+}
+
+/* Icon */
+.custom-alert__icon {
+      font-size: 50px;
+      margin-bottom: 15px;
+}
+.custom-alert__icon.success { color: #28a745; }
+.custom-alert__icon.error { color: #dc3545; }
+.custom-alert__icon.warning { color: #ffc197; }
+
+/* Tiêu đề và nội dung */
+.custom-alert__title {
+      font-size: 1.5em;
+      font-weight: 600;
+      margin-bottom: 10px;
+}
+.custom-alert__text {
+      font-size: 1em;
+      color: #555;
+      margin-bottom: 20px;
+}
+
+/* Khu vực nút bấm */
+.custom-alert__actions {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+}
+.custom-alert__actions button {
+      border: none;
+      border-radius: 8px;
+      padding: 10px 25px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: opacity 0.2s;
+}
+.custom-alert__actions button:hover {
+      opacity: 0.8;
+}
+.confirm-btn {
+      background-color: #007bff;
+}
+.cancle-btn {
+      background-color: #6c757d;
+      columns: white;
+}
+
