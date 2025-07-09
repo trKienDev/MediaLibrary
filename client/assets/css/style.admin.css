@@ -2,10 +2,11 @@
 @import url('/pages/admin/tag/tag.admin.css');
 @import url('/utils/toast-notification/toast-notification.utils.css');
 @import url('/utils/alert-box/alert-box.utils.css');
-@import url('/assets/css/style.app.css');
+@import url('/assets/css/style.main.css');
 /* Reset cơ bản */
 body, html {
       background-color: #f4f7fa;
+      color: black;
 }
 
 /* Container chính sử dụng Flexbox để tạo layout 2 cột */
