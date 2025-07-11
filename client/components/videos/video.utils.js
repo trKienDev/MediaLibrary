@@ -25,5 +25,7 @@ function createVideoSource(src) {
 
 const videoUtils = {
       createVideoPlayer,
+      createVideoPreview,
+      createVideoSource,
 }
 export default videoUtils;

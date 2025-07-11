@@ -1,4 +1,4 @@
-import { ServerFolders } from "../../constants/folder.constant";
+import { ServerFolders } from "../../constants/folder.constant.js";
 
 const VIDEO_TYPE_CONFIGS = {
       video: {

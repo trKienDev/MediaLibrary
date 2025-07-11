@@ -13,6 +13,7 @@ function addEffectHoverToZoomImage(container_element, image_element) {
       image_element.classList.add('hover-to-zoom-img');
 }
 
-export default imageUtils = {
+const imageUtils = {
       addEffectHoverToZoomImage,
 }
+export default imageUtils;

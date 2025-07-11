@@ -1,9 +1,14 @@
-import apiCreator from "../../api/creator.api.js";
-import apiFilm from "../../api/film.api.js";
+import apiService from "../../api/api.instance.js";
 
-export default async function getFilmAndCreatorNames(video) {
+async function getFilmAndCreatorNames(video) {
       return Promise.all([
-            apiFilm.getName(video.film_id),
-            apiCreator.getName(video.creator_id)
+            apiService.getName(video.film_id),
+            apiService.getName(video.creator_id),
       ]);
 }
+
+const videoService = {
+      getFilmAndCreatorNames,
+}
+export default videoService;
+

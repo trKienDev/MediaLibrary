@@ -24,9 +24,9 @@ function createResponsiveImgElement({ src, cssClass, alt = '', srcSet, sizes }) 
       return img;
 }
 
-const imgComponent = {
+const imageComponent = {
       createImgElement, 
       createLazyImgElement, 
       createResponsiveImgElement,
 }
-export default imgComponent;
+export default imageComponent;
