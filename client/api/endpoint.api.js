@@ -10,7 +10,6 @@ const apiEndpoint = {
             delete: '/api/creator', // delete
       },
       homepageFeeds: 'api/hompage-feeds',
-
       films: {
             getById: '/api/film',
       }

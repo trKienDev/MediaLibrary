@@ -6,31 +6,27 @@ import apiMethod from "./method.api.js";
  * Implements all business logic for Creator API
 */
 export default class ApiStrategy {
-      async getAll() {
-            const creators = await apiMethod.get(apiEndpoint.creators.getAll);
-            return this.#handleResult(creators);
+      async getAll(apiEndpoint) {
+            const result = await apiMethod.get(apiEndpoint);
+            return this.#handleResult(result);
       }
-      async getById(creatorId) {
-            const url = `${apiEndpoint.creators.getById}/${creatorId}`;
-            const creator = await apiMethod.get(url);
-            return this.#handleResult(creator);
-      }
-      async getByTagId(tagId) {
-            const url = `${apiEndpoint.creators.getById}/${tagId}`;
+      async getById(apiEndpoint, id) {
+            const url = `${apiEndpoint}/${id}`;
             const result = await apiMethod.get(url);
             return this.#handleResult(result);
       }
-      async getName(creatorId) {
-            const creator = await this.getById(creatorId);
-            return creator.name;
+      async getName(apiEndpoint, id) {
+            const result = await this.getById(apiEndpoint, id);
+            return result.name;
       }
-      async getImage(creatorId) {
-            const creator = await this.getById(creatorId);
-            return creator.image;
+      async getImage(apiEndpoint, id) {
+            const result = await this.getById(apiEndpoint, id);
+            return result.image;
       }
 
       #handleResult(result) {
             if(!result.success) {
+                  console.log('result: ', result);
                   throw new Error(result.error);
             }
             return result.data;

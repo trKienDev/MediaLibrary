@@ -16,4 +16,5 @@ export const ServerFolders = {
       ANIME_VIDEOS: `${ServerUploadFolder}/anime/videos`,
       ANIME_FILMS: `${ServerUploadFolder}/anime/films`,
       MANGAS: `${ServerUploadFolder}/mangas`,
+      CLIPS: `${ServerUploadFolder}/clips`,
 }

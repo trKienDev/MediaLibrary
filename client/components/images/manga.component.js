@@ -1,10 +1,11 @@
-import appConfigs from "../../config/app.config";
-import { ServerFolders } from "../../constants/folder.constant";
+import appConfigs from "../../config/app.config.js";
+import { ServerFolders } from "../../constants/folder.constant.js";
+import { addHoverToScaleEffect } from "../../utils/effects.utils.js";
 import imageUtils from "../../utils/images.utils.js";
 import domsComponent from "../dom.components.js";
-import imageComponent from "./image.component";
+import imageComponent from "./image.component.js";
 
-async function createMangaThumbnail(manga) {
+export async function createMangaThumbnail(manga) {
       const mangaWrapper = domsComponent.createDiv('manga-wrapper');
       const mangaAhref = domsComponent.createAhref({
             href: `manga/#id=${manga._id}`,
@@ -19,11 +20,6 @@ async function createMangaThumbnail(manga) {
 
       mangaAhref.appendChild(mangaThumbnail);
       mangaWrapper.appendChild(mangaAhref);
-      imageUtils.addEffectHoverToZoomImage(mangaWrapper, mangaThumbnail);
+      addHoverToScaleEffect(mangaWrapper);
       return mangaWrapper;
 }
-
-const mangaComponent = {
-      createMangaThumbnail,
-}
-export default mangaComponent;

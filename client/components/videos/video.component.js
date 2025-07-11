@@ -1,3 +1,5 @@
+import apiService from "../../api/api.instance.js";
+import apiEndpoint from "../../api/endpoint.api.js";
 import domsComponent from "../dom.components.js";
 import avatarComponent from "../images/avatar.component.js";
 import AnimeVideoArticle from "./anime-video-article.class.js";
@@ -17,11 +19,11 @@ function createInfor({ ihref, itext, icssClass, icontainerCss }) {
       return container;
 }
 async function createVideoInfor(video) {
+      const creatorData = await apiService.getById(apiEndpoint.creators.getById ,video.creator_id);
       const videoInfoDiv = domsComponent.createDiv('video-info');
       const container = domsComponent.createDiv('video-info-container');
-      const avatar = await avatarComponent.createAvatar(video.creator_id);
+      const avatar = await avatarComponent.createAvatar(creatorData);
       container.appendChild(avatar);
-
       const [filmName, creatorName] = await videoService.getFilmAndCreatorNames(video);
 
       const filmInfor = createInfor({
@@ -51,8 +53,8 @@ async function createVideoInfor(video) {
 }
 
 const videoComponent = {
-      createVideoArticle: (video) => new VideoArticle(video).createArticle(),
-      createAnimeVideoArticle: (video) => new AnimeVideoArticle(video).createArticle(),
+      createVideoArticle: async (video) => await new VideoArticle(video).createArticle(),
+      createAnimeVideoArticle: async(video) => await new AnimeVideoArticle(video).createArticle(),
       createVideoPlayer: videoUtils.createVideoPlayer,
       createVideoSource: videoUtils.createVideoSource,
       attachHoverPlayHandler: videoBehavior.attachHoverPlayHandler,

@@ -1,9 +1,11 @@
-import sectionRenderers from "./section.renderers.js";
+import { createMangaThumbnail } from "../../../components/images/manga.component.js";
+import { renderCreatorsSection, renderFilmsSection, renderMangasSection, renderVideosSection } from "./section.renderers.js";
 
 const sectionRegistry = {
-      videos: sectionRenderers.renderVideosSection,
-      films: sectionRenderers.renderFilmsSection,
-      mangas: sectionRenderers.renderMangasSection,
+      creators: renderCreatorsSection,
+      videos: renderVideosSection,
+      films: renderFilmsSection,
+      mangas: renderMangasSection,
       /// .........................
 }
 export default sectionRegistry;

@@ -17,7 +17,7 @@ function AppController() {
       App.spa.router.init({
             routes: appRoutes,
             context: 'app',
-            rootElementId: 'app-root-content'
+            rootElementId: 'app-root-content',
       });
 }
 AppController();

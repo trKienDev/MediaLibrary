@@ -1,6 +1,4 @@
-import { toastNotifier } from "../app.admin.js";
 import appConfigs from "../config/app.config.js";
-import NOTIFICATION_TYPES from "../constants/notification-types.constant.js";
 
 /* --- STRATEGY INTERFACE: buildOptions(data) --- */
 class GetStrategy {
@@ -64,7 +62,6 @@ async function apiRequest(endpoint, strategy, data) {
 async function processReponse(response) {
       if(!response.ok) {
             const error = await response.json().catch(() => ({ error: 'Unknown error' }));
-            toastNotifier.show(error.error || 'Unknown error', NOTIFICATION_TYPES.ERROR);
             return { success: false, error: error.error || 'Unknown error' };
       }
       const result = await response.json().catch(() => ({}));

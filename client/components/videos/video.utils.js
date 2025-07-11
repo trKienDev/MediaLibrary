@@ -13,7 +13,6 @@ function createVideoPreview(cssClass) {
       const video = document.createElement('video');
       video.classList.add(cssClass);
       video.controls = false;
-      video.muted = true;
       return video;
 }
 function createVideoSource(src) {

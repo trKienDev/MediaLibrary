@@ -1,39 +1,65 @@
-import appConfigs from "../../config/app.config";
+import appConfigs from "../../config/app.config.js";
 import { formatDate } from "../../utils/date.utils.js";
+import { addHoverToScaleEffect } from "../../utils/effects.utils.js";
 import imageUtils from "../../utils/images.utils.js";
+import domsComponent from "../dom.components.js";
+import imageComponent from "../images/image.component.js";
 
-function renderFilmTemplate(film, folder) {
-      const filmDateStr = formatDate(new Date(film.date));
-      const thumbnailSrc = `${appConfigs.SERVER}/${folder}/${film.thumbnail}`;
-      
-      return `
-            <artcile class="film-article">
-                  <div class="film-article-container>
-                        <a href="film/id=${film._id}" class="film-link">
-                              <div class="film-thumbnail-wrapper>
-                                    <img src="${thumbnailSrc} class="film-thumbnail"/>
-                              </div>
-                              <div class="film-detail-wrapper>
-                                    <div class="film-name">${film.name}</div>
-                                    <div class="film-date">${filmDateStr}</div>
-                              </div>
-                        </a>
-                  </div>
-            </article
-      `;
+// factory: create <a> link element
+function createFilmLink(film) {
+      return domsComponent.createAhref({
+            href: `film/#id=${film._id}`,
+            cssClass: 'film-link',
+      });
 }
 
-function createFilmThumbnailFrame(film, folder) {
-      const wrapper = document.createElement('div');
-      wrapper.innerHTML = renderFilmTemplate(film, folder);
-      const article = wrapper.firstElementChild;
+// factory: create thumbnail container + image
+function createFilmThumbnail(film, folder) {
+      const wrapper = domsComponent.createDiv('film-thumbnail-wrapper');
+      const imgSrc = `${appConfigs.SERVER}/${folder}/${film.thumbnail}`;
+      const image = imageComponent.createImgElement({ src: imgSrc, cssClass: 'film-thumbnail' });
+      wrapper.appendChild(image);
 
-      const thumbnailContainer = article.querySelector('.film-thumbnail-wrapper');
-      const thumbnailImage = article.querySelector('.film-thumbnail');
+      return wrapper;
+}
 
-      imageUtils.addEffectHoverToZoomImage(thumbnailContainer, thumbnailImage);
+// factory: create infor wrapper (name + date)
+function createFilmInfor(film) {
+      const wrapper = domsComponent.createDiv('film-infor-wrapper');
+      const nameDiv = domsComponent.createDiv('film-name');
+      nameDiv.textContent = film.name;
+
+      const dateStr = formatDate(new Date(film.date));
+      const dateDiv = domsComponent.createDiv('film-date');
+      dateDiv.textContent = dateStr;
+
+      wrapper.appendChild(nameDiv);
+      wrapper.appendChild(dateDiv);
+      return wrapper;
+}
+
+// factory: create main article frame
+function createFilmArticle() {
+      const article = domsComponent.createArticle('film-article');
+      const wrapper = domsComponent.createDiv('film-article-wrapper');
+      article.appendChild(wrapper);
+      addHoverToScaleEffect(article);
       
-      return article;      
+      return { article, wrapper };
+}
+
+// Main function: compose everything
+function createFilmThumbnailFrame(film, folder) {
+      const { article, wrapper } = createFilmArticle();
+      const link = createFilmLink(film);
+      const thumbnail = createFilmThumbnail(film, folder);
+      const infor = createFilmInfor(film);
+
+      link.appendChild(thumbnail);
+      link.appendChild(infor);
+      wrapper.appendChild(link);
+
+      return article;
 }
 
 const filmComponent = {

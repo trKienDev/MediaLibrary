@@ -30,7 +30,7 @@ App.spa.router = (function() {
       function init({ routes, context, rootElementId }) {
             _routes = routes;
             _context = context || 'app';
-
+            
             // Khởi tạo bộ render với đúng phần tử gốc
             App.spa.render.init(rootElementId);
 

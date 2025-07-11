@@ -1,8 +1,8 @@
 import appConfigs from "../../config/app.config.js";
-import { ServerFolders } from "../../constants/folder.constant";
+import { ServerFolders } from "../../constants/folder.constant.js";
 import imageUtils from "../../utils/images.utils.js";
 import domsComponent from "../dom.components.js";
-import imageComponent from "./image.component";
+import imageComponent from "./image.component.js";
 
 async function createImageFrame(image) {
       const imageWrapper = domsComponent.createDiv('image-wrapper');

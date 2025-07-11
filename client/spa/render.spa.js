@@ -36,7 +36,7 @@ App.spa.render = (function() {
                   script.id = 'page-specific-script';
                   script.src = `/pages/${context}/${pageName}.js`;
                   script.type = 'module';
-
+                  console.log('script: ', script);
                   document.body.appendChild(script);
             } catch (error) {
                   _rootElement.innerHTML = '<h1>404 - Không tìm thấy trang</h1>';

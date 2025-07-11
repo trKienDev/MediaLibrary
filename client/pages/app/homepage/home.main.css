@@ -1,0 +1,49 @@
+#homepage-feeds-content .section-content-container {
+      margin-top: 10px;
+}
+#homepage-feeds-content .section-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+}
+#homepage-feeds-content .video-article {
+      width: calc((100% - 40px) / 4);
+}
+#homepage-feeds-content .video-frame {
+      width: 100%;
+      border-radius: 10px;
+}
+#homepage-feeds-content .film-article {
+      width: calc((100% - 80px) / 8);
+}
+#homepage-feeds-content .film-thumbnail {
+      display: block;
+      width: 100%;
+      height: 300px;
+      display: block;
+      object-fit: cover;
+}
+#homepage-feeds-content .avatar-frame {
+      width: calc((100% - 100px) / 10);
+}
+#homepage-feeds-content .avatar-frame-wrapper {
+      height: 100%;
+      border-radius: 10px;
+}
+#homepage-feeds-content .avatar-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+}
+#homepage-feeds-content .manga-wrapper {
+      width: calc((100% - 80px) / 8);
+      border-radius: 10px;
+}
+#homepage-feeds-content .manga-thumbnail {
+      display: block;
+      width:100%;
+      height: 100%;
+      border-radius: 10px;
+}
+

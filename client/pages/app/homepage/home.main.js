@@ -1,6 +1,6 @@
 import { toastNotifier } from "../../../app.main.js";
+import appConfigs from "../../../config/app.config.js";
 import NOTIFICATION_TYPES from "../../../constants/notification-types.constant.js";
-import { renderSection } from "./render.utils.js";
 import sectionRegistry from "./section.registry.js";
 
 const homepageSectionTypes = Object.keys(sectionRegistry);
@@ -31,6 +31,7 @@ let lastSelectedType = null;
 })();
 
 async function loadUntilScrollable(content, loader, seed) {
+      await fetchAndRender(content, loader, seed);
       while(document.body.scrollHeight <= window.innerHeight && !isLoading) {
             await fetchAndRender(content, loader, seed);
       }
@@ -48,7 +49,7 @@ async function fetchAndRender(content, loader, seed) {
       lastSelectedType = randomType;
 
       const page = sectionPages[randomType];
-      const url = `/api/section?type=${randomType}&page=${page}&seed=${seed}`;
+      const url = `${appConfigs.SERVER}/api/feeds/section?type=${randomType}&page=${page}&seed=${seed}`;
 
       try {
             const response = await fetch(url);
@@ -61,7 +62,6 @@ async function fetchAndRender(content, loader, seed) {
             console.error(`Error fetching ${randomType}`, error);
             toastNotifier.show(`Error fetching ${randomType}`, NOTIFICATION_TYPES.ERROR);
       } finally {
-            loader.style.display = 'none';
             isLoading = false;
       }
 }
