@@ -23,6 +23,10 @@ export default class ApiStrategy {
             const result = await this.getById(apiEndpoint, id);
             return result.image;
       }
+      async getAvatarUrl(apiEndpoint, id) {
+            const result = await this.getById(apiEndpoint, id);
+            return result.avatar_url;
+      }
 
       #handleResult(result) {
             if(!result.success) {

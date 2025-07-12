@@ -1,24 +1,24 @@
 import appConfigs from "../../config/app.config.js";
 import { ServerFolders } from "../../constants/folder.constant.js";
-import imageUtils from "../../utils/images.utils.js";
+import { addHoverToScaleEffect } from "../../utils/effects.utils.js";
 import domsComponent from "../dom.components.js";
 import imageComponent from "./image.component.js";
 
 async function createImageFrame(image) {
-      const imageWrapper = domsComponent.createDiv('image-wrapper');
+      const wrapper = domsComponent.createDiv('image-wrapper');
       const imageSrc = `${appConfigs.SERVER}/${ServerFolders.IMAGES}/${image.image_url}`;
       
-      const imageElement = imageComponent.createImgElement({
+      const frame = imageComponent.createImgElement({
             src: imageSrc,
-            cssClass: 'image-element'
+            cssClass: 'image-frame'
       });
-      imageElement.width = image.width / 2;
-      imageElement.height = image.height / 2;
+      frame.width = image.width / 2;
+      frame.height = image.height / 2;
 
-      imageWrapper.appendChild(imageElement);
-      imageUtils.addEffectHoverToZoomImage(imageWrapper, imageElement);
+      wrapper.appendChild(frame);
+      addHoverToScaleEffect(wrapper);
 
-      return imageWrapper;
+      return wrapper;
 }
 
 const imageFrameComponent = {

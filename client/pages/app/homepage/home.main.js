@@ -1,3 +1,4 @@
+import apiEndpoint from "../../../api/endpoint.api.js";
 import { toastNotifier } from "../../../app.main.js";
 import appConfigs from "../../../config/app.config.js";
 import NOTIFICATION_TYPES from "../../../constants/notification-types.constant.js";
@@ -49,7 +50,7 @@ async function fetchAndRender(content, loader, seed) {
       lastSelectedType = randomType;
 
       const page = sectionPages[randomType];
-      const url = `${appConfigs.SERVER}/api/feeds/section?type=${randomType}&page=${page}&seed=${seed}`;
+      const url = `${appConfigs.SERVER}/${apiEndpoint.homepageFeeds}?type=${randomType}&page=${page}&seed=${seed}`;
 
       try {
             const response = await fetch(url);
@@ -73,5 +74,6 @@ async function renderSection(section, parent) {
             return;
       }
       const el = await renderer(section.data);
+      console.log('el: ', el);
       parent.appendChild(el);
 }

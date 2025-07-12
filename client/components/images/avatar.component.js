@@ -6,30 +6,44 @@ import { addHoverToScaleEffect } from "../../utils/effects.utils.js";
 import domsComponent from "../dom.components.js";
 import imageComponent from "./image.component.js";
 
-async function createAvatar(data) {
-      const creatorAvatarImg = await apiService.getImage(apiEndpoint.creators.getById, data._id);
-      const avatarSrc = `${appConfigs.SERVER}/${ServerFolders.CREATOR_AVATARS}/${creatorAvatarImg}`;
-      const creatorAvatar = await createAvatarFrame({
-            creatorId: data._id , avatarSrc: avatarSrc, cssClass: 'avatar-image'
-      });
-      addHoverToScaleEffect(creatorAvatar)
+export const AvatarTypes = {
+      IDOL: 'idol',
+      CREATOR: 'creator',
+}
+// Component-based design theo kiểu factory pattern
+function AvatarComponent() {
+      const create = async (id, type) => {
+            let path = null;
+            let imgSrc = null;
+            switch(type) {
+                  case AvatarTypes.IDOL: 
+                        path = await apiService.getAvatarUrl(apiEndpoint.idols.getById, id);
+                        imgSrc = `${appConfigs.SERVER}/${ServerFolders.IDOLS}/${path}`;
+                        break;
+                  case AvatarTypes.CREATOR: 
+                        path = await apiService.getImage(apiEndpoint.creators.getById, id);
+                        imgSrc = `${appConfigs.SERVER}/${ServerFolders.CREATOR_AVATARS}/${path}`;
+                        break;
+                  default:
+                        return 'default.png';
+            }
+            return render(id, imgSrc, type);
+      }
+      const render = ( id, imgSrc, type) => {
+            const frame = domsComponent.createDiv('avatar-frame');
+            const wrapper = domsComponent.createDiv('avatar-frame-wrapper');
+            const img = imageComponent.createImgElement({ src: imgSrc, cssClass: 'avatar-image' });
+            const link = domsComponent.createAhref({ href: `${type}/#id=${id }`});
 
-      return creatorAvatar;
-}
-async function createAvatarFrame({ creatorId, avatarSrc, cssClass }) {
-      const avatarFrame = domsComponent.createDiv('avatar-frame');
-      const avatarFrameContainer = domsComponent.createDiv('avatar-frame-wrapper');
-      const avatarImg = imageComponent.createImgElement({ src: avatarSrc, cssClass: cssClass });
-      const creatorAhref = domsComponent.createAhref({ href: `creator/#id=${creatorId }`});
-      
-      creatorAhref.appendChild(avatarImg);
-      avatarFrameContainer.appendChild(creatorAhref);
-      avatarFrame.appendChild(avatarFrameContainer);
-      
-      return avatarFrame;
+            link.appendChild(img);
+            wrapper.appendChild(link);
+            frame.appendChild(wrapper);
+            addHoverToScaleEffect(frame);
+
+            return frame;
+      }
+
+      return { create };
 }
 
-const avatarComponent = {
-      createAvatar,
-}
-export default avatarComponent;
+export default AvatarComponent;

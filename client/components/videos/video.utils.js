@@ -1,30 +1,25 @@
-import appConfigs from "../../config/app.config.js";
-import domsComponent from "../dom.components.js";
+import appConfigs from "../../config/app.config.js"
 
-function createVideoPlayer({ name, filepath, folder }) {
-      const container = domsComponent.createDiv('video-container');
-      const video = createVideoPreview('video-frame');
-      const source = createVideoSource(`${appConfigs.SERVER}/${folder}/${filepath}`);
-      video.appendChild(source);
-      container.appendChild(video);
-      return container;
-}
-function createVideoPreview(cssClass) {
-      const video = document.createElement('video');
-      video.classList.add(cssClass);
-      video.controls = false;
-      return video;
-}
-function createVideoSource(src) {
-      const source = document.createElement('source');
-      source.src = src;
-      source.type = 'video/mp4';
-      return source;
-}
+const VideoUtils = {
+      populateVideo(iVideo, uploadPath) {
+            const videoUrl = `${appConfigs.SERVER}/${uploadPath}/${iVideo.file_path}`;
+            const videoPlayer = document.querySelector('video');
+            const videoSource = videoPlayer.querySelector('source');
+            const thumbnailImage = document.getElementById('thumbnail-video');
+            videoSource.src = videoUrl;
+            videoPlayer.load();
+            videoPlayer.classList.remove('d-none');
+            thumbnailImage.style.display = 'none';
+      },
 
-const videoUtils = {
-      createVideoPlayer,
-      createVideoPreview,
-      createVideoSource,
-}
-export default videoUtils;
+      updateVideoSourceById({ elementId, iVideo, uploadPath }) {
+            const videoUrl = `${appConfigs.SERVER}/${uploadPath}/${iVideo.file_path}`;
+            const videoPlayer = document.getElementById(elementId);
+            const videoSource =videoPlayer.querySelector('source');
+            videoSource.src = videoUrl;
+            videoPlayer.load();
+            return videoPlayer;
+      }
+};
+
+export default VideoUtils;

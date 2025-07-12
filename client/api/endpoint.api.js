@@ -9,9 +9,13 @@ const apiEndpoint = {
             update: '/api/creator', //  put
             delete: '/api/creator', // delete
       },
-      homepageFeeds: 'api/hompage-feeds',
       films: {
             getById: '/api/film',
+      },
+      homepageFeeds: 'api/feeds/section',
+      idols: {
+            getById: '/api/idol',
       }
+
 }
 export default apiEndpoint;
