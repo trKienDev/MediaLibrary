@@ -74,6 +74,5 @@ async function renderSection(section, parent) {
             return;
       }
       const el = await renderer(section.data);
-      console.log('el: ', el);
       parent.appendChild(el);
 }

@@ -1,12 +1,12 @@
-import { renderAnimeFilms, renderAnimeVideos, renderClipsSection, renderCreatorsSection, renderFilmsSection, renderIdolsSection, renderImagesSection, renderMangasSection, renderShortsSection, renderVideosSection } from "./section.renderers.js";
+import { renderAnimeFilmsSection, renderAnimeVideosSection, renderClipsSection, renderCreatorsSection, renderFilmsSection, renderIdolsSection, renderImagesSection, renderMangasSection, renderShortsSection, renderVideosSection } from "./section.renderers.js";
 
 const sectionRegistry = {
       creators: renderCreatorsSection,
       videos: renderVideosSection,
       films: renderFilmsSection,
       mangas: renderMangasSection,
-      anime_videos: renderAnimeVideos,
-      anime_films: renderAnimeFilms,
+      anime_videos: renderAnimeVideosSection,
+      anime_films: renderAnimeFilmsSection,
       idols: renderIdolsSection,
       images: renderImagesSection,
       shorts: renderShortsSection,
