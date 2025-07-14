@@ -16,7 +16,16 @@ function createElement(tag, { cssClass, text, href, id, attrs = {} } = {}) {
       return el;
 }
 
+function _updateTextById(domId, text, domName) {
+      const el = document.getElementById(domId);
+      if(el && (!domName || el.tagName === domName)) {
+            el.textContent = text;
+      }
+      return el;
+}
+
 const domsComponent = {
+      // API Create DOM
       createElement: (tag, options) => createElement(tag, options),
       createArticle: ({cssClass, text, id, attrs} = {}) => createElement('article', { cssClass, text, id, attrs}),
       createDiv: ({cssClass, text, id, attrs} = {}) => createElement('div', {cssClass, text, id, attrs}),
@@ -25,6 +34,10 @@ const domsComponent = {
       createSpan: ({ text, cssClass, id, attrs } = {}) => createElement('span', { cssClass, text, id, attrs }),
       createLiElement: ({ cssClass, text, id, attrs } = {}) => createElement('li', { cssClass, text, id, attrs }),
       createSection: ({ id, cssClass, text, attrs } = {}) => createElement('section', { cssClass, text, id, attrs }),
+
+      // API Update DOM
+      updateSpanText: (id, text) => _updateTextById(id, text, 'SPAN'),
+      updateTextById: (id, text) => _updateTextById(id, text)
 }
 export default domsComponent;
 

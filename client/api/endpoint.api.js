@@ -15,6 +15,9 @@ const apiEndpoint = {
       homepageFeeds: 'api/feeds/section',
       idols: {
             getById: '/api/idol',
+      },
+      tags: {
+            getById: '/api/tag',
       }
 
 }
