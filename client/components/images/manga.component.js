@@ -6,9 +6,9 @@ import domsComponent from "../dom.components.js";
 import imageComponent from "./image.component.js";
 
 export async function createMangaThumbnail(manga) {
-      const mangaWrapper = domsComponent.createDiv('manga-wrapper');
+      const mangaWrapper = domsComponent.createDiv({cssClass: 'manga-wrapper'});
       const mangaAhref = domsComponent.createAhref({
-            href: `manga/#id=${manga._id}`,
+            href: `manga/${manga._id}`,
             cssClass: 'manga-link',
             attrs: {
                   'data-spa': 'true',

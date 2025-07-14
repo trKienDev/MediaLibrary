@@ -9,12 +9,12 @@ import imageFrameComponent from "../../../components/images/image-frame.componen
 import ShortVideoArticle from "../../../components/videos/video-article/short-video-article.class.js";
 import ClipVideoArticle from "../../../components/videos/video-article/clip-video-article.class.js";
 
-export async function renderSection(data, {
+async function renderSection(data, {
       wrapperClass,
       itemFactory
 }) {
-      const container = domsComponent.createDiv('section-content-container');
-      const wrapper = domsComponent.createDiv(wrapperClass);
+      const container = domsComponent.createDiv({cssClass: 'section-content-container'});
+      const wrapper = domsComponent.createDiv({cssClass: wrapperClass});
       const items = await Promise.all(data.map(itemFactory));
       wrapper.append(...items);
       container.appendChild(wrapper);

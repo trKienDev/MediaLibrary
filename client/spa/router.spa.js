@@ -43,8 +43,15 @@ App.spa.router = (function() {
 
             event.preventDefault();
             const href = anchor.getAttribute('href');
-            // Chỉ điều hướng nếu URL thay đổi để tránh render lại không cần thiết
-            if (window.location.pathname !== href) {
+
+            // normalize relative path to absolute
+            const url = new URL(href, window.location.origin);
+            const path = url.pathname;
+            console.log(`navigate(): href=${href}, resolved path=${path}, current path=${window.location.pathname}`);
+            console.log(`window.location.pathname: ${window.location.pathname} / path: ${path}`);
+            // Chỉ navigate nếu pathname khác:
+            if (window.location.pathname !== path) {
+                  console.log('pathname: ', window.location.pathname);
                   window.history.pushState({}, '', href);
                   handleLocation();
             }

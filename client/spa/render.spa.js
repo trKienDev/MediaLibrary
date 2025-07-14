@@ -23,29 +23,25 @@ App.spa.render = (function() {
 
             try {
                   const path = `/pages/${context}/${pageName}.html`;
-                  
-                  console.log(`Đang fetch trang: ${path}`);
-
+                  console.log(`Fetching page: ${path}`);
                   const response = await fetch(path);
                   if (!response.ok) throw new Error(`Không tìm thấy file trang tại: ${path}`);
                   
                   const html = await response.text();
                   _rootElement.innerHTML = html;
 
-                  // Gắn params toàn cục cho page script để sử dụng
+                  // // Gắn params toàn cục cho page script để sử dụng
                   window.PageParams = params;
 
-                  // Xóa script cũ nếu có
-                  const oldScript = document.getElementById('page-specific-script');
-                  if(oldScript) oldScript.remove();
-
-                  // Tạo & gắn thẻ script tường minh
-                  const script = document.createElement('script');
-                  script.id = 'page-specific-script';
-                  script.src = `/pages/${context}/${pageName}.js`;
-                  script.type = 'module';
-                  console.log('script: ', script);
-                  document.body.appendChild(script);
+                  const modulePath = `/pages/${context}/${pageName}.js?t=${Date.now()}`;
+                  console.log(`Dynamic import module: ${modulePath}`);
+                  
+                  const module = await import(modulePath);
+                  if(module && typeof module.default === 'function') {
+                        await module.default();
+                  } else {
+                        console.warn(`Module ${modulePath} does not export default function`);
+                  }
             } catch (error) {
                   _rootElement.innerHTML = '<h1>404 - Không tìm thấy trang</h1>';
                   throw new Error(`Lỗi render trang:', ${error}`);

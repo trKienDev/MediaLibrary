@@ -11,7 +11,7 @@ const appRoutes = [
       // pages
       { path: '/video/:id', page: 'video/video.main'},
       // sections
-      { path: '/section/videos', page: 'sections/video/video-section.main'},
+      { path: '/section/videos', page: 'homepage/sections/video/video-section.main'},
 ];
 
 function AppController() {

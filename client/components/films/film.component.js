@@ -8,7 +8,7 @@ import imageComponent from "../images/image.component.js";
 // factory: create <a> link element
 function createFilmLink(film) {
       return domsComponent.createAhref({
-            href: `film/#id=${film._id}`,
+            href: `film/${film._id}`,
             cssClass: 'film-link',
             attrs: {
                   'data-spa': 'true'
@@ -18,7 +18,7 @@ function createFilmLink(film) {
 
 // factory: create thumbnail container + image
 function createFilmThumbnail(film, folder) {
-      const wrapper = domsComponent.createDiv('film-thumbnail-wrapper');
+      const wrapper = domsComponent.createDiv({cssClass: 'film-thumbnail-wrapper'});
       const imgSrc = `${appConfigs.SERVER}/${folder}/${film.thumbnail}`;
       const image = imageComponent.createImgElement({ src: imgSrc, cssClass: 'film-thumbnail' });
       wrapper.appendChild(image);
@@ -28,12 +28,12 @@ function createFilmThumbnail(film, folder) {
 
 // factory: create infor wrapper (name + date)
 function createFilmInfor(film) {
-      const wrapper = domsComponent.createDiv('film-infor-wrapper');
-      const nameDiv = domsComponent.createDiv('film-name');
+      const wrapper = domsComponent.createDiv({cssClass: 'film-infor-wrapper'});
+      const nameDiv = domsComponent.createDiv({cssClass: 'film-name'});
       nameDiv.textContent = film.name;
 
       const dateStr = formatDate(new Date(film.date));
-      const dateDiv = domsComponent.createDiv('film-date');
+      const dateDiv = domsComponent.createDiv({cssClass: 'film-date'});
       dateDiv.textContent = dateStr;
 
       wrapper.appendChild(nameDiv);
@@ -43,8 +43,8 @@ function createFilmInfor(film) {
 
 // factory: create main article frame
 function createFilmArticle() {
-      const article = domsComponent.createArticle('film-article');
-      const wrapper = domsComponent.createDiv('film-article-wrapper');
+      const article = domsComponent.createArticle({cssClass: 'film-article'});
+      const wrapper = domsComponent.createDiv({ cssClass: 'film-article-wrapper' });
       article.appendChild(wrapper);
       addHoverToScaleEffect(article);
       
