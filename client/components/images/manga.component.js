@@ -9,7 +9,10 @@ export async function createMangaThumbnail(manga) {
       const mangaWrapper = domsComponent.createDiv('manga-wrapper');
       const mangaAhref = domsComponent.createAhref({
             href: `manga/#id=${manga._id}`,
-            cssClass: 'manga-link'
+            cssClass: 'manga-link',
+            attrs: {
+                  'data-spa': 'true',
+            }
       });
 
       const mangaSrc = `${appConfigs.SERVER}/${ServerFolders.MANGAS}/${manga.thumbnail}`;

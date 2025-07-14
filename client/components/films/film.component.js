@@ -10,6 +10,9 @@ function createFilmLink(film) {
       return domsComponent.createAhref({
             href: `film/#id=${film._id}`,
             cssClass: 'film-link',
+            attrs: {
+                  'data-spa': 'true'
+            }
       });
 }
 

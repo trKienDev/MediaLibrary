@@ -8,24 +8,11 @@ window.App = window.App || {};
 App.pages = App.pages || { app: {}, admin: {} }; // Đảm bảo namespace tồn tại
 
 // Định nghĩa routes cho admin
-const adminRoutes = {
-      '/admin/': 'dashboard/dashboard.admin', // URL gốc của admin
-      '/admin/dashboard': 'dashboard/dashboard.admin',
-      '/admin/creator': 'creator/creator.admin',
-      '/admin/studio': 'studio/studio.admin',
-      '/admin/film': 'film/film.admin',
-      '/admin/collection': 'collection/collection.admin',
-      '/admin/video': 'video/video.admin',
-      '/admin/playlist': 'playlist/playlist.admin',
-      '/admin/code': 'code/code.admin',
-      '/admin/tag': 'tag/tag.admin',
-      'admin/anime': 'anime/anime.admin',
-      'admin/manga': 'manga/manga.admin',
-      'admin/idol': 'idol/idol.admin',
-      'admin/image': 'image/image.admin',
-      'admin/short': 'short/short.admin',
-      'admin/record': 'record/record.admin',
-};
+const adminRoutes = [
+      // '/admin/': 'dashboard/dashboard.admin', // URL gốc của admin
+      // '/admin/dashboard': 'dashboard/dashboard.admin',\
+      { path: '/admin/tag', page: 'tag/tag.admin' },
+];
 
 function AdminController() {
       console.log('Ứng dụng Admin đang khởi tạo...');

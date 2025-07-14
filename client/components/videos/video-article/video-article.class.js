@@ -21,12 +21,15 @@ export default class VideoArticle {
       async render() {
             const { video } = this;
             
-            const article = domsComponent.createArticle(this.cssClass);
-            const wrapper = domsComponent.createDiv('video-wrapper');
+            const article = domsComponent.createArticle({ cssClass: this.cssClass });
+            const wrapper = domsComponent.createDiv({ cssClass: 'video-wrapper' });
 
             const ahref = domsComponent.createAhref({
-                  href: `${this.linkPrefix}/#id=${video._id}`,
+                  href: `${this.linkPrefix}/${video._id}`,
                   cssClass: `${this.linkPrefix}-link`,
+                  attrs: {
+                        'data-spa': 'true'
+                  }
             });
             wrapper.appendChild(ahref);
 
@@ -56,8 +59,8 @@ export default class VideoArticle {
                   apiService.getName(apiEndpoint.creators.getById, video.creator_id),
             ]);
 
-            const videoInfor = domsComponent.createDiv('video-infor');
-            const videoInforWrapper = domsComponent.createDiv('video-infor-wrapper');
+            const videoInfor = domsComponent.createDiv({ cssClass: 'video-infor' });
+            const videoInforWrapper = domsComponent.createDiv({cssClass: 'video-infor-wrapper'});
 
             const avatarComponent = AvatarComponent();
             const videoCreator = await avatarComponent.create(video.creator_id, AvatarTypes.CREATOR);
@@ -77,7 +80,7 @@ export default class VideoArticle {
                   iWrapperCss: 'video-creator-wrapper',
             });
 
-            const videoDetails = domsComponent.createDiv('video-details');
+            const videoDetails = domsComponent.createDiv({ cssClass: 'video-details'});
             const videoViews = domsComponent.createSpan({
                   text: `${video.views} views`,
                   cssClass: 'video-views',
@@ -104,7 +107,7 @@ export default class VideoArticle {
       }
 
       createVideoPlayer(name, filepath, folder) {
-            const wrapper = domsComponent.createDiv('video-wrapper');
+            const wrapper = domsComponent.createDiv({ cssClass: 'video-wrapper'});
             const videoPlayer = document.createElement('video');
             videoPlayer.classList.add('video-player');
             videoPlayer.controls = false;

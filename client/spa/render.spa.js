@@ -11,7 +11,7 @@ App.spa.render = (function() {
             }
       }
 
-      async function renderPage(pageName, context = 'app') {
+      async function renderPage(pageName, context = 'app', params= {}) {
             if (!_rootElement) {
                   throw new Error('Bộ render chưa được khởi tạo với phần tử gốc.');
             }
@@ -23,6 +23,7 @@ App.spa.render = (function() {
 
             try {
                   const path = `/pages/${context}/${pageName}.html`;
+                  
                   console.log(`Đang fetch trang: ${path}`);
 
                   const response = await fetch(path);
@@ -30,6 +31,13 @@ App.spa.render = (function() {
                   
                   const html = await response.text();
                   _rootElement.innerHTML = html;
+
+                  // Gắn params toàn cục cho page script để sử dụng
+                  window.PageParams = params;
+
+                  // Xóa script cũ nếu có
+                  const oldScript = document.getElementById('page-specific-script');
+                  if(oldScript) oldScript.remove();
 
                   // Tạo & gắn thẻ script tường minh
                   const script = document.createElement('script');

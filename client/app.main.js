@@ -6,12 +6,13 @@ import ToastNotifier from './utils/toast-notification/toast-notification.utils.j
 window.App = window.App || {};
 App.pages =  App.pages || { app: {}, admin: {} }; // Khởi tạo namespace cho pages
 
-// Định nghĩa routes cho người dùng
-const appRoutes = {
-      '/': 'homepage/home.main',
-      '/about': 'about/about.main',
-      '/products': 'products/product.main'
-};
+const appRoutes = [
+      { path: '/', page: 'homepage/home.main' },
+      // pages
+      { path: '/video/:id', page: 'video/video.main'},
+      // sections
+      { path: '/section/videos', page: 'sections/video/video-section.main'},
+];
 
 function AppController() {
       App.spa.router.init({

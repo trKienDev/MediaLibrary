@@ -33,7 +33,12 @@ function AvatarComponent() {
             const frame = domsComponent.createDiv('avatar-frame');
             const wrapper = domsComponent.createDiv('avatar-frame-wrapper');
             const img = imageComponent.createImgElement({ src: imgSrc, cssClass: 'avatar-image' });
-            const link = domsComponent.createAhref({ href: `${type}/#id=${id }`});
+            const link = domsComponent.createAhref({ 
+                  href: `${type}/#id=${id }`,
+                  attrs: {
+                        'data-spa': 'true'
+                  }
+            });
 
             link.appendChild(img);
             wrapper.appendChild(link);

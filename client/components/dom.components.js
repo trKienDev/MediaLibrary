@@ -1,4 +1,4 @@
-function createElement(tag, { cssClass, text, href, id } = {}) {
+function createElement(tag, { cssClass, text, href, id, attrs = {} } = {}) {
       const el = document.createElement(tag);
 
       if(cssClass) {
@@ -8,17 +8,23 @@ function createElement(tag, { cssClass, text, href, id } = {}) {
       if(href && tag === 'a') el.href = href;
       if(id) el.id = id;
       
+      // set additional attributes if provided
+      Object.entries(attrs).forEach(([key, value]) => {
+            el.setAttribute(key, value);
+      });
+
       return el;
 }
 
 const domsComponent = {
-      createArticle: (cssClass) => createElement('article', { cssClass}),
-      createDiv: (cssClass, text) => createElement('div', { cssClass, text }),
-      createAhref: ({ href, text, cssClass }) => createElement('a', { cssClass, text, href }),
-      createH3: (text, cssClass) => createElement('h3', { cssClass, text }),
-      createSpan: ({ text, cssClass }) => createElement('span', { cssClass, text }),
-      createLiElement: (cssClass) => createElement('li', { cssClass }),
-      createSection: ({ id, cssClass }) => createElement('section', { cssClass, id }),
+      createElement: (tag, options) => createElement(tag, options),
+      createArticle: ({cssClass, text, id, attrs} = {}) => createElement('article', { cssClass, text, id, attrs}),
+      createDiv: ({cssClass, text, id, attrs} = {}) => createElement('div', {cssClass, text, id, attrs}),
+      createAhref: ({href, text, cssClass, id, attrs} = {}) => createElement('a', {cssClass, text, href, id, attrs}),
+      createH3: ({text, cssClass, id, attrs} = {}) => createElement('h3', { cssClass, text, id, attrs}),
+      createSpan: ({ text, cssClass, id, attrs } = {}) => createElement('span', { cssClass, text, id, attrs }),
+      createLiElement: ({ cssClass, text, id, attrs } = {}) => createElement('li', { cssClass, text, id, attrs }),
+      createSection: ({ id, cssClass, text, attrs } = {}) => createElement('section', { cssClass, text, id, attrs }),
 }
 export default domsComponent;
 

@@ -7,19 +7,42 @@ App.spa.router = (function() {
       let _routes = {};
       let _context = 'app';
 
+      function matchRoute(path) {
+            for(const route of _routes) {
+                  const paramNames = [];
+                  const regexPath = route.path.replace(/:([^/]+)/g, (_, key) => {
+                        paramNames.push(key);
+                        return '([^/]+)';
+                  });
+                  const regex = new RegExp(`^${regexPath}$`);
+                  const match = path.match(regex);
+                  if(match) {
+                        const params = {};
+                        paramNames.forEach((name, index) => {
+                              params[name] = match[index + 1]; 
+                        });
+                        return { pageName: route.page, params};
+                  }
+            }
+            return null;
+      }
+
       function handleLocation() {
             const path = window.location.pathname;
-            const pageName = _routes[path] || '404'; 
-            renderPage(pageName, _context);
+            console.log('path: ', path);
+            const match = matchRoute(path);
+            if(match) {
+                  renderPage(match.pageName, _context, match.params);
+            }
       }
 
       function navigate(event) {
             // Chỉ xử lý nếu click vào link SPA
-            if (!event.target.matches('a[data-spa]')) {
-                  return;
-            }
+            const anchor = event.target.closest('a[data-spa]');
+            if (!anchor) return;
+
             event.preventDefault();
-            const href = event.target.getAttribute('href');
+            const href = anchor.getAttribute('href');
             // Chỉ điều hướng nếu URL thay đổi để tránh render lại không cần thiết
             if (window.location.pathname !== href) {
                   window.history.pushState({}, '', href);
@@ -37,7 +60,7 @@ App.spa.router = (function() {
             document.addEventListener('click', navigate);
             window.addEventListener('popstate', handleLocation);
 
-                  // Tải nội dung cho trang ban đầu
+            // Tải nội dung cho trang ban đầu
             handleLocation();
       }
 
