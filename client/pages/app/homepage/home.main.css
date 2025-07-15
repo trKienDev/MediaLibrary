@@ -1,62 +1,63 @@
+
 .homepage-content-container {
       padding: 0 20px;
 }
 #homepage-feeds-content .section-content-container {
       margin-top: 35px;
 }
-#homepage-feeds-content .videos-wrapper {
+.videos-wrapper {
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
 }
-#homepage-feeds-content .video-article {
+.video-article {
       width: calc((100% - 80px) / 4);
 }
-#homepage-feeds-content .video-wrapper {
+.video-wrapper {
       background-color: var(--dark-gray);
       border-radius: 10px;
       transition: all .3s;
 }
-#homepage-feeds-content .video-wrapper:hover {
+.video-wrapper:hover {
       background-color: #3a3d44;
 }
-#homepage-feeds-content .video-player {
+.video-player {
       width: 100%;
       border-radius: 10px;
       display: block;
 }
-#homepage-feeds-content .video-infor-wrapper {
+.video-infor-wrapper {
       display: flex;
       padding: 5px;
 }
-#homepage-feeds-content .video-details {
+.video-details {
       width: 100%;
       margin-left: 10px;
       line-height: 1;
 }
-#homepage-feeds-content .video-infor .avatar-frame {
-      width:50px;
+.video-infor .avatar-frame {
+      width:50px !important; 
       height: 50px;
 }
-#homepage-feeds-content .video-infor .avatar-image {
-      border-radius: 50%;
+.video-infor .avatar-image {
+      border-radius: 50% !important;
       width: 50px;
 }
-#homepage-feeds-content .video-details .video-film {
+.video-details .video-film {
       font-size: 15px;
       font-weight: 600;
 }
-#homepage-feeds-content .video-details .video-film:hover {
+.video-details .video-film:hover {
       color: var(--light-pink);
 }
-#homepage-feeds-content .video-details .video-creator {
+.video-details .video-creator {
       font-size: 13px;
       color: rgb(172, 172, 172);
 }
-#homepage-feeds-content .video-details .video-creator:hover {
+.video-details .video-creator:hover {
       color: white;
 }
-#homepage-feeds-content .video-details .video-views {
+.video-details .video-views {
       font-size: 13px;
 }
 #homepage-feeds-content .films-wrapper {
@@ -64,10 +65,10 @@
       flex-wrap: wrap;
       gap: 10px;
 }
-#homepage-feeds-content .film-article {
+.film-article {
       width: calc((100% - 80px) / 8);
 }
-#homepage-feeds-content .film-thumbnail {
+.film-thumbnail {
       display: block;
       width: 100%;
       height: 300px;

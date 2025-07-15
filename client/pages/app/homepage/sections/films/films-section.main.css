@@ -1,0 +1,5 @@
+.homepage-films #films-pagination {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px 11px;
+}

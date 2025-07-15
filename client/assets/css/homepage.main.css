@@ -1,5 +1,8 @@
 @import url("/pages/app/homepage/home.main.css");
 @import url("/pages/app/homepage/sections/video/video-section.main.css");
+@import url("/pages/app/homepage/sections/films/films-section.main.css");
+
+
 /**** LAYOUT ****/
 .homepage-layout {
       display: grid;

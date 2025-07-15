@@ -12,6 +12,7 @@ const apiEndpoint = {
       },
       films: {
             getById: '/api/film',
+            getRandomizePagination: '/api/films/unique-pagination',
       },
       homepageFeeds: 'api/feeds/section',
       idols: {
