@@ -1,6 +1,7 @@
 const apiEndpoint = {
       collections: {
-            getAll: 'api/collections',
+            getAll: 'api/collections', 
+            getById: '/api/collection', 
       }, 
       creators: {
             getAll: '/api/creators',
@@ -18,7 +19,14 @@ const apiEndpoint = {
       },
       tags: {
             getById: '/api/tag',
-      }
-
+      },
+      playlist: {
+            getById: '/api/playlist',
+      },
+      videos: {
+            getById: '/api/video',
+            getUniquePagination: '/api/videos/unique-pagination',
+            increaseViewsByOne: '/api/video/views',
+      },
 }
 export default apiEndpoint;
