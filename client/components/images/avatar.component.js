@@ -4,7 +4,6 @@ import appConfigs from "../../config/app.config.js";
 import { ServerFolders } from "../../constants/folder.constant.js";
 import { addHoverToScaleEffect } from "../../utils/effects.utils.js";
 import domsComponent from "../dom.components.js";
-import imageComponent from "./image.component.js";
 
 export const AvatarTypes = {
       IDOL: 'idol',
@@ -32,7 +31,7 @@ function AvatarComponent() {
       const render = ( id, imgSrc, type) => {
             const frame = domsComponent.createDiv({ cssClass: 'avatar-frame'});
             const wrapper = domsComponent.createDiv({cssClass: 'avatar-frame-wrapper'});
-            const img = imageComponent.createImgElement({ src: imgSrc, cssClass: 'avatar-image' });
+            const img = createImgElement({ src: imgSrc, cssClass: 'avatar-image' });
             const link = domsComponent.createAhref({ 
                   href: `${type}/${id }`,
                   attrs: {

@@ -13,6 +13,7 @@ const apiEndpoint = {
       films: {
             getById: '/api/film',
             getRandomizePagination: '/api/films/unique-pagination',
+            getByCreator: '/api/films/creator',
       },
       homepageFeeds: 'api/feeds/section',
       idols: {
@@ -27,6 +28,7 @@ const apiEndpoint = {
       videos: {
             getById: '/api/video',
             getUniquePagination: '/api/videos/unique-pagination',
+            getByCreator: '/api/videos/creator',
             increaseViewsByOne: '/api/video/views',
       },
 }

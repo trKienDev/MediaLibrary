@@ -6,6 +6,7 @@ import AvatarComponent, { AvatarTypes } from "../../../components/images/avatar.
 import { updateFilmThumbnailSource } from "../../../components/images/thumbnail.component";
 import { createStarsRating } from "../../../components/stars.component";
 import tagComponent from "../../../components/tags/tags.component";
+import VideoArticle from "../../../components/videos/video-article/video-article.class";
 import VideoUtils from "../../../components/videos/video.utils";
 import { ServerFolders } from "../../../constants/folder.constant";
 import NOTIFICATION_TYPES from "../../../constants/notification-types.constant";
@@ -23,7 +24,7 @@ export default async function() {
 
             await renderVideoData(video);
             await renderFilmData(filmId);
-            await 
+            await renderRelatedFilmVideos(video);
       } catch(error) {
             console.error('Error loading play video page: ', error);
             toastNotifier.show('Error loading play video page', NOTIFICATION_TYPES.ERROR);
@@ -69,7 +70,7 @@ async function populateVideoFilm(video) {
       domsComponent.updateSpanText('video-film-name', filmName);
 }
 async function populateVideoAction(video) {
-      const actionWrapper = document.getElementById('video-action-wrapper');
+      const actionWrapper = document.querySelector('[data-role="video-action-wrapper"]');
       actionWrapper.innerHTML = '';
 
       const videoAction = await tagComponent.createTagDivWithApi({ tagId: video.action_id, cssClass: 'tag-element'});
@@ -79,7 +80,7 @@ async function populateVideoAction(video) {
       return actionWrapper;
 }
 async function populateCreatorAvatar(video) {
-      const creatorEl = document.getElementById('video-creator');
+      const creatorEl = document.querySelector('[data-role="video-creator"]');
       creatorEl.innerHTML = '';
 
       const avatarComponent = AvatarComponent();
@@ -88,7 +89,7 @@ async function populateCreatorAvatar(video) {
       return creatorEl;
 }
 async function populateVideoTags(video) {
-      const tagsEl = document.getElementById('video-tags');
+      const tagsEl = document.querySelector('[data-role="video-tags"]');
       await renderListToElement({
             element: tagsEl,
             item: video.tag_ids,
@@ -96,7 +97,7 @@ async function populateVideoTags(video) {
       });
 }
 async function populateVideoPlaylist(video) {
-      const playlistEl = document.getElementById('video-playlist');
+      const playlistEl = document.querySelector('[data-role="video-playlist"]');
       await renderListToElement({
             element: playlistEl,
             items: video.playlist_id,
@@ -130,7 +131,7 @@ async function renderFilmData(filmId) {
 
       createStarsRating('film-rating', filmInfor.rating);
 
-      const descriptionEl = document.getElementById('film-description');
+      const descriptionEl = document.querySelector('[data-role="film-description"]');
       descriptionEl.innerHTML = '';
       const descriptionSpan = domsComponent.createSpan({
             text: filmInfor.description,
@@ -140,7 +141,7 @@ async function renderFilmData(filmId) {
 }
 
 function populateFilmName(filmInfor) {
-      const nameEl = document.getElementById('film-name');
+      const nameEl = document.querySelector('[data-role="film-name"]');
       nameEl.innerHTML = '';
 
       const nameLink = domsComponent.createAhref({
@@ -153,7 +154,7 @@ function populateFilmName(filmInfor) {
       return nameEl;
 }
 async function populateFilmCreator(filmInfor) {
-      const creatorEl = document.getElementById('film-creator');
+      const creatorEl = document.querySelector('[data-role="film-creators"]');
       creatorEl.innerHTML = '';
 
       for(const creatorId of filmInfor.creator_ids) {
@@ -174,7 +175,7 @@ async function populateFilmCreator(filmInfor) {
       return creatorEl;
 }
 async function populateFilmStudio(filmInfor) {
-      const studioEl = document.getElementById('film-studio');
+      const studioEl = document.querySelector('[data-role="film-studios"]');
       studioEl.innerHTML = '';
 
       const studioName = await apiService.getName(filmInfor.studio_id);
@@ -188,7 +189,7 @@ async function populateFilmStudio(filmInfor) {
       return studioEl;
 }
 function populateFilmDate(filmInfor) {
-      const dateEl = document.getElementById('film-date');
+      const dateEl = document.querySelector('[data-role="film-date"]');
       dateEl.innerHTML = '';
 
       const dateStr = formatDate(new Date(filmInfor.date));
@@ -198,7 +199,7 @@ function populateFilmDate(filmInfor) {
       return dateEl;
 }
 async function populateFilmCollection(filmInfor) {
-      const collectionEl = document.getElementById('film-collection');
+      const collectionEl = document.querySelector('[data-role="film-collection"]');
       collectionEl.innerHTML = '';
 
       if(!film.collection_id) {
@@ -215,7 +216,7 @@ async function populateFilmCollection(filmInfor) {
       }
 }
 async function populateFilmTags(filmInfor) {
-      const tagsEl = document.getElementById('film-tags');
+      const tagsEl = document.querySelector('[data-role="film-tags"]');
       await renderListToElement({
             element: tagsEl,
             items: filmInfor.tag_ids,
@@ -225,12 +226,56 @@ async function populateFilmTags(filmInfor) {
 
 /* ------------------- Related videos ------------------- */
 async function renderRelatedFilmVideos(video) {
-      const wrapperEl = document.getElementById('film-videos');
+      const wrapperEl = document.querySelector('[data-role="film-videos"]');
       wrapperEl.innerHTML = '';
 
-      const relatedIds = await get
+      const relatedIds = await getRelatedVideosByFilm(video);
+
+      for(const videoId of relatedIds) {
+            const node = await renderRelatedVideosByFilm(videoId);
+            wrapperEl.appendChild(node);
+      }
 }
 async function getRelatedVideosByFilm(video) {
       const film = await apiService.getById(video.film_id);
       return film.video_ids.filter(id => id !== video._id);
+}
+async function renderRelatedVideosByFilm(videoId) {
+      const relatedVideosByFilm = await getRelatedVideosByFilm(videoId);
+      relatedVideosByFilm.foreach(async (videoId) => {
+            const videoInfor = await apiService.getById(apiEndpoint.videos.getById, videoId);
+
+            const videoFrame = domsComponent.createDiv({ cssClass: 'video-frame'});
+            const videoFrameWrapper = domsComponent.createDiv({cssClass: 'video-frame-wrapper'});
+            let videoLink = domsComponent.createAhref({href: `video/${videoId}`, cssClass: ''});
+
+            const videoComponent = new VideoArticle(videoInfor, { showVideoInfor: false });
+            const videoPlayer = videoComponent.render();
+            videoLink.appendChild(videoPlayer);
+            
+            videoFrameWrapper.appendChild(videoLink);
+            videoFrame.appendChild(videoFrameWrapper);
+
+            return videoFrame;
+      });
+}
+
+/* ------------------- Like button ------------------- */
+function processLikeButton(videoId) {
+      const likeBtn = document.getElementById('like-video');
+      if(!likeBtn) return;
+
+      likeBtn.replaceWith(likeBtn.cloneNode(true)); // reset old listener
+      const newLikeBtn = document.getElementById('like-video');
+
+      newLikeBtn.addEventListener('click', async(e) => {
+            e.preventDefault();
+            try {
+                  const likedVideo = await apiService.updateJson(apiEndpoint.videos.increaseViewsByOne, videoId);
+                  domsComponent.updateSpanText({ id: 'video-likes', text: likedVideo.likes });
+            } catch(error) { 
+                  console.error('Failed to liek video: ', error);
+                  toastNotifier.show('Failed to like video: ', NOTIFICATION_TYPES.ERROR);
+            }
+      });
 }

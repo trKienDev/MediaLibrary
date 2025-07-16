@@ -5,9 +5,9 @@ import { ServerFolders } from "../../../constants/folder.constant.js";
 import VideoArticle from "../../../components/videos/video-article/video-article.class.js";
 import AnimeVideoArticle from "../../../components/videos/video-article/anime-video-article.class.js";
 import AvatarComponent, { AvatarTypes } from "../../../components/images/avatar.component.js";
-import imageFrameComponent from "../../../components/images/image-frame.component.js";
 import ShortVideoArticle from "../../../components/videos/video-article/short-video-article.class.js";
 import ClipVideoArticle from "../../../components/videos/video-article/clip-video-article.class.js";
+import { createImageFrame } from "../../../components/images/image-frame.component.js";
 
 async function renderSection(data, {
       wrapperClass,
@@ -80,7 +80,7 @@ export async function renderMangasSection(data) {
 export async function renderImagesSection(data) {
       return renderSection(data, {
             wrapperClass: 'images-wrapper',
-            itemFactory: async image => imageFrameComponent.createImageFrame(image)
+            itemFactory: async image => createImageFrame(image)
       });
 }
 

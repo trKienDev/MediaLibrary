@@ -1,3 +1,7 @@
+function selectEl(role, context = document) {
+      return context.querySelector(`[data-role="${role}"]`);
+}
+
 function createElement(tag, { cssClass, text, href, id, attrs = {} } = {}) {
       const el = document.createElement(tag);
 
@@ -23,8 +27,16 @@ function _updateTextById(domId, text, domName) {
       }
       return el;
 }
+function _updateTextByRole(role, text, domName) {
+      const el = document.querySelector(`[data-role="${role}"]`);
+      if(el && (!domName || el.tagName === domName)) {
+            el.textContent = text;
+      }
+      return el;
+}
 
 const domsComponent = {
+      selectEl,
       // API Create DOM
       createElement: (tag, options) => createElement(tag, options),
       createArticle: ({cssClass, text, id, attrs} = {}) => createElement('article', { cssClass, text, id, attrs}),
@@ -36,7 +48,7 @@ const domsComponent = {
       createSection: ({ id, cssClass, text, attrs } = {}) => createElement('section', { cssClass, text, id, attrs }),
 
       // API Update DOM
-      updateSpanText: (id, text) => _updateTextById(id, text, 'SPAN'),
+      updateSpanText: (role, text) => _updateTextByRole(role, text, 'SPAN'),
       updateTextById: (id, text) => _updateTextById(id, text)
 }
 export default domsComponent;

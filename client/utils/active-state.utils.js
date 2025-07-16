@@ -1,50 +1,72 @@
 /**
- * Khởi tạo và quản lý trạng thái active cho một nhóm các phần tử.
- * Sử dụng event delegation để tối ưu hiệu năng.
- *
- * @param {string} containerSelector - Bộ chọn CSS cho phần tử cha chứa các mục.
- * @param {string} itemSelector - Bộ chọn CSS cho các mục có thể được kích hoạt.
- * @param {function(HTMLElement): void} onStateChange - Callback được gọi khi một mục thay đổi trạng thái active.
- */
-function initActiveState(containerSelector, itemSelector, onStateChange) {
-      const container = document.querySelector(containerSelector);
-      if (!container) {
-            console.error(`Container element not found with selector: ${containerSelector}`);
-            return;
+ * activeState_utils
+ * 
+ * Tính năng:
+ * ✅ Event delegation để tối ưu performance.
+ * ✅ Hỗ trợ async init (chờ element xuất hiện trước khi attach logic).
+ * ✅ Hỗ trợ active tab mặc định nếu chưa có tab active.
+*/
+async function waitForElement(selector, timeout = 3000) {
+      return new Promise((resolve, reject) => {
+            const timer = setTimeout(() => reject(new Error(`Timeout waiting for ${selector}`)), timeout);
+            const check = () => {
+                  const el = document.querySelector(selector);
+                  if(el) {
+                        clearTimeout(timer);
+                        resolve(el);
+                  } else {
+                        requestAnimationFrame(check);
+                  }
+            };
+            check();
+      });
+}
+
+async function InitializeActiveStateAsync({
+      containerSelector,
+      activatableClassName,
+      onElementActivated,
+      defaultIndex = 0,
+      waitTimeout = 3000
+}) {
+      // chờ container có mặt trên DOM
+      const container = await waitForElement(containerSelector, waitTimeout);
+      if(!container) return;
+
+      const activatableSelector = `.${activatableClassName}`;
+      const activeSelector = `${activatableSelector}.active`;
+
+      handleElementActiveStateDelegated(container, activatableSelector, onElementActivated);
+
+      let initialActiveElement = container.querySelector(activeSelector);
+      if(!initialActiveElement) {
+            const allItems = container.querySelectorAll(activatableSelector);
+            if(allItems.length > 0 && allItems[defaultIndex]) {
+                  initialActiveElement = allItems[defaultIndex];
+                  initialActiveElement.classList.add('active');
+            }
       }
 
-      // 1. Gắn một event listener duy nhất cho phần tử cha
-      container.addEventListener('click', (event) => {
-            // 2. Xác định phần tử con được click khớp với itemSelector
-            const clickedItem = event.target.closest(itemSelector);
-
-            // Nếu không click vào một mục hợp lệ, hoặc mục đó đã active, thì bỏ qua
-            if (!clickedItem || clickedItem.classList.contains('active')) {
-                  return;
-            }
-
-            // 3. Tìm và vô hiệu hóa mục đang active
-            const currentActiveItem = container.querySelector(`${itemSelector}.active`);
-            if (currentActiveItem) {
-                  currentActiveItem.classList.remove('active');
-            }
-
-            // 4. Kích hoạt mục mới và gọi callback
-            clickedItem.classList.add('active');
-            if (onStateChange && typeof onStateChange === 'function') {
-                  onStateChange(clickedItem);
-            }
-      });
-
-      // Xử lý trạng thái active ban đầu khi tải trang
-      const initialActiveItem = container.querySelector(`${itemSelector}.active`);
-      if (initialActiveItem && onStateChange && typeof onStateChange === 'function') {
-            onStateChange(initialActiveItem);
+      if(initialActiveElement && typeof onElementActivated === 'function') {
+            onElementActivated(initialActiveElement);
       }
 }
 
-// Cách export vẫn có thể giữ nguyên hoặc chỉ export một hàm duy nhất
-const activeStateUtils = {
-      init: initActiveState,
-};
-export default activeStateUtils;
+function handleElementActiveStateDelegated(container, itemSelector, callbackFn) {
+      container.addEventListener('click', (event) => {
+            const item = event.target.closest(itemSelector);
+            if(!item || !container.contains(item)) return;
+
+            if(item.classList.contains('active')) return;
+
+            const currentActive = container.querySelector(`${itemSelector}.active`);
+            if(currentActive) {
+                  currentActive.classList.remove('active');
+            }
+            item.classList.add('active');
+
+            if(callbackFn && typeof callbackFn === 'function') {
+                  callbackFn(item);
+            }
+      });
+}

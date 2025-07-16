@@ -1,9 +1,8 @@
 import appConfigs from "../../config/app.config.js";
 import { formatDate } from "../../utils/date.utils.js";
 import { addHoverToScaleEffect } from "../../utils/effects.utils.js";
-import imageUtils from "../../utils/images.utils.js";
 import domsComponent from "../dom.components.js";
-import imageComponent from "../images/image.component.js";
+import { createImgElement } from "../images/image.component.js";
 
 // factory: create <a> link element
 function createFilmLink(film) {
@@ -20,7 +19,7 @@ function createFilmLink(film) {
 function createFilmThumbnail(film, folder) {
       const wrapper = domsComponent.createDiv({cssClass: 'film-thumbnail-wrapper'});
       const imgSrc = `${appConfigs.SERVER}/${folder}/${film.thumbnail}`;
-      const image = imageComponent.createImgElement({ src: imgSrc, cssClass: 'film-thumbnail' });
+      const image = createImgElement({ src: imgSrc, cssClass: 'film-thumbnail' });
       wrapper.appendChild(image);
 
       return wrapper;

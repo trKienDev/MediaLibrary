@@ -7,7 +7,7 @@ import domsComponent from "../../dom.components.js";
 import AvatarComponent, { AvatarTypes } from "../../images/avatar.component.js";
 
 export default class VideoArticle {
-      constructor(video, { folder = ServerFolders.VIDEOS, linkPrefix = "video", cssClass = "video-article"} = {}) {
+      constructor(video, { folder = ServerFolders.VIDEOS, linkPrefix = "video", cssClass = "video-article", showVideoInfor = true} = {}) {
             this.video = video;
             this.folder = folder;
             this.linkPrefix = linkPrefix;
@@ -16,6 +16,7 @@ export default class VideoArticle {
             this.playTimeout = null;
             this.handleMouseEnter = this.handleMouseEnter.bind(this);
             this.handleMouseLeave = this.handleMouseLeave.bind(this);
+            this.showVideoInfor = showVideoInfor;
       }
 
       async render() {
@@ -38,7 +39,7 @@ export default class VideoArticle {
             ahref.appendChild(videoPlayer);
 
             // Chỉ add info nếu có method createVideoInfor tồn tại:
-            if(typeof this.createVideoInfor === 'function') {
+            if(this.showVideoInfor && typeof this.createVideoInfor === 'function') {
                   const videoInfor = await this.createVideoInfor(video);
                   if(videoInfor) ahref.appendChild(videoInfor);
             }
