@@ -1,7 +1,9 @@
 @import url("/pages/app/homepage/home.main.css");
 @import url("/pages/app/homepage/sections/video/video-section.main.css");
 @import url("/pages/app/homepage/sections/films/films-section.main.css");
-
+@import url("/pages/app/homepage/sections/animes/anime-section.main.css");
+@import url("/pages/app/homepage/sections/images/image-section.main.css");
+@import url("/pages/app/homepage/sections/shorts/short-section.main.css");
 
 /**** LAYOUT ****/
 .homepage-layout {

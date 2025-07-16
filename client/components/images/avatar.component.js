@@ -4,6 +4,7 @@ import appConfigs from "../../config/app.config.js";
 import { ServerFolders } from "../../constants/folder.constant.js";
 import { addHoverToScaleEffect } from "../../utils/effects.utils.js";
 import domsComponent from "../dom.components.js";
+import { createImgElement } from "./image.component.js";
 
 export const AvatarTypes = {
       IDOL: 'idol',

@@ -13,6 +13,11 @@ const appRoutes = [
       // sections
       { path: '/section/videos', page: 'homepage/sections/video/video-section.main'},
       { path: '/section/films', page: 'homepage/sections/films/film-section.main'},
+      { path: '/section/animes', page: 'homepage/sections/animes/anime-section.main' },
+      { path: '/section/mangas', page: 'homepage/sections/mangas/manga-section.main' },
+      { path: '/section/images', page: 'homepage/sections/images/image-section.main' },
+      { path: '/section/shorts', page: 'homepage/sections/shorts/short-section.main' },
+
 ];
 
 function AppController() {

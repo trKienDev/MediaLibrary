@@ -1,4 +1,7 @@
 const apiEndpoint = {
+      anime_videos: {
+            getUniquePagination: '/api/anime-videos/unique-pagination',
+      },
       collections: {
             getAll: 'api/collections', 
             getById: '/api/collection', 
@@ -15,15 +18,24 @@ const apiEndpoint = {
             getRandomizePagination: '/api/films/unique-pagination',
             getByCreator: '/api/films/creator',
       },
-      homepageFeeds: 'api/feeds/section',
       idols: {
             getById: '/api/idol',
+      },
+      images: {
+            getRandomPagination: '/api/images/random-pagination',
+      },
+      homepageFeeds: 'api/feeds/section',
+      mangas: {
+            getRandomizePagination: '/api/mangas/random-pagination',
       },
       tags: {
             getById: '/api/tag',
       },
       playlist: {
             getById: '/api/playlist',
+      },
+      shorts: {
+            getRandomPagination: '/api/shorts/random-pagination',
       },
       videos: {
             getById: '/api/video',
