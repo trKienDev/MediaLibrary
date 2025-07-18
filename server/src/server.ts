@@ -1,7 +1,8 @@
 import http, { IncomingMessage, ServerResponse } from "http";
 import mongoose from "mongoose";
-import { ApiRequest } from "./interfaces/api-request.interface";
-import { processRoutes } from "./routes/process.route";
+import { ApiRequest } from "./interfaces/api-request.interface.js";
+import { processRoutes } from "./routes/process.route.js";
+import { processStaticFiles } from "./middlewares/process-static-file.js";
 
 // ====== CONFIG ======
 const PORT = process.env.PORT || 3000;
@@ -35,8 +36,8 @@ function requestHandler(req: IncomingMessage, res: ServerResponse) {
             return;
       }
 
-      // const isStatic = handleStaticFiles(req, res);
-      // if (isStatic) return;
+      const isStatic = processStaticFiles(req, res);
+      if(isStatic) return;
       
       const apiRequest = req as ApiRequest;
       processRoutes(apiRequest, res);

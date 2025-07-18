@@ -1,5 +1,4 @@
 import { ServerResponse } from "http";
-import { Route } from "../interfaces/Route.js";
 import { processApiRoutes } from "./api.route.js";
 import { ApiRequest } from "../interfaces/api-request.interface.js";
 

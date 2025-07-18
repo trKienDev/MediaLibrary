@@ -1,6 +1,7 @@
 import { IncomingMessage, ServerResponse } from "http";
 import path from "path";
 import fs from 'fs';
+
 /**
  * handleStaticFiles: serve static files from /uploads folder.
  * - Stream read
@@ -8,7 +9,7 @@ import fs from 'fs';
  * - Cache-Control
  * - Basic path traversal protection
 */
-function processStaticFiles(req: IncomingMessage, res: ServerResponse): boolean {
+export function processStaticFiles(req: IncomingMessage, res: ServerResponse): boolean {
       if(!req.url?.startsWith('/uploads')) return false;
 
       const safePath = req.url.replace('/uploads', '').replace(/\.\./g, '');
@@ -73,22 +74,3 @@ function processStaticFiles(req: IncomingMessage, res: ServerResponse): boolean 
 
       return true;
 }
-
-/**
- * requestHandler: main handler for all HTTP requests
-*/
-const requestHandler = (req: IncomingMessage, res: ServerResponse) => {
-      setCorsHeaders(res);
-
-      if (req.method === 'OPTIONS') {
-      res.writeHead(200);
-      res.end();
-      return;
-      }
-
-      const isStatic = handleStaticFiles(req, res);
-      if (isStatic) return;
-
-      const apiReq = req as ApiRequest;
-      handleRoutes(apiReq, res);
-};

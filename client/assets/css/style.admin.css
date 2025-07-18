@@ -3,6 +3,15 @@
 @import url('/utils/toast-notification/toast-notification.utils.css');
 @import url('/utils/alert-box/alert-box.utils.css');
 @import url('/assets/css/style.main.css');
+
+:root {
+      --neon-blue: #1F51FF;
+      --gold: #FFD700;
+      --hot-pink: #FF69B4;
+      --light-pink: #FFB6C1;
+      --dark-gray: #2e3138;
+}
+
 /* Reset cơ bản */
 body, html {
       background-color: #f4f7fa;

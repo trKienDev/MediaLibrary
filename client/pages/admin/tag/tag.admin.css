@@ -17,6 +17,56 @@
 .tag-table .btn + .btn {
       margin-left: 0.25rem;
 }
-.btn-add {
+.add-tag-form label {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 14px;
+}
+.add-tag-form input[type="text"], .add-tag-form select {
       width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+      box-sizing: border-box;
+      background-color: white;
+      font-family: 'Lexend';
+}
+.add-tag-form .selected-media-container {
+      min-height: 100px;
+      width: 100%;
+      margin-bottom: 1rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+}
+.add-tag-form .selected-media-wrapper {
+      padding: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+}
+.add-tag-form button {
+      width: 100%;
+}
+.add-tag-form .selected-media {
+      width: fit-content;
+      padding: 5px;
+      background-color: white;
+      border-radius: 5px;
+      border: 1px solid #d0cdcd;
+      font-size: 13px;      
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+      display: inline-block;
+}
+.add-tag-form .selected-media:hover {
+      cursor: pointer;
+      background-color: #ff0000;;
+      color: white;
+      transform: scale(1.05);
+}
+.selected-media.fade-out {
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.3s ease, transform 0.3s ease;
 }

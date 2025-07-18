@@ -1,74 +1,95 @@
-import { apiGet } from "../../../api/api.service.js";
-import apiEnpoint from "../../../api/endpoint.api.js";
-import { toastNotifier } from "../../../app.admin.js";
-import TableBuilder from "../../../components/tables/table-builder.component.js";
-import tableRenderers from "../../../components/tables/table-renderers.component.js";
-import NOTIFICATION_TYPES from "../../../constants/notification-types.constant.js";
+import domsComponent from "../../../components/dom.components.js";
 
-(async function() {
-      try {
-            const fetchResult = await apiGet(apiEnpoint.tags.getAll);
-            if(!fetchResult.success) {
-                  throw new Error(fetchResult.error);
-            }
+export default async function() {
+      const form = document.querySelector('.add-tag-form');
+      const tagNameInput = document.getElementById('tag-name');
+      const tagKindSelect = document.getElementById('tag-kind');
+      const mediaScopeSelect = document.querySelector('[dom-selector="media-scope"]');
+      const selectedMediaWrapper = document.querySelector('[dom-selector="selected-media"]');
+      const submitBtn = form.querySelector('button[type="submit"]');
 
-            const allTags = fetchResult.data;
-            
-            const tagsTableConfig = {
-                  columns: [
-                        { 
-                              header: 'Name', // Tiêu đề cột 1
-                              render: (item) => tableRenderers.textRenderer(item, 'name')
-                        }, 
-                        {
-                              header: 'Kind',
-                              render: (item) => tableRenderers.textRenderer(item, 'kind')
-                        }, {
-                              header: 'Actions',
-                              render: (item) => tableRenderers.actionsRenderer(item, [
-                                    {
-                                          label: 'Edit',
-                                          iconClass: 'fa-solid fa-pencil',
-                                          cssClass: 'light-btn',
-                                          onClick: (tag) => alert(`Edit tag: ${tag.name}`)
-                                    },
-                                    {
-                                          label: 'Delete',
-                                          iconClass: 'fa-solid fa-trash',
-                                          cssClass: 'danger-btn',
-                                          onClick: (tag) => {
-                                                if(confirm(`Are you sure to delete "${tag.name}"`)) {
-                                                      alert(`Tag deleted: "${tag.name}"`);
-                                                }
-                                          }
-                                    }
-                              ])
-                        }
-                  ]
-            }
-
-            // Khai báo tagsTable ở đây để có thể truy cập ở cả hàm search
-            let tagsTable;
-            if(allTags && allTags.length > 0) {
-                  tagsTable = new TableBuilder('.tag-table tbody', tagsTableConfig);
-                  tagsTable.render(allTags);
-            } else {
-                  document.querySelector('.tag-table tbody').innerHTML = '<tr><td colspan="3">Không có dữ liệu để hiển thị.</td></tr>';
-            }
-            // Chức năng tìm kiếm
-            const searchInput = document.querySelector('.search-input');
-            searchInput.addEventListener('input', () => {
-                  const searchTerm = searchInput.value.trim().toLowerCase();
-                  const filteredTags = allTags.filter(tag => 
-                        tag.name.toLowerCase().includes(searchTerm)
-                  );
-                  if(tagsTable) {
-                        tagsTable.render(filteredTags);
-                  }
-            });
-      } catch(error) {
-            toastNotifier.show(error, NOTIFICATION_TYPES.ERROR);
-            throw new Error(error);
+      const errorMessages = {
+            tag_name: form.querySelector('.error-tag-name') || createErrorMessageElement(tagNameInput),
+            tag_kind: form.querySelector('.error-tag-kind') || createErrorMessageElement(tagKindSelect),
+            media_scope: form.querySelector('.error-media-scope') || createErrorMessageElement(mediaScopeSelect)
       }
-})();
+      
+      // Helper để tạo phần tử hiển thị lỗi dưới input/select
+      function createErrorMessageElement(target) {
+            const el = document.createElement('div');
+            el.className = 'error-message';
+            el.style.color = '#e53935';
+            el.style.fontSize = '12px';
+            el.style.marginTop = '4px';
+            target.parentNode.appendChild(el);
+            return el;
+      }
 
+      // Clear all error message
+      function clearErrors() {
+            Object.values(errorMessages).forEach((el) => el.textContent = '');
+      }
+
+
+      // lắng nghe khi chọn media-scope
+      mediaScopeSelect.addEventListener('change', (event) => {
+            const selectedValue = event.target.value;
+            
+            // check nếu đã tồn tại khi ko thêm nữa
+            const existed = Array.from(selectedMediaWrapper.children).some(
+                  (el) => el.textContent === selectedValue
+            );
+            if(existed) return;
+
+            const selectedMediaDiv = domsComponent.createDiv({ text: selectedValue, cssClass: 'selected-media' });
+            // gắn sự kiện click để remove chính nó khi click
+            selectedMediaDiv.addEventListener('click', () => {
+                  selectedMediaDiv.classList.add('fade-out');
+                  setTimeout(() => {
+                        selectedMediaDiv.remove();
+                  }, 300);
+            });
+            selectedMediaWrapper.appendChild(selectedMediaDiv);
+      });
+
+      // lắng nghe submit
+      form.addEventListener('submit', async(e) => {
+            e.preventDefault();
+
+            clearErrors();
+
+            const tagName = document.getElementById('tag-name').value.trim();
+            const tagKind = document.getElementById('tag-kind').value;
+            const mediaScopes = Array.from(selectedMediaWrapper.children).map(
+                  (el) => el.textContent
+            );
+
+            // validate
+            let hasError = false;
+
+            if(!tagName) {
+                  errorMessages.tag_name.textContent = 'Tag name is required.';
+                  hasError = true;
+            }
+            if(tagKind === 'tag kind') {
+                  errorMessages.tag_kind.textContent = 'Please select tag kind.';
+                  hasError = true;
+            }
+
+            if(mediaScopeSelect.length === 0) {
+                  errorMessages.media_scope.textContent = 'Please select at least one media scope.';
+                  hasError = true;
+            }
+
+            if(hasError) {
+                  return;
+            }
+
+            const payload = {
+                  tag_name: tagName,
+                  tag_kind: tagKind,
+                  media_scope: mediaScopes
+            };
+            console.log('Submit payload: ', payload);
+      });
+}

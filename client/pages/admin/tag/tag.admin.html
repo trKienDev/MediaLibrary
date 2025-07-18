@@ -9,16 +9,43 @@
 
 <aside class="add-panel">
       <h2>Add new tag</h2>
-      <form>
-            <input type="text" class="form-input" placeholder="tag name">
-            <select class="form-input" name="" id="">
-                  <option class="form-input" value="film">film</option>
-                  <option class="form-input" value="video">video</option>
-                  <option class="form-input" value="creator">creatror</option>
-                  <option class="form-input" value="anime">anime</option>
-                  <option class="form-input" value="manga">manga</option>
-                  <option class="form-input" value="image">image</option>
-            </select>
-            <button type="submit" class="btn primary-btn btn-add">Add</button>
+      <form class="add-tag-form">
+            <div>
+                  <input type="text" id="tag-name" name="tag_name" placeholder="tag name">
+            </div>
+            <div>
+                  <select name="tag_kind" id="tag-kind">
+                        <option disabled selected>tag kind</option>
+                        <option value="video">video</option>
+                        <option value="film">film</option>
+                        <option value="creator">creator</option>
+                        <option value="manga">manga</option>
+                        <option value="anime">anime</option>
+                        <option value="image">image</option>
+                        <option value="idol">idol</option>
+                        <option value="short">short</option>
+                        <option value="clip">clip</option>
+                  </select>
+            </div>
+            <div class="">
+                  <select name="media_scope" dom-selector="media-scope">
+                        <option disabled selected>media scope</option>
+                        <option value="video">video</option>
+                        <option value="film">film</option>
+                        <option value="creator">creator</option>
+                        <option value="manga">manga</option>
+                        <option value="anime">anime</option>
+                        <option value="image">image</option>
+                        <option value="idol">idol</option>
+                        <option value="short">short</option>
+                        <option value="clip">clip</option>
+                  </select>
+                  <div class="selected-media-container">
+                        <div class="selected-media-wrapper" dom-selector="selected-media"></div>
+                  </div>
+            </div>
+            <div class="button-wrapper">
+                  <button type="submit" class="btn primary-btn">Submit</button>
+            </div>
       </form>
 </aside>

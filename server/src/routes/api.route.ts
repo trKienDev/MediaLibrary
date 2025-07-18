@@ -1,7 +1,11 @@
 import { Route } from "../interfaces/Route.js";
+import tagController from "../modules/tag/tag.controller.js";
 import { createRouter } from "./create.route.js";
 
 const apiRoutes: Route[] = [
+      // tag
+      { method: 'GET', path: '/api/tags', handler: tagController.getAllTags },
+      { method: 'POST', path: '/api/tag', handler: tagController.createTag },
       // // homepage-feed
       // { method: 'GET', path: '/api/feeds/section', handler: feed_controller.getSectionData },
       

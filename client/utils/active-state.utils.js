@@ -22,7 +22,7 @@ async function waitForElement(selector, timeout = 3000) {
       });
 }
 
-async function InitializeActiveStateAsync({
+export async function InitializeActiveStateAsync({
       containerSelector,
       activatableClassName,
       onElementActivated,
@@ -36,7 +36,7 @@ async function InitializeActiveStateAsync({
       const activatableSelector = `.${activatableClassName}`;
       const activeSelector = `${activatableSelector}.active`;
 
-      handleElementActiveStateDelegated(container, activatableSelector, onElementActivated);
+      processElementActiveStateDelegated(container, activatableSelector, onElementActivated);
 
       let initialActiveElement = container.querySelector(activeSelector);
       if(!initialActiveElement) {
@@ -52,7 +52,7 @@ async function InitializeActiveStateAsync({
       }
 }
 
-function handleElementActiveStateDelegated(container, itemSelector, callbackFn) {
+function processElementActiveStateDelegated(container, itemSelector, callbackFn) {
       container.addEventListener('click', (event) => {
             const item = event.target.closest(itemSelector);
             if(!item || !container.contains(item)) return;

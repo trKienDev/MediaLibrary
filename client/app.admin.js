@@ -1,7 +1,7 @@
 import './services/state.service.js';
 import './spa/render.spa.js';
 import './spa/router.spa.js';
-import activeStateUtils from "./utils/active-state.utils.js";
+import { InitializeActiveStateAsync } from "./utils/active-state.utils.js";
 import ToastNotifier from './utils/toast-notification/toast-notification.utils.js';
 
 window.App = window.App || {};
@@ -24,7 +24,12 @@ function AdminController() {
             rootElementId: 'admin-root-content'
       });
 
-      activeStateUtils.init('#admin-sidebar', 'li');
+      InitializeActiveStateAsync({
+            containerSelector: '#admin-sidebar',
+            activatableClassName: 'sidebar-tab',
+            defaultIndex: 0,
+            waitTimeout: 3000
+      });
       
 };
 AdminController();
