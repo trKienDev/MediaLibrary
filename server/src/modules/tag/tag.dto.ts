@@ -1,7 +1,16 @@
-export type TagKind = 'video' | 'film' | 'anime' | 'manga' | 'clip' | 'image' | 'creator';
+import { MediaType } from "../../interfaces/media-type.interface.js";
+
+export interface CreateTagDTO {
+      _id?: string;
+      name: string;
+      class: string;
+      slug: string;
+      scopes: MediaType[];
+}
 
 export interface TagDTO {
       _id?: string;
       name: string;
-      kind: TagKind;
+      class: string;
+      scopes: MediaType[];
 }

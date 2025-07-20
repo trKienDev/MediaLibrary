@@ -1,6 +1,7 @@
 import { ServerResponse } from "http";
-import { Route } from "../interfaces/Route.js";
+import { Middleware, Route } from "../interfaces/route.js";
 import { ApiRequest } from "../interfaces/api-request.interface.js";
+import { sendError } from "../middlewares/response.js";
 
 /**
  * createRouter: factory tạo một router handler từ danh sách routes
@@ -54,11 +55,43 @@ export function createRouter(routes: Route[]) {
                   }
                   req.query = query;
 
-                  matchedRoute.handler(req, res);
+                  const middlewares = matchedRoute.middlewares || [];
+                  runMiddlewareStack(req, res, middlewares, 
+                        () => matchedRoute.handler(req, res),
+                        (err) => {
+                              console.error('Middleware error: ', err);
+                              return sendError(res, 400, 'Middleware error');
+                        }
+                  );
             } else {
                   res.statusCode = 404;
                   res.setHeader('Content-Type', 'text/plain');
                   res.end('Not Found');
             }
       };
+}
+
+export const runMiddlewareStack = (req: ApiRequest, res: ServerResponse, middlewares: Middleware[], done: () => void, onError: (err: any) => void) => {
+      let index = 0;
+      
+      const next = (err?: any) => {
+            if(err) {
+                  onError(err);
+                  return;
+            }
+
+            const middleware = middlewares[index++];
+            if(!middleware) {
+                  done();
+                  return;
+            }
+
+            try {
+                  middleware(req, res, next);
+            } catch(e) {
+                  onError(e);
+            }
+      };
+      
+      next();
 }

@@ -1,17 +1,21 @@
 import mongoose, { Document, Schema } from "mongoose";
-import { TagKind } from "./tag.dto.js";
+import { MediaType } from "../../interfaces/media-type.interface.js";
 
 export interface iTag extends Document {
       _id: mongoose.Types.ObjectId;
       name: string;
-      kind: TagKind;
+      class: string;
+      slug: string;
+      scopes: MediaType[];
 }
 
-const allowedKinds: TagKind[] = ['video', 'film', 'anime', 'manga', 'clip', 'image', 'creator'];
+const allowedScope: MediaType[] = ['video', 'film', 'anime', 'manga', 'clip', 'image', 'creator', 'idol', 'short'];
 
 const TagSchema: Schema = new Schema({
       name: { type: String, required: true, unique: true },
-      kind: { type: String, required: true, enum: allowedKinds },
+      class: { type: String, required: true },
+      slug: { type: String, required: true },
+      scopes: [{ type: String, required: true, enum: allowedScope }],
 }, {
       collection: 'Tags', 
       timestamps: true

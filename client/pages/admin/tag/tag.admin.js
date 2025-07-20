@@ -1,95 +1,126 @@
-import domsComponent from "../../../components/dom.components.js";
+import apiService from "../../../api/api.instance.js";
+import apiEndpoint from "../../../api/endpoint.api.js";
+import apiMethod from "../../../api/method.api.js";
+import { alertBox, toastNotifier } from "../../../app.admin.js";
+import NOTIFICATION_TYPES from "../../../constants/notification-types.constant.js";
 
 export default async function() {
+      const tbody = document.querySelector('.tag-table tbody');
+      
+      renderTagsTable(tbody);
+
       const form = document.querySelector('.add-tag-form');
       const tagNameInput = document.getElementById('tag-name');
-      const tagKindSelect = document.getElementById('tag-kind');
+      const tagClassSelect = document.getElementById('tag-class');
       const mediaScopeSelect = document.querySelector('[dom-selector="media-scope"]');
       const selectedMediaWrapper = document.querySelector('[dom-selector="selected-media"]');
-      const submitBtn = form.querySelector('button[type="submit"]');
+      const submitButton = form.querySelector('button[type="submit"]');
 
-      const errorMessages = {
-            tag_name: form.querySelector('.error-tag-name') || createErrorMessageElement(tagNameInput),
-            tag_kind: form.querySelector('.error-tag-kind') || createErrorMessageElement(tagKindSelect),
-            media_scope: form.querySelector('.error-media-scope') || createErrorMessageElement(mediaScopeSelect)
-      }
-      
-      // Helper để tạo phần tử hiển thị lỗi dưới input/select
-      function createErrorMessageElement(target) {
+      const fields = {
+            tag_name: tagNameInput,
+            tag_class: tagClassSelect,
+            media_scope: mediaScopeSelect
+      };
+
+      const errorContainers = {};
+
+      for(const key in fields) {
             const el = document.createElement('div');
             el.className = 'error-message';
-            el.style.color = '#e53935';
-            el.style.fontSize = '12px';
-            el.style.marginTop = '4px';
-            target.parentNode.appendChild(el);
-            return el;
+            fields[key].parentNode.appendChild(el);
+            errorContainers[key] = el;
       }
 
-      // Clear all error message
-      function clearErrors() {
-            Object.values(errorMessages).forEach((el) => el.textContent = '');
-      }
+      const clearErrors = () => {
+            Object.values(errorContainers).forEach(e => e.textContent = '');
+            Object.values(fields).forEach(f => f.classList.remove('input-error'));
+      };
 
+      const setError = (key, message) => {
+            errorContainers[key].innerHTML = `${message}`;
+            fields[key].classList.add('input-error');
+      };
 
-      // lắng nghe khi chọn media-scope
       mediaScopeSelect.addEventListener('change', (event) => {
-            const selectedValue = event.target.value;
-            
-            // check nếu đã tồn tại khi ko thêm nữa
-            const existed = Array.from(selectedMediaWrapper.children).some(
-                  (el) => el.textContent === selectedValue
-            );
-            if(existed) return;
+            const val = event.target.value;
+            if([...selectedMediaWrapper.children].some(el => el.textContent === val)) return;
 
-            const selectedMediaDiv = domsComponent.createDiv({ text: selectedValue, cssClass: 'selected-media' });
-            // gắn sự kiện click để remove chính nó khi click
-            selectedMediaDiv.addEventListener('click', () => {
-                  selectedMediaDiv.classList.add('fade-out');
-                  setTimeout(() => {
-                        selectedMediaDiv.remove();
-                  }, 300);
-            });
-            selectedMediaWrapper.appendChild(selectedMediaDiv);
+            const div = document.createElement('div');
+            div.className = 'selected-media';
+            div.textContent = val;
+            div.title = 'Click to remove';
+            div.addEventListener('click', () => div.remove());
+            selectedMediaWrapper.appendChild(div);
+
+            mediaScopeSelect.selectedIndex = 0;
       });
 
+
       // lắng nghe submit
-      form.addEventListener('submit', async(e) => {
-            e.preventDefault();
+      form.addEventListener('submit', (e) => processSubmit(e, {
+            form, submitButton, tagNameInput, tagClassSelect, selectedMediaWrapper, clearErrors, setError, tbody
+      }));
+}
 
-            clearErrors();
+async function renderTagsTable(tbody) {
+      const tags = await apiService.getAll(apiEndpoint.tags.getAll);
+      tbody.innerHTML = '';
+      tags.forEach(tag => {
+            const tr = document.createElement('tr');
+            tr.innerHTML =  `
+                  <td>${tag.name}</td>
+                  <td>${tag.class}</td>
+            `;
+            tbody.appendChild(tr);
+      });
+}
 
-            const tagName = document.getElementById('tag-name').value.trim();
-            const tagKind = document.getElementById('tag-kind').value;
-            const mediaScopes = Array.from(selectedMediaWrapper.children).map(
-                  (el) => el.textContent
-            );
+async function processSubmit(e, context) {
+      e.preventDefault();
 
-            // validate
-            let hasError = false;
+      const {
+            form, submitButton, tagNameInput, tagClassSelect, selectedMediaWrapper,
+            clearErrors, setError, tbody
+      } = context;
 
-            if(!tagName) {
-                  errorMessages.tag_name.textContent = 'Tag name is required.';
-                  hasError = true;
-            }
-            if(tagKind === 'tag kind') {
-                  errorMessages.tag_kind.textContent = 'Please select tag kind.';
-                  hasError = true;
-            }
+      clearErrors();
 
-            if(mediaScopeSelect.length === 0) {
-                  errorMessages.media_scope.textContent = 'Please select at least one media scope.';
-                  hasError = true;
-            }
+      const tagName = tagNameInput.value.trim();
+      const tagClass = tagClassSelect.value;
+      const mediaScopes = [...selectedMediaWrapper.children].map(el => el.textContent);
 
-            if(hasError) {
+      // validate
+      let hasError = false;
+      if(!tagName) { setError('tag_name', 'Tag name is required.'); hasError = true; }
+      if(tagClass === 'tag class') { setError('tag_class', 'Select tag kind.'); hasError = true; }
+      if(mediaScopes.length === 0) { setError('media_scope', 'Select at least a media scope.'); hasError = true; }
+
+      if(hasError) return;
+
+      const payload = { tag_name: tagName, tag_class: tagClass, tag_scopes: mediaScopes };
+      
+      try {
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
+
+            const response = await apiMethod.createJson(apiEndpoint.tags.create, payload);
+            if(!response.success) {
+                  console.error('Error creating tag: ', response.error);
+                  alertBox.showError('tag created failed');
                   return;
             }
 
-            const payload = {
-                  tag_name: tagName,
-                  tag_kind: tagKind,
-                  media_scope: mediaScopes
-            };
-            console.log('Submit payload: ', payload);
-      });
+            const result = response.data;
+            alertBox.showSuccess('tag created');
+            
+            form.reset();
+            selectedMediaWrapper.innerHTML = '';
+      } catch(err) {
+            console.error(err);
+            toastNotifier.show('Submit tag failed', NOTIFICATION_TYPES.ERROR);
+      } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = 'Submit';
+            await renderTagsTable(tbody);
+      }
 }

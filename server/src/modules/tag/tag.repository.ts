@@ -1,6 +1,10 @@
-import { iTagRepository } from "./itag.repository.js";
-import { TagDTO } from "./tag.dto.js";
+import { CreateTagDTO, TagDTO } from "./tag.dto.js";
 import { TagModel } from "./tag.model.js";
+
+export interface iTagRepository {
+      getAll(): Promise<TagDTO[]>;
+      create(data: CreateTagDTO): Promise<TagDTO>;
+}
 
 export class TagRepository implements iTagRepository {
       async getAll(): Promise<TagDTO[]> {
@@ -8,17 +12,20 @@ export class TagRepository implements iTagRepository {
             return tags.map(doc => ({
                   _id: doc.id,
                   name: doc.name,
-                  kind: doc.kind
+                  class: doc.class,
+                  scopes: doc.scopes,
             }));
       }
 
-      async create(data: TagDTO): Promise<TagDTO> {
+      async create(data: CreateTagDTO): Promise<TagDTO> {
+            console.log('data: ', data);
             const tag = new TagModel(data);
             const saved = await tag.save();
             return {
                   _id: saved.id,
                   name: saved.name, 
-                  kind: saved.kind
+                  class: saved.class,
+                  scopes: saved.scopes
             }
       }
 }

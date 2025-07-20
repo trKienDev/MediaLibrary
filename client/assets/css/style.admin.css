@@ -10,12 +10,20 @@
       --hot-pink: #FF69B4;
       --light-pink: #FFB6C1;
       --dark-gray: #2e3138;
+      --secondary-background-color: #f6f8fa;
+      --secondary-background-hover: #eff2f5;
+      --secondary-border-color: #d1d9e0;
+      --secondary-box-shawdow: 0px 1px 0px 0px #1f23280a;
+      
 }
 
 /* Reset cơ bản */
 body, html {
       background-color: #f4f7fa;
       color: black;
+}
+select:hover {
+      cursor: pointer;
 }
 
 /* Container chính sử dụng Flexbox để tạo layout 2 cột */
@@ -47,7 +55,7 @@ body, html {
       background-color: white;
       color: black; 
 }
-#admin-sidebar .active a {
+#admin-sidebar nav li .active {
       background-color: white;
       color: black; 
 }
@@ -91,23 +99,13 @@ body, html {
 }
 /* add panel */
 .add-panel {
-      width: 250px; /* Chiều rộng cố định */
-      flex-shrink: 0; /* Không cho phép panel này co lại */
+      flex-shrink: 0; 
 }
 .add-panel h2 {
       margin-top: 0;
       font-weight: 500;
 }
-.add-panel .form-input {
-      display: block;
-      width: 100%;
-      padding: 0.75rem;
-      margin-bottom: 1rem;
-      border: 1px solid #e0e0e0;
-      border-radius: 6px;
-      background-color: #f8f9fa; /* Màu nền cho input */
-      box-sizing: border-box;
-}
+
 .add-panel .add-button {
       width: 100%;
       padding: 0.75rem;
@@ -122,4 +120,129 @@ body, html {
 }
 .add-panel .add-button:hover {
     background-color: #4c58b6; /* Màu đậm hơn khi hover */
+}
+
+/* select-search */
+.select-search_component {
+      position: relative;
+      margin-bottom: 20px;
+}
+.wrapper {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      position: relative;
+      background: #fff;
+}
+.select-btn {
+      padding: 10px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+}
+.select-btn span {
+      font-size: 14px;
+}
+.select-search_component .caret-down {
+      font-size: 12px;
+}
+.select-search_component .content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border: 1px solid #ccc;
+      z-index: 1000;
+}
+.select-search_component .wrapper.active .content {
+      display: block;
+}
+.select-search_component .search input {
+      width: 100%;
+      padding: 8px;
+      border: none;
+      border-bottom: 1px solid #ccc;
+}
+.select-search_component .options {
+      max-height: 150px;
+      overflow-y: auto;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+}
+.select-search_component .options li {
+      padding: 8px 10px;
+      cursor: pointer;
+      font-size: 14px;
+}
+.options li:hover {
+      background: #f0f0f0;
+}
+.select-search_component #selected-tag-area {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      padding: 5px;
+}
+.select-search_component .selected-tag {
+      background: #007bff;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 12px;
+      height: fit-content;
+}
+.select-search_component .selected-tag-container {
+      min-height: 100px;
+      width: 100%;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+}
+.select-search_component .selected-option {
+      width: fit-content;
+      background-color: white;
+      border-radius: 5px;
+      padding: 4px 8px;
+      border: 1px solid #d0cdcd;
+      font-size: 13px;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+      display: inline-block;
+}
+.select-search_component .selected-option:hover {
+      cursor: pointer;
+      background-color: #ff0000;
+      color: white;
+}
+
+/* primary-form */
+.primary-form .form-input {
+      margin-bottom: 10px;
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 5px;
+      box-sizing: border-box;
+      background-color: white;
+      font-family: 'Lexend';
+      box-sizing: border-box;
+}
+.primary-form button {
+      width: 100%;
+}
+.primary-form .form-row {
+      display: flex;
+      justify-content: space-between;
+}
+.primary-form .form-column {
+      width: 47%;
+}
+.primary-form #upload-image {
+      width: 100%;
+}
+.primary-form #upload-image:hover {
+      filter: brightness(0.95);
+      cursor: pointer;
 }

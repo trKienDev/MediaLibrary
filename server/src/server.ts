@@ -6,7 +6,7 @@ import { processStaticFiles } from "./middlewares/process-static-file.js";
 
 // ====== CONFIG ======
 const PORT = process.env.PORT || 3000;
-const MONGODB_URI = 'mongodb://localhost:27017/VideoLibrary';
+const MONGODB_URI = 'mongodb://localhost:27017/VideoLibraryDev';
 
 // ====== CORS ======
 function setCorsHeaders(res: ServerResponse) {
@@ -42,9 +42,6 @@ function requestHandler(req: IncomingMessage, res: ServerResponse) {
       const apiRequest = req as ApiRequest;
       processRoutes(apiRequest, res);
 
-      res.statusCode = 200;
-      res.setHeader('Content-Type', 'application/json');
-      res.end(JSON.stringify({ message: 'Media server running!' }));
 }
 
 // ====== MAIN FUNCTION ======

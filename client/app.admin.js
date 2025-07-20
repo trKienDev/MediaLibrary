@@ -2,6 +2,7 @@ import './services/state.service.js';
 import './spa/render.spa.js';
 import './spa/router.spa.js';
 import { InitializeActiveStateAsync } from "./utils/active-state.utils.js";
+import AlertBox from './utils/alert-box/alert-box.utils.js';
 import ToastNotifier from './utils/toast-notification/toast-notification.utils.js';
 
 window.App = window.App || {};
@@ -12,6 +13,7 @@ const adminRoutes = [
       // '/admin/': 'dashboard/dashboard.admin', // URL gốc của admin
       // '/admin/dashboard': 'dashboard/dashboard.admin',\
       { path: '/admin/tag', page: 'tag/tag.admin' },
+      { path: '/admin/creator', page: 'creator/creator.admin' },
 ];
 
 function AdminController() {
@@ -34,3 +36,4 @@ function AdminController() {
 };
 AdminController();
 export const toastNotifier = new ToastNotifier();
+export const alertBox = new AlertBox();

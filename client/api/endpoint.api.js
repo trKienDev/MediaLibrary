@@ -30,12 +30,17 @@ const apiEndpoint = {
       },
       tags: {
             getById: '/api/tag',
+            getAll: '/api/tags',
+            create: '/api/tag', 
       },
       playlist: {
             getById: '/api/playlist',
       },
       shorts: {
             getRandomPagination: '/api/shorts/random-pagination',
+      },
+      studios: {
+            getAll: '/api/studios',
       },
       videos: {
             getById: '/api/video',

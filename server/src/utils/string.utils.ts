@@ -1,10 +1,9 @@
-function replaceSpacesWithUnderscore(istring: string): string {
+export function replaceSpacesWithUnderscore(istring: string): string {
       return istring.replace(/\s+/g, '_');
 }
 
-
-
-const string_utils = {
-      replaceSpacesWithUnderscore,
+export function slugify(input: string): string {
+      return input.trim()
+            .toLowerCase()
+            .replace(/\s+/g, '-');
 }
-export default string_utils;

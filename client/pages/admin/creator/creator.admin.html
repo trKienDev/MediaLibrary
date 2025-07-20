@@ -1,1 +1,60 @@
-<h1>Admin Creator</h1>
+<main class="management-panel">
+      <h1>Creator management</h1>
+      <input type="search" class="search-input" placeholder="search tag ...">
+      <table class="tag-table">
+            <thead></thead>
+            <tbody></tbody>
+      </table>
+</main>
+
+<aside class="add-panel add-creator-panel">
+      <h2>Add new creator</h2>
+      <form class="add-creator-form primary-form">
+            <div class="form-row">
+                  <div class="form-column">
+                        <div>
+                              <input class="form-input"  type="text" id="creator-name" name="creator_name" placeholder="creator">
+                        </div>
+                        <div>
+                              <input class="form-input" type="date" id="creator-birth" name="creator_birth" placeholder="birth">
+                        </div>
+                        <div>
+                              <input class="form-input" type="number" id="creator-views" name="creator_views" placeholder="views">
+                        </div>
+                        <div>
+                              <select class="form-input" name="creator-active" id="creator-active">
+                                    <option value="active">active</option>
+                                    <option value="deactive">deactive</option>
+                              </select>
+                        </div>
+                        <div>
+                              <div id="creator-tags" class="select-search_component">
+                                    <div class="wrapper">
+                                          <div class="select-btn">
+                                                <span>Select item</span>
+                                                <i class="caret-down">▼</i>
+                                          </div>
+                                          <div class="content">
+                                                <div class="search row">
+                                                      <input class="form-input" type="text" placeholder="Search ...">
+                                                </div>
+                                                <ul class="options"></ul>
+                                          </div>
+                                    </div>
+                                    <div class="selected-tag-container" class="selected-tag_container">
+                                          <div id="selected-tag-area"></div>
+                                    </div>
+                              </div>
+
+                        </div>
+                  </div>
+                  <div class="form-column">
+                        <img id="upload-image" src="/assets/images/upload-profile.jpg" alt="">
+                        <input type="file" id="image-input" name="file" style="display: none;" accept="image/*">
+                  </div>
+            </div>
+            <div class="save-button">
+                  <button type="submit" class="btn primary-btn">Add</button>
+            </div>
+      </form>
+</aside>

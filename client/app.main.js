@@ -17,6 +17,8 @@ const appRoutes = [
       { path: '/section/mangas', page: 'homepage/sections/mangas/manga-section.main' },
       { path: '/section/images', page: 'homepage/sections/images/image-section.main' },
       { path: '/section/shorts', page: 'homepage/sections/shorts/short-section.main' },
+      { path: '/section/studios', page: 'homepage/sections/studios/studio-section.main' },
+      { path: '/section/creators', page: 'homepage/sections/creators/creator-section.main' },
 
 ];
 

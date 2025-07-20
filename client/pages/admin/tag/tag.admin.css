@@ -17,6 +17,7 @@
 .tag-table .btn + .btn {
       margin-left: 0.25rem;
 }
+
 .add-tag-form label {
       display: block;
       margin-bottom: 4px;
@@ -27,15 +28,16 @@
       padding: 0.75rem;
       border: 1px solid #e0e0e0;
       border-radius: 5px;
-      margin-bottom: 1rem;
       box-sizing: border-box;
       background-color: white;
       font-family: 'Lexend';
 }
+.add-tag-form .media-scope {
+      margin-bottom: 10px;
+}
 .add-tag-form .selected-media-container {
       min-height: 100px;
       width: 100%;
-      margin-bottom: 1rem;
       border: 1px solid #e0e0e0;
       border-radius: 5px;
       background-color: #f9f9f9;
@@ -51,9 +53,9 @@
 }
 .add-tag-form .selected-media {
       width: fit-content;
-      padding: 5px;
       background-color: white;
       border-radius: 5px;
+      padding: 4px 8px;
       border: 1px solid #d0cdcd;
       font-size: 13px;      
       transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
@@ -63,6 +65,35 @@
       cursor: pointer;
       background-color: #ff0000;;
       color: white;
+      transform: scale(1.05);
+}
+.selected-media.fade-out {
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.input-error {
+      border-color: #e53935 !important;
+      box-shadow: 0 0 5px rgba(229, 57, 53, 0.6);
+      transition: border-color 0.3s, box-shadow 0.3s;
+}
+.error-message {
+      color: #e53935;
+      font-size: 12px;
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      animation: fadeIn 0.3s ease;
+      font-size: 14px;
+}
+@keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-3px); }
+      to { opacity: 1; transform: translateY(0); }
+}
+.selected-media:hover {
+      background-color: #e53935;
+      color: #fff;
       transform: scale(1.05);
 }
 .selected-media.fade-out {

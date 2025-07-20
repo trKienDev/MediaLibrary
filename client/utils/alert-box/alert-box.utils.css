@@ -65,18 +65,24 @@
       gap: 15px;
 }
 .custom-alert__actions button {
-      border: none;
-      border-radius: 8px;
-      padding: 10px 25px;
-      font-size: 1em;
+      padding: 5px 15px;
+      font-size: 14px;
+      color: black;
+      background-color: var(--secondary-background-color);
+      border: 1px solid var(--secondary-border-color);
+      box-shadow: var(--secondary-box-shadow);
       cursor: pointer;
-      transition: opacity 0.2s;
+      user-select: none;
+      border-radius: 6px;
+      transition: 80ms cubic-bezier(0.33, 1, 0.68, 1);
+      transition-property: color,background-color,box-shadow,border-color;
 }
 .custom-alert__actions button:hover {
-      opacity: 0.8;
+      background-color: var(--secondary-background-hover);
+      transition-duration: .1s;
 }
 .confirm-btn {
-      background-color: #007bff;
+      background-color: #eff2f5;
 }
 .cancle-btn {
       background-color: #6c757d;

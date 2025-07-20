@@ -1,0 +1,18 @@
+.homepage-content-container .studios-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+}
+.homepage-content-container .tag-style{
+      background-color: white;
+      border-color: #d1d9e0b3;
+      box-shadow: 0px 1px 1px 0px #1f23280f, 0px 1px 3px 0px #1f23280f;
+      transition: background-color .2s ease;
+}
+.homepage-content-container .tag-style a {
+      color: black;
+      font-size: 13px;
+}
+.homepage-content-container .tag-style:hover {
+      background-color: #f6f8fa;
+}

@@ -10,12 +10,12 @@
 <aside class="add-panel">
       <h2>Add new tag</h2>
       <form class="add-tag-form">
-            <div>
+            <div class="form-input">
                   <input type="text" id="tag-name" name="tag_name" placeholder="tag name">
             </div>
-            <div>
-                  <select name="tag_kind" id="tag-kind">
-                        <option disabled selected>tag kind</option>
+            <div class="form-input">
+                  <select name="tag_class" id="tag-class">
+                        <option disabled selected>tag class</option>
                         <option value="video">video</option>
                         <option value="film">film</option>
                         <option value="creator">creator</option>
@@ -27,8 +27,8 @@
                         <option value="clip">clip</option>
                   </select>
             </div>
-            <div class="">
-                  <select name="media_scope" dom-selector="media-scope">
+            <div class="form-input">
+                  <select name="media_scope" dom-selector="media-scope" class="media-scope">
                         <option disabled selected>media scope</option>
                         <option value="video">video</option>
                         <option value="film">film</option>

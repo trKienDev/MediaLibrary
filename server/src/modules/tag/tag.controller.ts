@@ -2,9 +2,11 @@ import { IncomingMessage, ServerResponse } from "http";
 import { TagRepository } from "./tag.repository.js";
 import { TagService } from "./tag.service.js";
 import { sendError, sendResponse } from "../../middlewares/response.js";
+import { SlugRepository } from "../slug-mangament/slug.repository.js";
 
 const _tagRepository = new TagRepository();
-const _tagService = new TagService(_tagRepository);
+const _slugRepository = new SlugRepository();
+const _tagService = new TagService(_tagRepository, _slugRepository);
 
 const getAllTags = async(req: IncomingMessage, res: ServerResponse) => {
       try {

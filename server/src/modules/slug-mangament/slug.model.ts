@@ -1,0 +1,21 @@
+import mongoose, { Schema } from "mongoose";
+import { MediaType } from "../../interfaces/media-type.interface";
+
+export interface iSlug extends Document {
+      slug: string;
+      refType: MediaType;
+      refId: mongoose.Types.ObjectId;
+}
+
+const allowedRefTypes: MediaType[] = ['video', 'film', 'anime', 'manga', 'clip', 'image', 'creator', 'idol', 'short', "tag"];
+
+const SlugSchema = new Schema({
+      slug: { type: String, unique: true, required: true },
+      refType: { type: String, required: true, enum: allowedRefTypes},
+      refId: { type: Schema.Types.ObjectId, required: true} 
+}, {
+      collection: 'Slugs', 
+      timestamps: true
+});
+
+export const SlugModel = mongoose.model<iSlug>('Slug', SlugSchema); 
