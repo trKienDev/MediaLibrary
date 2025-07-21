@@ -1,15 +1,16 @@
 import { Route } from "../interfaces/route.js";
-import creatorController from "../modules/creator/creator.controller.js";
-import tagController from "../modules/tag/tag.controller.js";
+import { createCreator, getAllCreators } from "../modules/creator/creator.controller.js";
+import { createTag, getAllTags } from "../modules/tag/tag.controller.js";
 import { createRouter } from "./create.route.js";
 
 const apiRoutes: Route[] = [
       // tag
-      { method: 'GET', path: '/api/tags', handler: tagController.getAllTags },
-      { method: 'POST', path: '/api/tag', handler: tagController.createTag },
+      { method: 'GET', path: '/api/tags', handler: getAllTags },
+      { method: 'POST', path: '/api/tag', handler: createTag },
 
       // creator
-      { method: 'POST', path: '/api/creator', handler: creatorController.createCreator },
+      { method: 'GET', path: '/api/creators', handler: getAllCreators },
+      { method: 'POST', path: '/api/creator', handler: createCreator },
 
 
       // // homepage-feed

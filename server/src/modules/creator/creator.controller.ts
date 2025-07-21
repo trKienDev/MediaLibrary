@@ -19,7 +19,7 @@ const findCreatorById = async(req: ValidateIdRequest, res: ServerResponse) => {
       }
 };
 
-const getAllCreators = async(req: ApiRequest, res: ServerResponse) => {
+export const getAllCreators = async(req: ApiRequest, res: ServerResponse) => {
       try { 
             const creators = await _creatorRepository.getAll();
             return sendResponse(res, 200, creators);
@@ -29,7 +29,7 @@ const getAllCreators = async(req: ApiRequest, res: ServerResponse) => {
       }
 };
 
-const createCreator = async(req: ApiRequest, res: ServerResponse) => {
+export const createCreator = async(req: ApiRequest, res: ServerResponse) => {
       try {
             const created = await _creatorService.createCreator(req);
             return sendResponse(res, 201, created);
@@ -49,9 +49,3 @@ const createCreator = async(req: ApiRequest, res: ServerResponse) => {
 //             return sendError(res, 500, err);
 //       }
 // }
-
-const creatorController = {
-      getAllCreators,
-      createCreator,
-}
-export default creatorController;

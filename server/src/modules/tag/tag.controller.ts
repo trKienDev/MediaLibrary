@@ -8,7 +8,7 @@ const _tagRepository = new TagRepository();
 const _slugRepository = new SlugRepository();
 const _tagService = new TagService(_tagRepository, _slugRepository);
 
-const getAllTags = async(req: IncomingMessage, res: ServerResponse) => {
+export const getAllTags = async(req: IncomingMessage, res: ServerResponse) => {
       try {
             const tags = await _tagService.getAllTags();
             sendResponse(res, 200, tags);
@@ -18,7 +18,7 @@ const getAllTags = async(req: IncomingMessage, res: ServerResponse) => {
       }
 };
 
-const createTag = async(req: IncomingMessage, res: ServerResponse) => {
+export const createTag = async(req: IncomingMessage, res: ServerResponse) => {
       try {
             const tag = await _tagService.createTag(req);
             sendResponse(res, 201, tag);
@@ -27,9 +27,3 @@ const createTag = async(req: IncomingMessage, res: ServerResponse) => {
             sendError(res, 500, err);
       }
 };
-
-const tagController = {
-      getAllTags,
-      createTag, 
-}
-export default tagController;

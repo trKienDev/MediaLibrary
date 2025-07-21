@@ -1,12 +1,13 @@
 import apiService from "../../../api/api.instance.js";
 import apiEndpoint from "../../../api/endpoint.api.js";
 import apiMethod from "../../../api/method.api.js";
-import { toastNotifier } from "../../../app.admin.js";
+import { alertBox, toastNotifier } from "../../../app.admin.js";
 import SelectSearchComponent from "../../../components/select-search.component.js";
 import NOTIFICATION_TYPES from "../../../constants/notification-types.constant.js";
 import { handleUploadImage } from "../../../utils/images.utils.js";
 
 export default async function() {
+      await loadCreators();
       const tags = await apiService.getAll(apiEndpoint.tags.getAll);
       const tagDictionary = tags.map(tag => ({
             key: tag.name,
@@ -60,8 +61,9 @@ export default async function() {
                   submitBtn.disabled = true;
                   submitBtn.textContent = 'Submitting...';
                   console.log('form data: ', formData);
-                  const response = await apiMethod.createForm(apiEndpoint.creators.create, formData);
-                  console.log('response: ', response);
+                  const response = await apiService.createForm(apiEndpoint.creators.create, formData);
+                  alertBox.showSuccess('creator created');
+                  loadCreators();
             } catch(err) {
                   console.error('Submit failed: ', err);
                   toastNotifier.show('Submit creator failed: ', NOTIFICATION_TYPES.ERROR);
@@ -70,4 +72,13 @@ export default async function() {
                   submitBtn.textContent = 'Submit';
             }
       });
+}
+
+async function loadCreators() {
+      const creators = await apiService.getAll(apiEndpoint.creators.getAll);
+      console.log('creators: ', creators);
+}
+
+async function createCreator() {
+
 }

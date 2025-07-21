@@ -50,14 +50,17 @@ export default class ApiStrategy {
             const result = await this.getById(apiEndpoint, id);
             return result.film_id;
       }
-      async updateJson(apiEndpoint, data) {
-            const result = await apiMethod.updateJson(apiEndpoint, data);
+      async updateJson(apiEndpoint, json) {
+            const result = await apiMethod.updateJson(apiEndpoint, json);
+            return this.#handleResult(result);
+      }
+      async createForm(apiEndpoint, form) {
+            const result = await apiMethod.createForm(apiEndpoint, form);
             return this.#handleResult(result);
       }
 
       #handleResult(result) {
             if(!result.success) {
-                  console.log('result: ', result);
                   throw new Error(result.error);
             }
             return result.data;
