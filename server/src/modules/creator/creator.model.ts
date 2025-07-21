@@ -3,7 +3,7 @@ import mongoose, { Document, Schema } from "mongoose";
 export interface iCreator extends Document {
       _id: mongoose.Types.ObjectId;
       name: string;
-      identifier_name: string;
+      slug: string;
       birth: Date;
       image: string;
       studio_ids: mongoose.Types.ObjectId[];
@@ -16,7 +16,7 @@ export interface iCreator extends Document {
 
 const CreatorSchema: Schema = new Schema({
       name: { type: String, required: true },
-      identifier_name: { type: String },
+      slug: { type: String },
       birth: {
             type: Date, 
             required: true, 

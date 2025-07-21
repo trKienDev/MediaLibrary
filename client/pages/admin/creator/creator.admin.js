@@ -3,11 +3,16 @@ import apiEndpoint from "../../../api/endpoint.api.js";
 import apiMethod from "../../../api/method.api.js";
 import { alertBox, toastNotifier } from "../../../app.admin.js";
 import SelectSearchComponent from "../../../components/select-search.component.js";
+import { createImageTd, createTextTd, createTrWithId } from "../../../components/tables/table.component.js";
+import appConfigs from "../../../config/app.config.js";
+import { ServerFolders } from "../../../constants/folder.constant.js";
 import NOTIFICATION_TYPES from "../../../constants/notification-types.constant.js";
+import { renameUploadedFile } from "../../../utils/files.utils.js";
 import { handleUploadImage } from "../../../utils/images.utils.js";
 
 export default async function() {
-      await loadCreators();
+      const creatorTableTbody = document.querySelector('.creator-table tbody');
+      await renderCreatorsTable(creatorTableTbody);
       const tags = await apiService.getAll(apiEndpoint.tags.getAll);
       const tagDictionary = tags.map(tag => ({
             key: tag.name,
@@ -43,9 +48,9 @@ export default async function() {
             const creatorViews = parseInt(document.getElementById('creator-views').value, 10);
             const creatorActive = document.getElementById('creator-active').value;
             const selectedTags = selectSearch.getSelected();
-
             const imageInput = document.getElementById('image-input');
             const imageFile = imageInput.files[0] || null;
+            
 
             const formData = new FormData();
             formData.append("name", creatorName);
@@ -54,7 +59,9 @@ export default async function() {
             formData.append("status", creatorActive);
             formData.append("tag_ids", selectedTags);
             if(imageFile) {
-                  formData.append('file', imageFile);
+                  console.log('creator name: ', creatorName);
+                  const renamedFile = renameUploadedFile(imageFile, creatorName);
+                  formData.append('file', renamedFile);
             }
 
             try {
@@ -63,7 +70,7 @@ export default async function() {
                   console.log('form data: ', formData);
                   const response = await apiService.createForm(apiEndpoint.creators.create, formData);
                   alertBox.showSuccess('creator created');
-                  loadCreators();
+                  renderCreatorsTable(creatorTableTbody);
             } catch(err) {
                   console.error('Submit failed: ', err);
                   toastNotifier.show('Submit creator failed: ', NOTIFICATION_TYPES.ERROR);
@@ -74,11 +81,18 @@ export default async function() {
       });
 }
 
-async function loadCreators() {
+async function renderCreatorsTable(tbody) {
       const creators = await apiService.getAll(apiEndpoint.creators.getAll);
-      console.log('creators: ', creators);
-}
+      tbody.innerHTML = '';
+      creators.forEach(creator => {
+            const tr = createTrWithId(creator._id);
+            const nameTd = createTextTd({ iText: creator.name, iCss: 'creator-name'});
+            tr.appendChild(nameTd);
+            
+            const imgSrc = `${appConfigs.SERVER}/${ServerFolders.CREATORS}/${creator.image}`;
+            const imgTd = createImageTd(imgSrc, 'image-td');
+            tr.appendChild(imgTd);
 
-async function createCreator() {
-
+            tbody.appendChild(tr);
+      });
 }

@@ -18,12 +18,12 @@
       margin-left: 0.25rem;
 }
 
-.add-tag-form label {
+#add-tag-form label {
       display: block;
       margin-bottom: 4px;
       font-size: 14px;
 }
-.add-tag-form input[type="text"], .add-tag-form select {
+#add-tag-form input[type="text"], #add-tag-form select {
       width: 100%;
       padding: 0.75rem;
       border: 1px solid #e0e0e0;
@@ -32,26 +32,26 @@
       background-color: white;
       font-family: 'Lexend';
 }
-.add-tag-form .media-scope {
+#add-tag-form .media-scope {
       margin-bottom: 10px;
 }
-.add-tag-form .selected-media-container {
+#add-tag-form .selected-media-container {
       min-height: 100px;
       width: 100%;
       border: 1px solid #e0e0e0;
       border-radius: 5px;
       background-color: #f9f9f9;
 }
-.add-tag-form .selected-media-wrapper {
+#add-tag-form .selected-media-wrapper {
       padding: 10px;
       display: flex;
       flex-wrap: wrap;
       gap: 5px;
 }
-.add-tag-form button {
+#add-tag-form button {
       width: 100%;
 }
-.add-tag-form .selected-media {
+#add-tag-form .selected-media {
       width: fit-content;
       background-color: white;
       border-radius: 5px;
@@ -61,7 +61,7 @@
       transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
       display: inline-block;
 }
-.add-tag-form .selected-media:hover {
+#add-tag-form .selected-media:hover {
       cursor: pointer;
       background-color: #ff0000;;
       color: white;

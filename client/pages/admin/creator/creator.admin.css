@@ -4,3 +4,8 @@
 .add-creator-panel {
       width: 35%;
 }
+.creator-table .image-td {
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+}

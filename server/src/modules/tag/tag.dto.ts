@@ -3,7 +3,6 @@ import { MediaType } from "../../interfaces/media-type.interface.js";
 export interface CreateTagDTO {
       _id?: string;
       name: string;
-      class: string;
       slug: string;
       scopes: MediaType[];
 }
@@ -11,6 +10,5 @@ export interface CreateTagDTO {
 export interface TagDTO {
       _id?: string;
       name: string;
-      class: string;
       scopes: MediaType[];
 }

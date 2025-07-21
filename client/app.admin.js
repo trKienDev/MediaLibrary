@@ -14,6 +14,7 @@ const adminRoutes = [
       // '/admin/dashboard': 'dashboard/dashboard.admin',\
       { path: '/admin/tag', page: 'tag/tag.admin' },
       { path: '/admin/creator', page: 'creator/creator.admin' },
+      { path: '/admin/studio', page: 'studio/studio.admin' },
 ];
 
 function AdminController() {

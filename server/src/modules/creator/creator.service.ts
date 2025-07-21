@@ -2,11 +2,16 @@ import { UploadFiles } from "../../enums.js";
 import { ApiRequest } from "../../interfaces/api-request.interface.js";
 import { uploadFile } from "../../utils/file.utils.js";
 import { extractParamFromRequest } from "../../utils/request.utils.js";
-import { CreatorDTO } from "./creator.dto.js";
+import { slugify } from "../../utils/string.utils.js";
+import { iSlugRepository } from "../slug/slug.repository.js";
+import { CreateCreatorDTO, CreatorDTO } from "./creator.dto.js";
 import { iCreatorRepository } from "./creator.repository.js";
 
 export class CreatorService {
-      constructor(private _creatorRepository: iCreatorRepository) {}
+      constructor(
+            private readonly _creatorRepository: iCreatorRepository,
+            private readonly _slugRepository: iSlugRepository,
+      ) {}
 
       async findCreatorById(id: string): Promise<CreatorDTO> {
             const creator = await this._creatorRepository.findById(id);
@@ -16,7 +21,6 @@ export class CreatorService {
 
       async createCreator(req: ApiRequest) {
             const { file_name } = await uploadFile(req, UploadFiles.CREATORS);
-            console.log('file name: ', file_name);
             const creator_name = extractParamFromRequest(req, "name");
             const creator_birth = new Date(extractParamFromRequest(req, "birth"));
             const creator_views = Number(extractParamFromRequest(req, "views"));
@@ -29,10 +33,10 @@ export class CreatorService {
             const existing = await this._creatorRepository.findByNameAndBirth(creator_name, creator_birth);
             if (existing) return { success: false, code: 409, message: "Creator has already existed" };
 
-            const identifier_name = createCreatorIdentifierName(creator_name);
-            const data: CreatorDTO = {
+            const creator_slug = slugify(creator_name);
+            const data: CreateCreatorDTO = {
                   name: creator_name,
-                  identifier_name,
+                  slug: creator_slug,
                   birth: creator_birth,
                   image: file_name, 
                   active: isCreatorActive,
@@ -40,7 +44,9 @@ export class CreatorService {
                   tag_ids: creator_tags,
             };
 
-            return this._creatorRepository.create(data);
+            const creator = await this._creatorRepository.create(data);
+            await this._slugRepository.create(creator_slug, "creator", creator._id);
+            return creator;
       }
 
       // async updateCreator(req: ApiRequest, id: string): Promise<CreatorDTO> {
@@ -62,8 +68,4 @@ export class CreatorService {
       //       if (!updated) throw new Error("Error updating creator.");
       //       return updated;
       // }
-}
-
-function createCreatorIdentifierName(name: string): string {
-      return `@${name.toLowerCase().replace(/\\s/g, "")}`;
 }

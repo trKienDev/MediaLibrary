@@ -1,6 +1,8 @@
 import { IncomingMessage, ServerResponse } from "http";
 import path from "path";
-import fs from 'fs';
+import fs from 'fs/promises';
+import mime from 'mime';
+import { lookup as mimeLookup } from 'mime-types';
 
 /**
  * handleStaticFiles: serve static files from /uploads folder.
@@ -9,68 +11,54 @@ import fs from 'fs';
  * - Cache-Control
  * - Basic path traversal protection
 */
-export function processStaticFiles(req: IncomingMessage, res: ServerResponse): boolean {
-      if(!req.url?.startsWith('/uploads')) return false;
+export async function processStaticFiles(req: IncomingMessage, res: ServerResponse): Promise<boolean> {
+      if (!req.url?.startsWith('/uploads')) {
+        return false;
+    }
 
-      const safePath = req.url.replace('/uploads', '').replace(/\.\./g, '');
-      const filePath = path.join(process.cwd(), 'uploads', safePath);
+    try {
+        // Xác định root uploads dir tuyệt đối
+        const uploadsRoot = path.resolve(process.cwd(), '..', '..', 'uploads');
 
-      try {
-            const stats = fs.statSync(filePath);
-            if(!stats.isFile()) {
-                  res.statusCode = 404;
-                  res.end('File not found');
-                  return true;
-            } 
+        // Resolve path an toàn (chống traversal)
+        const relativePath = req.url.replace('/uploads', '');
+        const requestedPath = path.normalize(path.join(uploadsRoot, relativePath));
 
-            const range = req.headers.range;
-            const ext = path.extname(filePath).toLocaleLowerCase();
-            const mimeTypes: Record<string, string> = {
-                  '.jpg': 'image/jpeg',
-                  '.jpeg': 'image/jpeg',
-                  '.png': 'image/png',
-                  '.gif': 'image/gif',
-                  '.txt': 'text/plain',
-                  '.html': 'text/html',
-                  '.css': 'text/css',
-                  '.js': 'application/javascript',
-                  '.mp4': 'video/mp4'
-            };
-            const contentType = mimeTypes[ext] || 'application/octet-stream';
+        // Ensure requestedPath nằm trong uploadsRoot
+        if (!requestedPath.startsWith(uploadsRoot)) {
+            res.statusCode = 403;
+            res.end('Forbidden');
+            return true;
+        }
 
-            res.setHeader('Content-Type', contentType);
-            res.setHeader('Cache-Control', 'public, max-age=31536000');
-
-            if(range) {
-                  const positions = range.replace(/bytes=/, '').split('-');
-                  const start = parseInt(positions[0], 10);
-                  const end = positions[1] ? parseInt(positions[1], 10) : stats.size - 1;
-
-                  if(start >= stats.size) {
-                        res.statusCode = 416;
-                        res.setHeader('Content-Range', `bytes */${stats.size}`);
-                        res.end();
-                        return true;
-                  }
-
-                  const chunkSize = (end - start) + 1;
-                  res.statusCode = 206;
-                  res.setHeader('Content-Range', `bytes ${start}-${end}/${stats.size}`);
-                  res.setHeader('Accept-Ranges', 'bytes');
-                  res.setHeader('Content-Length', chunkSize);
-
-                  const stream = fs.createReadStream(filePath, { start, end });
-                  stream.pipe(res);
-            } else {
-                  res.statusCode = 200;
-                  res.setHeader('Content-Length', stats.size);
-                  const stream = fs.createReadStream(filePath);
-                  stream.pipe(res);
-            }
-      } catch(err) {
+        const stats = await fs.stat(requestedPath);
+        if (!stats.isFile) {
             res.statusCode = 404;
             res.end('File not found');
-      }
+            return true;
+        }
 
-      return true;
+        const data = await fs.readFile(requestedPath);
+
+        const mimeType = mimeLookup(requestedPath) || 'application/octet-stream';
+        res.setHeader('Content-Type', mimeType);
+
+        // Optional: set caching policy
+        res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+
+        res.statusCode = 200;
+        res.end(data);
+        return true;
+
+    } catch (err) {
+        if ((err as any).code === 'ENOENT') {
+            res.statusCode = 404;
+            res.end('File not found');
+        } else {
+            console.error('[ERROR] Static file error:', err);
+            res.statusCode = 500;
+            res.end('Internal Server Error');
+        }
+        return true;
+    }
 }

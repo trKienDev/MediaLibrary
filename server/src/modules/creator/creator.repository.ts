@@ -1,5 +1,5 @@
 import mongoose, { FilterQuery } from "mongoose";
-import { CreatorDTO, CreatorsPaginationDTO, FilterCreatorsPagination } from "./creator.dto.js";
+import { CreateCreatorDTO, CreatorDTO, CreatorsPaginationDTO, FilterCreatorsPagination } from "./creator.dto.js";
 import { CreatorModel, iCreator } from "./creator.model.js";
 import seedrandom from "seedrandom";
 
@@ -9,7 +9,7 @@ export interface iCreatorRepository {
       findById(id: string): Promise<CreatorDTO | null>;
       findByNameAndBirth(name: string, birth: Date): Promise<CreatorDTO | null>;
       findByTagId(tag_id: string): Promise<CreatorDTO[]>;
-      create(data: CreatorDTO): Promise<CreatorDTO>;
+      create(data: CreateCreatorDTO): Promise<CreatorDTO>;
       update(id: string, data: Partial<CreatorDTO>): Promise<CreatorDTO>;
       delete(id: string): Promise<CreatorDTO>;
 }
@@ -52,10 +52,10 @@ export class CreatorRepository implements iCreatorRepository {
             return creators.map(doc => this.mapDocToDTO(doc));
       }
 
-      async create(data: CreatorDTO): Promise<CreatorDTO> {
+      async create(data: CreateCreatorDTO): Promise<CreatorDTO> {
             const newCreator = new CreatorModel({
                   name: data.name,
-                  identifier_name: data.identifier_name,
+                  slug: data.slug,
                   birth: data.birth,
                   image: data.image,
                   active: data.active,
@@ -99,7 +99,7 @@ export class CreatorRepository implements iCreatorRepository {
             return {
                   _id: doc._id.toString(),
                   name: doc.name,
-                  identifier_name: doc.identifier_name,
+                  slug: doc.slug,
                   birth: doc.birth,
                   image: doc.image,
                   active: doc.active,

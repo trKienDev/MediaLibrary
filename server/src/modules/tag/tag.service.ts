@@ -4,7 +4,7 @@ import { parseJSON } from "../../middlewares/json-parser.js";
 import { slugify } from "../../utils/string.utils.js";
 import { iTagRepository } from "./tag.repository.js";
 import { MediaType } from "../../interfaces/media-type.interface.js";
-import { iSlugRepository } from "../slug-mangament/slug.repository.js";
+import { iSlugRepository } from "../slug/slug.repository.js";
 
 export class TagService {
       constructor(
@@ -17,8 +17,8 @@ export class TagService {
       }
 
       async createTag(req: IncomingMessage): Promise<TagDTO> {
-            const body = await parseJSON(req, ['tag_name', 'tag_class', 'tag_scopes']);
-            const { tag_name, tag_class, tag_scopes } = body;
+            const body = await parseJSON(req, ['tag_name', 'tag_scopes']);
+            const { tag_name, tag_scopes } = body;
 
             if(typeof tag_name !== 'string' || !tag_name.trim()) {
                   throw new Error('Invalid tag name');
@@ -41,7 +41,7 @@ export class TagService {
                   }
             }
 
-            const dto: CreateTagDTO = { name: tag_name, slug: tag_slug, class: tag_class, scopes: tag_scopes as MediaType[]};
+            const dto: CreateTagDTO = { name: tag_name, slug: tag_slug, scopes: tag_scopes as MediaType[]};
             const tag = await this._tagRepository.create(dto);
 
             await this._slugRepository.create(tag_slug, "tag", tag._id!);

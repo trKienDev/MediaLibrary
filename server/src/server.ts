@@ -6,7 +6,7 @@ import { processStaticFiles } from "./middlewares/process-static-file.js";
 
 // ====== CONFIG ======
 const PORT = process.env.PORT || 3000;
-const MONGODB_URI = 'mongodb://localhost:27017/VideoLibraryDev';
+const MONGODB_URI = 'mongodb://localhost:27017/MediaLibrary';
 
 // ====== CORS ======
 function setCorsHeaders(res: ServerResponse) {
@@ -27,7 +27,7 @@ async function connectDB() {
 }
 
 // ====== REQUEST HANDLER ======
-function requestHandler(req: IncomingMessage, res: ServerResponse) {
+async function requestHandler(req: IncomingMessage, res: ServerResponse) {
       setCorsHeaders(res);
 
       if(req.method === 'OPTIONS') {
@@ -36,7 +36,8 @@ function requestHandler(req: IncomingMessage, res: ServerResponse) {
             return;
       }
 
-      const isStatic = processStaticFiles(req, res);
+      const isStatic = await processStaticFiles(req, res);
+      console.log('is static: ', isStatic);
       if(isStatic) return;
       
       const apiRequest = req as ApiRequest;
