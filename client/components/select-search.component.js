@@ -18,7 +18,7 @@ export default class SelectSearchComponent {
             this.placeholder = config.placeholder || 'Select item';
             this.mode = config.mode || 'single';
 
-            this.tagContainer = config.tagContainerSelector ? document.querySelector(config.tagContainerSelector) : null;
+            this.optionContainer = config.optionContainerSelector ? document.querySelector(config.optionContainerSelector) : null;
             this.tagClass = config.tagClass || 'selected-option';
 
             this.onSelect = config.onSelect || null;
@@ -86,8 +86,8 @@ export default class SelectSearchComponent {
                   }
             });
 
-            if (this.mode === 'multi' && this.tagContainer) {
-                  this.tagContainer.addEventListener('click', (e) => {
+            if (this.mode === 'multi' && this.optionContainer) {
+                  this.optionContainer.addEventListener('click', (e) => {
                         if (e.target && e.target.classList.contains(this.tagClass)) {
                               const id = e.target.getAttribute('data-id');
                               e.target.remove();
@@ -115,12 +115,12 @@ export default class SelectSearchComponent {
       }
 
       renderTag(id, text) {
-            if (!this.tagContainer) return;
+            if (!this.optionContainer) return;
             const div = document.createElement('div');
             div.className = this.tagClass;
             div.setAttribute('data-id', id);
             div.textContent = text;
-            this.tagContainer.appendChild(div);
+            this.optionContainer.appendChild(div);
       }
 
       getSelected(option = 'id') {
@@ -143,7 +143,7 @@ export default class SelectSearchComponent {
                   this.span.removeAttribute('item-id');
             } else {
                   this.selectedItems.clear();
-                  if (this.tagContainer) this.tagContainer.innerHTML = '';
+                  if (this.optionContainer) this.optionContainer.innerHTML = '';
             }
 
             this.input.value = '';

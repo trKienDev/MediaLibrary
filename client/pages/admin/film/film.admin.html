@@ -1,1 +1,89 @@
-<h1>Admin Film</h1>
+<aside class="add-panel film-form">
+      <h1>Add new film</h1>
+      <form class="primary-form" id="film-form">
+            <div class="row">
+                  <div class="primary-column">
+                        <div>
+                              <div id="film-studios" class="select-search-component">
+                                    <div class="wrapper">
+                                          <div class="select-btn">
+                                                <span>Select studio</span>
+                                                <i class="fa-solid fa-caret-down"></i>
+                                          </div>
+                                          <div class="content">
+                                                <div class="search row">
+                                                      <input class="search-input" type="text" placeholder="Search ...">
+                                                </div>
+                                                <ul class="options"></ul>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                        <div class="row">
+                              <div class="primary-column">
+                                    <div id="film-code" class="select-search-component">
+                                          <div class="wrapper">
+                                                <div class="select-btn">
+                                                      <span>Select code</span>
+                                                      <i class="fa-solid fa-caret-down"></i>
+                                                </div>
+                                                <div class="content">
+                                                      <div class="search row">
+                                                            <input class="search-input" type="text" placeholder="Search ...">
+                                                      </div>
+                                                      <ul class="options"></ul>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="secondary-column">
+                                    <input class="form-input" type="number" name="code" id="code-number" placeholder="123">
+                              </div>
+                        </div>
+                        <div class="">
+                              <textarea name="film-description" class="form-input" id="film-description" placeholder="description"></textarea>
+                        </div>
+                        <div class="row">
+                              <div class="primary-column">
+                                    <input class="form-input" type="date" name="release-date" id="release-date" placeholder="25 Mar 2025">
+                              </div>
+                              <div class="secondary-column">
+                                    <select name="film-rating" id="film-rating" class="form-input">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                          <option value="5">5</option>
+                                    </select>
+                              </div>
+                        </div>
+                        <div class="">
+                              <div id="film-tags" class="select-search-component">
+                                    <div class="wrapper">
+                                          <div class="select-btn">
+                                                <span>Select tag</span>
+                                                <i class="fa-solid fa-caret-down"></i>
+                                          </div>
+                                          <div class="content">
+                                                <div class="search row">
+                                                      <input class="search-input" type="text" placeholder="Search ...">
+                                                </div>
+                                                <ul class="options"></ul>
+                                          </div>
+                                    </div>
+                                    <div class="selected-option-container">
+                                          <div id="selected-option-area"></div>
+                                    </div>
+                              </div>
+                        </div>
+                  </div>
+                  <div class="secondary-column">
+                        <img id="upload-image" src="/assets/images/upload-profile.jpg" alt="">
+                        <input type="file" id="image-input" name="file" style="display: none;" accept="image/*">
+                  </div>
+            </div>
+            <div class="button-wrapper">
+                  <button type="submit" class="btn primary-btn">Submit</button>
+            </div>
+      </form>
+</aside>

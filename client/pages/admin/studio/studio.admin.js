@@ -28,7 +28,7 @@ export default async function() {
             try {
                   const response = await apiService.createJson(apiEndpoint.studios.create, payload);
                   alertBox.showSuccess('studio created');
-                  form.reset();
+                  studioForm.reset();
             } catch(error) {
                   console.error('Error creating studio: ', error);
                   alertBox.showError('studio created failed');

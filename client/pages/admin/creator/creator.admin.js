@@ -1,6 +1,5 @@
 import apiService from "../../../api/api.instance.js";
 import apiEndpoint from "../../../api/endpoint.api.js";
-import apiMethod from "../../../api/method.api.js";
 import { alertBox, toastNotifier } from "../../../app.admin.js";
 import SelectSearchComponent from "../../../components/select-search.component.js";
 import { createImageTd, createTextTd, createTrWithId } from "../../../components/tables/table.component.js";
@@ -14,7 +13,6 @@ export default async function() {
       const creatorTableTbody = document.querySelector('.creator-table tbody');
       await renderCreatorsTable(creatorTableTbody);
 
-      const payload = { tag_scopes: ['creator'] };
       const tags = await apiService.get(`${apiEndpoint.tags.getByScopes}?scopes=creator`);
       const tagDictionary = tags.map(tag => ({
             key: tag.name,
@@ -27,7 +25,7 @@ export default async function() {
             valueKey: 'value',
             placeholder: 'Select tag',
             mode: 'multi',
-            tagContainerSelector: '#selected-tag-area',
+            optionContainerSelector: '#selected-option-area',
             onSelect: ({ id, text }) => {
                   console.log('Selected option: ', id, text);
             },
@@ -35,7 +33,6 @@ export default async function() {
                   console.log('removed option: ', id);
             }
       });
-
       await selectSearch.init();
 
       handleUploadImage("upload-image", "image-input");
@@ -53,7 +50,6 @@ export default async function() {
             const imageInput = document.getElementById('image-input');
             const imageFile = imageInput.files[0] || null;
             
-
             const formData = new FormData();
             formData.append("name", creatorName);
             formData.append("birth", creatorBirth);

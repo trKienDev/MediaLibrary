@@ -1,0 +1,6 @@
+.film-form {
+      width: 20%;
+}
+.film-form #film-description {
+      min-height: 100px;
+}

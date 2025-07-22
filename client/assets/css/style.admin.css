@@ -1,5 +1,6 @@
 @import url('/pages/admin/creator/creator.admin.css');
 @import url('/pages/admin/tag/tag.admin.css');
+@import url('/pages/admin/film/film.admin.css');
 @import url('/utils/toast-notification/toast-notification.utils.css');
 @import url('/utils/alert-box/alert-box.utils.css');
 @import url('/assets/css/style.main.css');
@@ -31,6 +32,15 @@ table {
 th {
       font-weight: bold;
 }
+
+.row {
+      display: flex;
+      justify-content: space-between;
+}
+.primary-column, .secondary-column {
+      width: 48%;
+}
+
 /* Container chính sử dụng Flexbox để tạo layout 2 cột */
 #admin-container {
       display: flex;
@@ -128,9 +138,9 @@ th {
 }
 
 /* select-search */
-.select-search_component {
+.select-search-component {
       position: relative;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
 }
 .wrapper {
       border: 1px solid #ccc;
@@ -148,10 +158,10 @@ th {
 .select-btn span {
       font-size: 14px;
 }
-.select-search_component .caret-down {
+.select-search-component .caret-down {
       font-size: 12px;
 }
-.select-search_component .content {
+.select-search-component .content {
       display: none;
       position: absolute;
       top: 100%;
@@ -161,23 +171,35 @@ th {
       border: 1px solid #ccc;
       z-index: 1000;
 }
-.select-search_component .wrapper.active .content {
+.select-search-component .search-input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 0px;
+      box-sizing: border-box;
+      background-color: white;
+      font-family: 'Lexend';
+      box-sizing: border-box;
+      display: block;
+      margin-bottom: 0px;
+}
+.select-search-component .wrapper.active .content {
       display: block;
 }
-.select-search_component .search input {
+.select-search-component .search input {
       width: 100%;
       padding: 8px;
       border: none;
       border-bottom: 1px solid #ccc;
 }
-.select-search_component .options {
+.select-search-component .options {
       max-height: 150px;
       overflow-y: auto;
       list-style: none;
       margin: 0;
       padding: 0;
 }
-.select-search_component .options li {
+.select-search-component .options li {
       padding: 8px 10px;
       cursor: pointer;
       font-size: 14px;
@@ -185,13 +207,13 @@ th {
 .options li:hover {
       background: #f0f0f0;
 }
-.select-search_component #selected-tag-area {
+.select-search-component #selected-option-area {
       display: flex;
       flex-wrap: wrap;
       gap: 5px;
       padding: 5px;
 }
-.select-search_component .selected-tag {
+.select-search-component .selected-tag {
       background: #007bff;
       color: #fff;
       padding: 5px 10px;
@@ -200,13 +222,13 @@ th {
       font-size: 12px;
       height: fit-content;
 }
-.select-search_component .selected-tag-container {
+.select-search-component .selected-option-container {
       min-height: 100px;
       width: 100%;
       border-radius: 5px;
       background-color: #f9f9f9;
 }
-.select-search_component .selected-option {
+.select-search-component .selected-option {
       width: fit-content;
       background-color: white;
       border-radius: 5px;
@@ -216,22 +238,25 @@ th {
       transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
       display: inline-block;
 }
-.select-search_component .selected-option:hover {
+.select-search-component .selected-option:hover {
       cursor: pointer;
       background-color: #ff0000;
       color: white;
 }
-
+.select-search-component .selected-option-container {
+      margin-top: 10px;
+}
 /* primary-form */
 .primary-form .form-input {
       margin-bottom: 10px;
       width: 100%;
-      padding: 0.75rem;
+      padding: 10px;
       border: 1px solid #e0e0e0;
       border-radius: 5px;
       box-sizing: border-box;
       background-color: white;
       font-family: 'Lexend';
+      font-size: 14px;
       box-sizing: border-box;
       display: block;
 }
