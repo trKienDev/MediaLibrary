@@ -1,10 +1,9 @@
-import { iSlugRepository } from "../slug/slug.repository";
+import { iSlugRepository } from "../slug/slug.repository.js";
 import { iStudioRepository } from "./studio.repository.js";
-import { ApiRequest } from "../../interfaces/api-request.interface";
 import { IncomingMessage } from "http";
-import { CreateStudioDTO, StudioDTO } from "./studio.dto";
-import { parseJSON } from "../../middlewares/json-parser";
-import { slugify } from "../../utils/string.utils";
+import { CreateStudioDTO, StudioDTO } from "./studio.dto.js";
+import { parseJSON } from "../../middlewares/json-parser.js";
+import { slugify } from "../../utils/string.utils.js";
 
 export default class StudioService {
       constructor(

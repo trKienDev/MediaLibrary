@@ -6,8 +6,12 @@ import apiMethod from "./method.api.js";
  * Implements all business logic for Creator API
 */
 export default class ApiStrategy {
-      async getAll(apiEndpoint) {
+      async get(apiEndpoint) {
             const result = await apiMethod.get(apiEndpoint);
+            return this.#handleResult(result);
+      }
+      async getJson(apiEndpoint, data) {
+            const result = await apiMethod.getJson(apiEndpoint, data);
             return this.#handleResult(result);
       }
       async getById(apiEndpoint, id) {
@@ -49,6 +53,10 @@ export default class ApiStrategy {
       async getFilmId(apiEndpoint, id) {
             const result = await this.getById(apiEndpoint, id);
             return result.film_id;
+      }
+      async createJson(apiEndpoint, json) {
+            const result = await apiMethod.createJson(apiEndpoint, json);
+            return this.#handleResult(result);
       }
       async updateJson(apiEndpoint, json) {
             const result = await apiMethod.updateJson(apiEndpoint, json);

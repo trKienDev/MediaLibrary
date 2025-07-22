@@ -1,10 +1,10 @@
 import { ServerResponse } from "http";
-import { ValidateIdRequest } from "../../interfaces/validated-id-request.js";
 import { CreatorRepository } from "./creator.repository.js";
 import { CreatorService } from "./creator.service.js";
 import { sendError, sendResponse } from "../../middlewares/response.js";
 import { ApiRequest } from "../../interfaces/api-request.interface.js"; 
 import { SlugRepository } from "../slug/slug.repository.js";
+import { ValidateIdRequest } from "../../middlewares/validate-id.js";
 
 const _creatorRepository = new CreatorRepository();
 const _slugRepository = new SlugRepository();

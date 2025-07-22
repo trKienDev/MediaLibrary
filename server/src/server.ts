@@ -37,7 +37,6 @@ async function requestHandler(req: IncomingMessage, res: ServerResponse) {
       }
 
       const isStatic = await processStaticFiles(req, res);
-      console.log('is static: ', isStatic);
       if(isStatic) return;
       
       const apiRequest = req as ApiRequest;

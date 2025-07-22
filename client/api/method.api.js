@@ -6,6 +6,7 @@ class GetStrategy {
             return { method: 'GET' } 
       }
 }
+
 class JsonPostStrategy {
       buildOptions(data) {
             return {

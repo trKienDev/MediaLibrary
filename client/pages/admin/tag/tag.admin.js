@@ -59,7 +59,7 @@ export default async function() {
 }
 
 async function renderTagsTable(tbody) {
-      const tags = await apiService.getAll(apiEndpoint.tags.getAll);
+      const tags = await apiService.get(apiEndpoint.tags.getAll);
       tbody.innerHTML = '';
       tags.forEach(tag => {
             const tr = document.createElement('tr');

@@ -2,8 +2,13 @@ const apiEndpoint = {
       anime_videos: {
             getUniquePagination: '/api/anime-videos/unique-pagination',
       },
+      codes: {
+            getAll: '/api/codes',
+            create: '/api/code',
+            getByStudio: '/api/codes/studio'
+      },
       collections: {
-            getAll: 'api/collections', 
+            getAll: '/api/collections', 
             getById: '/api/collection', 
       }, 
       creators: {
@@ -32,6 +37,7 @@ const apiEndpoint = {
             getById: '/api/tag',
             getAll: '/api/tags',
             create: '/api/tag', 
+            getByScopes: '/api/tags/scopes',
       },
       playlist: {
             getById: '/api/playlist',
@@ -41,6 +47,7 @@ const apiEndpoint = {
       },
       studios: {
             getAll: '/api/studios',
+            create: '/api/studio',
       },
       videos: {
             getById: '/api/video',

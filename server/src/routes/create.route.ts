@@ -64,9 +64,7 @@ export function createRouter(routes: Route[]) {
                         }
                   );
             } else {
-                  res.statusCode = 404;
-                  res.setHeader('Content-Type', 'text/plain');
-                  res.end('Not Found');
+                  return sendError(res, 404, `api not found: ${url}`);
             }
       };
 }

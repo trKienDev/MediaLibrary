@@ -13,7 +13,9 @@ import { handleUploadImage } from "../../../utils/images.utils.js";
 export default async function() {
       const creatorTableTbody = document.querySelector('.creator-table tbody');
       await renderCreatorsTable(creatorTableTbody);
-      const tags = await apiService.getAll(apiEndpoint.tags.getAll);
+
+      const payload = { tag_scopes: ['creator'] };
+      const tags = await apiService.get(`${apiEndpoint.tags.getByScopes}?scopes=creator`);
       const tagDictionary = tags.map(tag => ({
             key: tag.name,
             value: tag._id,
@@ -82,7 +84,7 @@ export default async function() {
 }
 
 async function renderCreatorsTable(tbody) {
-      const creators = await apiService.getAll(apiEndpoint.creators.getAll);
+      const creators = await apiService.get(apiEndpoint.creators.getAll);
       tbody.innerHTML = '';
       creators.forEach(creator => {
             const tr = createTrWithId(creator._id);

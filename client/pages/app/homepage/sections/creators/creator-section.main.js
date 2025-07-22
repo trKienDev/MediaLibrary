@@ -4,7 +4,7 @@ import AvatarComponent, { AvatarTypes } from "../../../../../components/images/a
 
 export default async function() {
       const creatorsWrapper = document.querySelector('[data-role="list-creators"]');
-      const creators = await apiService.getAll(apiEndpoint.creators.getAll);
+      const creators = await apiService.get(apiEndpoint.creators.getAll);
       const avatarComponent = AvatarComponent();
       creators.forEach(creator => {
             const creatorAvatar = avatarComponent.create(creator._id, AvatarTypes.CREATOR);

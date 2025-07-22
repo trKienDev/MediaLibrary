@@ -1,19 +1,46 @@
 <aside class="add-panel">
       <h1>Add new studio</h1>
-      <form class="primary-form" id="add-studio-form">
+      <form class="primary-form" id="studio-form">
             <input class="form-input" type="text" id="studio-name" name="studio_name" placeholder="studio name">
             <div class="button-wrapper">
                   <button type="submit" class="btn primary-btn">Submit</button>
             </div>
       </form>
 </aside>
-stu
+
 <main class="management-panel">
       <h1>Studio management</h1>
       <input type="search" class="search-input" placeholder="search tag ...">
-      <table class="studio-table">
-            <thead></thead>
+      <table class="primary-table studio-table">
+            <thead>
+                  <th></th>
+                  <th>studio</th>
+            </thead>
             <tbody></tbody>
       </table>
 </main>
+
+<main class="add-panel">
+      <h1>Add new code</h1>
+      <form class="primary-form" id="code-form">
+            <label for="studio-label" id="studio-label" class="form-input" style="display: none;"></label>
+            <input class="form-input" type="text" id="code-name" name="code_name" placeholder="code name">
+            <div class="button-wrapper">
+                  <button type="submit" class="btn primary-btn">Submit</button>
+            </div>
+      </form>
+</main>
+
+<aside class="management-panel">
+      <h1>Code management</h1>
+      <input type="search" class="search-input" placeholder="search tag ...">
+      <table class="primary-table code-table">
+            <thead>
+                  <th>code</th>
+            </thead>
+            <tbody></tbody>
+      </table>
+</aside>
+
+
 

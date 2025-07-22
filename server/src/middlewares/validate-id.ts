@@ -1,10 +1,16 @@
 
 import { ServerResponse } from 'http';
-import { ValidateIdRequest } from '../interfaces/validated-id-request.js';
 import { sendError } from './response.js';
 import { ApiRequest } from '../interfaces/api-request.interface.js';
 
-const validateId = ( handler: (req: ValidateIdRequest, res: ServerResponse) => Promise<void> | void ) => {
+export interface ValidateIdRequest extends ApiRequest {
+      params: {
+            id: string;
+            [key: string]: string;
+      };
+}
+
+export const validateId = ( handler: (req: ValidateIdRequest, res: ServerResponse) => Promise<void> | void ) => {
       return async (req: ApiRequest, res: ServerResponse) => {
             const { id } = req.params || {};
             if (!id) {
@@ -18,8 +24,7 @@ const validateId = ( handler: (req: ValidateIdRequest, res: ServerResponse) => P
       };
 };
 
-
-const validateIds = (paramNames: string[], handler: (req: ApiRequest, res: ServerResponse) => Promise<void> | void) => {
+export const validateIds = (paramNames: string[], handler: (req: ApiRequest, res: ServerResponse) => Promise<void> | void) => {
       return async (req: ApiRequest, res: ServerResponse) => {
             const missingParams = paramNames.filter(param => !req.params?.[param]);
             
@@ -31,8 +36,3 @@ const validateIds = (paramNames: string[], handler: (req: ApiRequest, res: Serve
       };
 };
 
-export const validated_id = {
-      validateId,
-      validateIds,
-}
-  

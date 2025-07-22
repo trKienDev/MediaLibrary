@@ -5,6 +5,7 @@ import { slugify } from "../../utils/string.utils.js";
 import { iTagRepository } from "./tag.repository.js";
 import { MediaType } from "../../interfaces/media-type.interface.js";
 import { iSlugRepository } from "../slug/slug.repository.js";
+import { ApiRequest } from "../../interfaces/api-request.interface.js";
 
 export class TagService {
       constructor(
@@ -14,6 +15,17 @@ export class TagService {
 
       async getAllTags(): Promise<TagDTO[]> {
             return this._tagRepository.getAll();
+      }
+
+      async getTagsByScope(scopes: string[]): Promise<TagDTO[]> {
+            const validScopes = ['video', 'film', 'manga', 'anime', 'creator', 'image', 'short', 'clip', 'idol'];
+            for(const scope of scopes) {
+                  if(!validScopes.includes(scope)) {
+                        throw new Error(`Invalid scope value: ${scope}`);
+                  }
+            }
+
+            return await this._tagRepository.getByScopes(scopes);
       }
 
       async createTag(req: IncomingMessage): Promise<TagDTO> {

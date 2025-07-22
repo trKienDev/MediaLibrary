@@ -36,7 +36,7 @@ img {
       border: none; padding: 9px;
 }
 .btn:hover {
-      filter: brightness(1.5);
+      opacity: 0.8;
 }
 .primary-btn {
       background-color: #0437F2;

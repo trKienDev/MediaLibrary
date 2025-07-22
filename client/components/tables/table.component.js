@@ -34,3 +34,13 @@ export function createImageTd(imgSrc, cssClass) {
 
       return imageCell;
 }
+
+export function createSelectCheckboxTd(css_class) {
+      const selectTd = document.createElement('td');
+      selectTd.classList.add(css_class);
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      selectTd.appendChild(checkbox);
+
+      return { td: selectTd, checkbox };
+}

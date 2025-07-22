@@ -4,7 +4,7 @@ import tagComponent from "../../../../../components/tags/tags.component.js";
 
 export default async function() {
       const studiosWrapper = document.querySelector('[data-role="list-studios"]');
-      const studios = await apiService.getAll(apiEndpoint.studios.getAll);
+      const studios = await apiService.get(apiEndpoint.studios.getAll);
       studios.forEach(studio => {
             const studioLink = tagComponent.createTagDiv(studio, 'studio-link');
             studioLink.classList.add('tag-style');

@@ -25,7 +25,12 @@ body, html {
 select:hover {
       cursor: pointer;
 }
-
+table {
+      font-size: 14px;
+}
+th {
+      font-weight: bold;
+}
 /* Container chính sử dụng Flexbox để tạo layout 2 cột */
 #admin-container {
       display: flex;
@@ -228,6 +233,7 @@ select:hover {
       background-color: white;
       font-family: 'Lexend';
       box-sizing: border-box;
+      display: block;
 }
 .primary-form button {
       width: 100%;
@@ -245,4 +251,32 @@ select:hover {
 .primary-form #upload-image:hover {
       filter: brightness(0.95);
       cursor: pointer;
+}
+
+/* primary-table */
+.primary-table {
+      width: 100%;
+      border-collapse: collapse; 
+}
+.primary-table th, .primary-table td {
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #e0e0e0;
+}
+.primary-table th {
+      font-weight: bold;
+      background-color: var(--secondary-background-color);
+      transition: background-color .1s ease;
+}
+.primary-table tr:hover {
+      background-color: var(--secondary-background-color);
+}
+.primary-table tbody tr:last-child td {
+      border-bottom: none; /* Bỏ đường kẻ ở dòng cuối cùng */
+}
+.primary-table input[type="checkbox"] {
+      cursor: pointer;
+}
+.primary-table .btn + .btn {
+      margin-left: 0.25rem;
 }

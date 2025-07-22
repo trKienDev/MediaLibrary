@@ -6,7 +6,7 @@ export interface iSlug extends Document {
       refId: mongoose.Types.ObjectId;
 }
 
-const allowedRefTypes = ['video', 'film', 'anime', 'manga', 'clip', 'image', 'creator', 'idol', 'short', "tag", "studio"];
+const allowedRefTypes = ['video', 'film', 'anime', 'manga', 'clip', 'image', 'creator', 'idol', 'short', "tag", "studio", "code"];
 
 const SlugSchema = new Schema({
       slug: { type: String, unique: true, required: true },

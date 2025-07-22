@@ -6,6 +6,11 @@ export interface iStudioRepository {
 }
 
 export default class StudioRepository implements iStudioRepository {
+      async getAll(): Promise<StudioDTO[]> {
+            const studios = await StudioModel.find();
+            return studios.map(studio => this.mapDocToDTO(studio));
+      }
+
       async create(input: CreateStudioDTO): Promise<StudioDTO> {
             const newStudio = new StudioModel({
                   name: input.name,
