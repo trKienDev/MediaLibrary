@@ -35,10 +35,11 @@ export default class ApiStrategy {
             const result = await this.getById(apiEndpoint, id);
             return result.avatar_url;
       }
-      async getPagination({ apiEndpoint, page, limit, filters = {}}) {
+      async getPagination({ apiEndpoint, page, limit, seed, filters = {}}) {
             const params = new URLSearchParams({
                   page: String(page),
-                  limit: String(limit)
+                  limit: String(limit),
+                  seed: String(seed),
             });
 
             Object.entries(filters).forEach(([key, value]) => {

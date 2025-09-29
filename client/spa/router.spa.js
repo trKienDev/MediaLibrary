@@ -29,7 +29,6 @@ App.spa.router = (function() {
 
       function handleLocation() {
             const path = window.location.pathname;
-            console.log('path: ', path);
             const match = matchRoute(path);
             if(match) {
                   renderPage(match.pageName, _context, match.params);
@@ -47,11 +46,8 @@ App.spa.router = (function() {
             // normalize relative path to absolute
             const url = new URL(href, window.location.origin);
             const path = url.pathname;
-            console.log(`navigate(): href=${href}, resolved path=${path}, current path=${window.location.pathname}`);
-            console.log(`window.location.pathname: ${window.location.pathname} / path: ${path}`);
             // Chỉ navigate nếu pathname khác:
             if (window.location.pathname !== path) {
-                  console.log('pathname: ', window.location.pathname);
                   window.history.pushState({}, '', href);
                   handleLocation();
             }

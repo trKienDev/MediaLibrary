@@ -6,6 +6,8 @@
 @import url("/pages/app/homepage/sections/shorts/short-section.main.css");
 @import url("/pages/app/homepage/sections/studios/studio-section.main.css");
 @import url("/pages/app/homepage/sections/creators/creator-section.main.css");
+@import url("/pages/app/homepage/sections/records/record-section.main.css");
+
 
 /**** LAYOUT ****/
 .homepage-layout {

@@ -15,6 +15,7 @@ export default async function() {
             currentPage = 1;
             isLoading = false;
             hasMoreImages = true;
+            const seed = Math.random().toString(36).substring(2);
 
             const container = document.getElementById('images-pagination');
             if(container) container.innerHTML = '';
@@ -32,7 +33,7 @@ export default async function() {
                   const firstEntry = entries[0];
                   if(firstEntry.isIntersecting && !isLoading && hasMoreImages) {
                         console.log("Đã cuộn đến cuối trang, đang tải thêm");
-                        loadMoreImages('images-pagination', activeFilters);
+                        loadMoreImages('images-pagination', seed, activeFilters);
                   }
             }, {
                   root: null,
@@ -41,14 +42,14 @@ export default async function() {
 
             observer.observe(loader);
             console.log('Đang tải loạt films đầu tiên....');
-            loadMoreImages('images-pagination', activeFilters);
+            loadMoreImages('images-pagination', seed, activeFilters);
       } catch(error) {
             console.error("Error in getting images pagination ", error);
             throw new Error(error);
       }
 }
 
-async function loadMoreImages(elementId, filters = {}) {
+async function loadMoreImages(elementId, seed, filters = {}) {
       if(isLoading || !hasMoreImages) return;
       isLoading = true;
       const loader = document.getElementById('image-loader');
@@ -59,7 +60,8 @@ async function loadMoreImages(elementId, filters = {}) {
                   apiEndpoint: apiEndpoint.images.getRandomPagination,
                   page: currentPage,
                   limit: limit,
-                  filters: filters
+                  filters: filters,
+                  seed: seed
             });
             const { images, pagination } = result;
             if(images && images.length > 0) {

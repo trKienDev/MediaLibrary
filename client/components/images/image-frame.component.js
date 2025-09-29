@@ -6,6 +6,7 @@ import { createImgElement } from "./image.component.js";
 
 export async function createImageFrame(image) {
       const wrapper = domsComponent.createDiv({cssClass: 'image-wrapper'});
+      const ahref = domsComponent.createAhref({ href: `idol/${image.idol_id}`});
       const imageSrc = `${appConfigs.SERVER}/${ServerFolders.IMAGES}/${image.image_url}`;
       
       const frame = createImgElement({
@@ -15,7 +16,8 @@ export async function createImageFrame(image) {
       frame.width = image.width / 2;
       frame.height = image.height / 2;
 
-      wrapper.appendChild(frame);
+      ahref.appendChild(frame);
+      wrapper.appendChild(ahref);
       addHoverToScaleEffect(wrapper);
 
       return wrapper;

@@ -18,6 +18,9 @@ const apiEndpoint = {
             update: '/api/creator', //  put
             delete: '/api/creator', // delete
       },
+      clips: {
+            getUniquePagination: '/api/clips/unique-pagination',
+      },
       films: {
             getById: '/api/film',
             getRandomizePagination: '/api/films/unique-pagination',
@@ -55,5 +58,8 @@ const apiEndpoint = {
             getByCreator: '/api/videos/creator',
             increaseViewsByOne: '/api/video/views',
       },
+      records: {
+            getAll: ''
+      }
 }
 export default apiEndpoint;

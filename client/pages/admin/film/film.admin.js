@@ -1,6 +1,7 @@
 import apiService from "../../../api/api.instance.js";
 import apiEndpoint from "../../../api/endpoint.api.js";
 import SelectSearchComponent from "../../../components/select-search.component.js";
+import { renameUploadedFile } from "../../../utils/files.utils.js";
 import { handleUploadImage } from "../../../utils/images.utils.js";
 
 let studio_id = null;
@@ -69,11 +70,25 @@ export default async function() {
             const filmDate = document.getElementById('release-date').value;
             const filmRating = document.getElementById('film-rating').value;
             const filmTags = tagSelectSearch.getSelected();
+            const thumbnailInput = document.getElementById('image-input');
+            const thumbnailFile = thumbnailInput.files[0] || null;
 
+            const formData = new FormData();
+            formData.append("film_name", filmName);
+            formData.append("studio_id", studioId);
+            formData.append("code_id", codeId);
+            formData.append("film_description", filmDescription);
+            formData.append("release_date", filmDate);
+            formData.append("film_rating", filmRating);
+            formData.append("tag_ids", filmTags);
+
+            if(thumbnailFile) {
+                  const renamedThumbnail = renameUploadedFile(thumbnailFile, filmName);
+                  formData.append("file", renamedThumbnail);
+            }
             
-            console.log('tags: ', filmTags);
-            console.log('studio: ', studioId);
-            console.log('code: ', codeId);
+            console.log('form data: ', formData);
+
       });
 }
 

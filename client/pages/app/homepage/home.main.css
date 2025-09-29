@@ -40,7 +40,8 @@
 }
 .video-infor .avatar-image {
       border-radius: 50% !important;
-      width: 50px;
+      width: 50px !important;
+      height: 50px !important;
 }
 .video-details .video-film {
       font-size: 15px;

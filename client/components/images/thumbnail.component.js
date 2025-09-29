@@ -1,6 +1,6 @@
-import apiService from "../../api/api.instance";
-import apiEndpoint from "../../api/endpoint.api";
-import appConfigs from "../../config/app.config";
+import apiService from "../../api/api.instance.js";
+import apiEndpoint from "../../api/endpoint.api.js";
+import appConfigs from "../../config/app.config.js";
 
 export async function uploadThumbnail({ thumbnailImageId, thumbnailUploadElid, submitBtnId }) {
       const thumbnailImageEl = document.getElementById(thumbnailImageId);

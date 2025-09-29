@@ -57,7 +57,6 @@ export default async function() {
             formData.append("status", creatorActive);
             formData.append("tag_ids", selectedTags);
             if(imageFile) {
-                  console.log('creator name: ', creatorName);
                   const renamedFile = renameUploadedFile(imageFile, creatorName);
                   formData.append('file', renamedFile);
             }

@@ -15,7 +15,7 @@ export interface iCreator extends Document {
 }
 
 const CreatorSchema: Schema = new Schema({
-      name: { type: String, required: true },
+      name: { type: String },
       slug: { type: String },
       birth: {
             type: Date, 

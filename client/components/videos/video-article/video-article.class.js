@@ -55,17 +55,21 @@ export default class VideoArticle {
       }
 
       async createVideoInfor(video) {
-            const [ filmName, creatorName ] = await Promise.all([
-                  apiService.getName(apiEndpoint.films.getById, video.film_id),
-                  apiService.getName(apiEndpoint.creators.getById, video.creator_id),
-            ]);
+            const filmName = await apiService.getName(apiEndpoint.films.getById, video.film_id);
+
+            let creatorName = null;
+            if (video.creator_id) {
+                  creatorName = await apiService.getName(apiEndpoint.creators.getById, video.creator_id);
+            }
 
             const videoInfor = domsComponent.createDiv({ cssClass: 'video-infor' });
             const videoInforWrapper = domsComponent.createDiv({cssClass: 'video-infor-wrapper'});
 
-            const avatarComponent = AvatarComponent();
-            const videoCreator = await avatarComponent.create(video.creator_id, AvatarTypes.CREATOR);
-            videoInforWrapper.appendChild(videoCreator);
+            if (video.creator_id) {
+                  const avatarComponent = AvatarComponent();
+                  const videoCreator = await avatarComponent.create(video.creator_id, AvatarTypes.CREATOR);
+                  videoInforWrapper.appendChild(videoCreator);
+            }
 
             const videoFilm = this.createInfor({
                   iHref: video.film_id,
@@ -74,22 +78,26 @@ export default class VideoArticle {
                   iWrapperCss: 'video-film-wrapper',
             });
 
-            const videoCreatorName = this.createInfor({
-                  iHref: video.creator_id,
-                  iText: creatorName,
-                  iCssClass: 'video-creator',
-                  iWrapperCss: 'video-creator-wrapper',
-            });
-
             const videoDetails = domsComponent.createDiv({ cssClass: 'video-details'});
+
+            if (video.creator_id) {
+                  const videoCreatorName = this.createInfor({
+                        iHref: video.creator_id,
+                        iText: creatorName,
+                        iCssClass: 'video-creator',
+                        iWrapperCss: 'video-creator-wrapper',
+                  });
+                  videoInforWrapper.appendChild(videoCreatorName);
+                  videoDetails.appendChild(videoCreatorName);
+            }
+
+            
             const videoViews = domsComponent.createSpan({
                   text: `${video.views} views`,
                   cssClass: 'video-views',
             });
             videoDetails.appendChild(videoFilm);
-            videoDetails.appendChild(videoCreatorName);
             videoDetails.appendChild(videoViews);
-
             videoInforWrapper.appendChild(videoDetails);
             videoInfor.appendChild(videoInforWrapper);
 

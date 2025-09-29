@@ -1,45 +1,45 @@
-<div class="page-content-container">
-      <div id="video-page">
+<div class="page-container">
+      <div id="play-video_page" class="column">
             <div class="left-column">
                   <div class="column-wrapper">
-                        <div class="film-thumbnail-wrapper">
-                              <div id="film-thumbnail"></div>
+                        <div class="thumbnail_video-wrapper">
+                              <img id="video-film-thumbnail" width="399px" height="599px">
                         </div>
-                        <div id="film-infor">
-                              <div class="film-infor-wrapper">
-                                    <div class="film-infor-box">
-                                          <div data-role="film-description" class="film-description"></div>
+                        <div id="film-info">
+                              <div class="film-info_wrapper">
+                                    <div class="film-description_wrapper film-info_box">
+                                          <div id="film-description"></div>
                                     </div>
-                                    <div class="film-infor-box">
-                                          <span class="title">code: </span>
-                                          <div data-role="film-name" class="film-name"></div>
+                                    <div class="film-name_wrapper film-info_box">
+                                          <span class="title">code:</span>
+                                          <div id="film-name"></div>
                                     </div>
-                                    <div class="film-infor-box">
-                                          <span class="title">creator: </span>
-                                          <div data-role="film-creators" class="film-creators"></div>
+                                    <div class="film-creator_wrapper film-info_box">
+                                          <span class="title">creator:</span>
+                                          <div id="film-creator"></div>
                                     </div>
-                                    <div class="film-infor-box">
-                                          <span class="title">studio: </span>
-                                          <div data-role="film-studios" class="film-studios"></div>
+                                    <div class="film-studio_wrapper film-info_box">
+                                          <span class="title">studio:</span>
+                                          <div id="film-studio"></div>
                                     </div>
-                                    <div class="film-infor-box">
-                                          <span class="title">release date: </span>
-                                          <div data-role="film-date" class="film-date"></div>
+                                    <div class="film-date_wrapper film-info_box">
+                                          <span class="title">release date:</span>
+                                          <div id="film-date"></div>
                                     </div>
-                                    <div class="film-infor-box">
-                                          <span class="title">collectionL: </span>
-                                          <div data-role="film-collection" class="film-collection"></div>
-                                          <button id="open-film-collection-modal" class="modal-button">
+                                    <div class="film-collection_wrapper film-info_box">
+                                          <span class="title">collection:</span>
+                                          <div id="film-collection"></div>
+                                          <button id="open_film_collection-modal" class="add-film-collection_button">
                                                 <i class="fa-solid fa-square-plus"></i>
                                           </button>
                                     </div>
-                                    <div class="film-infor-box">
-                                          <span class="title">rating </span>
+                                    <div class="film-rating_wrapper film-info_box">
+                                          <span class="title">rating</span>
                                           <div id="film-rating"></div>
                                     </div>
-                                    <div class="film-infor-box">
-                                          <span class="title">tags </span>
-                                          <div data-role="film-tags" class="film-tags"></div>
+                                    <div class="film-tags_wrapper film-info_box">
+                                          <span class="title">tags: </span>
+                                          <div id="film-tags"></div>
                                     </div>
                               </div>
                         </div>
@@ -47,55 +47,60 @@
             </div>
             <div class="center-column">
                   <div class="column-wrapper">
-                        <div class="video-player-wrapper">
-                              <video id="video-player" controls>
+                        <div class="play_video-wrapper">
+                              <video id="video-player" width="950px" controls>
                                     <source src="" type="video/mp4">
                               </video>
-                              <div id="video-infor">
-                                    <div class="video-infor-wrapper">
-                                          <div class="first-row">
-                                                <div class="primary-column">
-                                                      <div data-role="video-creator" class="video-creator"></div>
-                                                      <span id="video-film-name"></span>
-                                                      <div data-role="video-action-wrapper" class="video-action-wrapper"></div>
+                              <div id="video-info">
+                                    <div class="video-info_container">
+                                          <div class="first-row d-flex jt-space_between">
+                                                <div class="primary-column d-flex">
+                                                      <div id="video-creator">
+                                                      </div>
+                                                      <span id="video-film_name"></span>
+                                                      <div id="video-action"></div>
                                                 </div>
-                                                <div class="secondary-column">
-                                                      <div class="video-views">
+                                                <div class="secondary-column display-flex">
+                                                      <div class="video-views video-function_box">
                                                             <i class="fa-solid fa-eye"></i>
                                                             <span id="video-total-views"></span>
                                                       </div>
-                                                      <div id="video-likes">
+                                                      <div id="like-video" class="video-likes video-function_box">
                                                             <i class="fa-solid fa-thumbs-up"></i>
                                                             <span id="video-total-likes"></span>
                                                       </div>
-                                                      <div id="open-video-playlist-modal" class="video-playlist">
+                                                      <div id="open-videoplaylist_modal" class="video-playlist video-function_box">
                                                             <i class="fa-solid fa-bookmark"></i>
                                                             <span class="save">Save</span>
                                                       </div>
                                                 </div>
                                           </div>
-                                          <div class="second-row">
-                                                <div class="video-tags-wrapper">
+                                          <div class="second-row">  
+                                                <div class="video-tags_wrapper video-info_box">
                                                       <span class="title">tags: </span>
-                                                      <div data-role="video-tags" class="video-tags"></div>
-                                                </div>
+                                                      <div id="video-tags"></div>    
+                                                </div>        
                                           </div>
-                                          <div class="third-row">
-                                                <div class="video-playlist-wrapper">
+                                          <div class="third-row">  
+                                                <div class="video-playlist_wrapper video-info_box">
                                                       <span class="title">playlist: </span>
-                                                      <div data-role="video-playlist" class="video-playlist"></div>
-                                                </div>
+                                                      <div id="video-playlist"></div>    
+                                                </div>        
                                           </div>
                                     </div>
-                                    <div class="film-videos-wrapper">
-                                          <div data-role="film-videos" class="film-videos"></div>
+                              </div>
+                              <div class="film-video_wrapper">
+                                    <div id="film-videos">
+
                                     </div>
                               </div>
                         </div>
                   </div>
             </div>
             <div class="right-column">
-                  <div class="column-wrapper"></div>
+                  <div class="column-wrapper">
+                        
+                  </div>
             </div>
       </div>
 </div>

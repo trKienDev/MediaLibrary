@@ -9,7 +9,7 @@ App.pages =  App.pages || { app: {}, admin: {} }; // Khởi tạo namespace cho 
 const appRoutes = [
       { path: '/', page: 'homepage/home.main' },
       // pages
-      { path: '/video/:id', page: 'video/video.main'},
+      { path: '/video/:id', page: 'video/video.main' },
       // sections
       { path: '/section/videos', page: 'homepage/sections/video/video-section.main'},
       { path: '/section/films', page: 'homepage/sections/films/film-section.main'},
@@ -19,7 +19,7 @@ const appRoutes = [
       { path: '/section/shorts', page: 'homepage/sections/shorts/short-section.main' },
       { path: '/section/studios', page: 'homepage/sections/studios/studio-section.main' },
       { path: '/section/creators', page: 'homepage/sections/creators/creator-section.main' },
-
+      { path: '/section/records', page: 'homepage/sections/records/record-section.main' }
 ];
 
 function AppController() {

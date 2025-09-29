@@ -270,12 +270,17 @@ th {
 .primary-form .form-column {
       width: 47%;
 }
-.primary-form #upload-image {
-      width: 100%;
-}
 .primary-form #upload-image:hover {
       filter: brightness(0.95);
       cursor: pointer;
+}
+.primary-form .film-thumbnail {
+      width: 350px;
+      height: 525px;
+      object-fit: cover;
+}
+.primary-form .button-wrapper {
+      margin-top: 10px;
 }
 
 /* primary-table */

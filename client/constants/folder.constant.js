@@ -9,7 +9,7 @@ export const ServerFolders = {
       VIDEOS: `${ServerUploadFolder}/videos`,
       FILMS: `${ServerUploadFolder}/films`,
       STUDIOS: `${ServerUploadFolder}/studios`,
-      CREATORS: `${ServerUploadFolder}/creators`,
+      CREATOR_AVATARS: `${ServerUploadFolder}/creators/avatars`,
       IMAGES: `${ServerUploadFolder}/images`,
       IDOLS: `${ServerUploadFolder}/idols`,
       SHORTS: `${ServerUploadFolder}/shorts`,
