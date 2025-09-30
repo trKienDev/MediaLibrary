@@ -11,6 +11,7 @@ export function createStarsRating(elementId, starsNumber = 0, maxStars = 5) {
       for(let i = 0; i < maxStars; i++) {
             const star = document.createElement('a');
             star.classList.add('fa', i < starsToRender ? 'fa-star' : 'fa-star-o', 'star-yellow');
+            star.classList.add('star');
             wrapperEl.appendChild(star);
       }
 

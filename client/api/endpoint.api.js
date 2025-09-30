@@ -50,6 +50,7 @@ const apiEndpoint = {
       },
       studios: {
             getAll: '/api/studios',
+            getById: '/api/studio',
             create: '/api/studio',
       },
       videos: {

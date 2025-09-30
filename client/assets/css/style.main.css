@@ -98,3 +98,19 @@ img {
       cursor: pointer;
       background-color: var(--bright-yellow);
 }
+
+.star {
+      color: var(--gold);
+}
+
+.tag-box {
+      background-color: var(--light-pink);
+      padding: 5px;
+      font-size: 12px;
+      border-radius: 5px;
+      color: black;
+      transition: all 80ms duration;
+}
+.tag-box:hover {
+      background-color: var(--hot-pink);
+}

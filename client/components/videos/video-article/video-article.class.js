@@ -7,7 +7,7 @@ import domsComponent from "../../dom.components.js";
 import AvatarComponent, { AvatarTypes } from "../../images/avatar.component.js";
 
 export default class VideoArticle {
-      constructor(video, { folder = ServerFolders.VIDEOS, linkPrefix = "video", cssClass = "video-article", showVideoInfor = true} = {}) {
+      constructor(video, { folder = ServerFolders.VIDEOS, linkPrefix = "video", cssClass = "video-article", showVideoInfor = true, hoverToScale = true} = {}) {
             this.video = video;
             this.folder = folder;
             this.linkPrefix = linkPrefix;
@@ -17,6 +17,7 @@ export default class VideoArticle {
             this.handleMouseEnter = this.handleMouseEnter.bind(this);
             this.handleMouseLeave = this.handleMouseLeave.bind(this);
             this.showVideoInfor = showVideoInfor;
+            this.hoverToScale = hoverToScale;
       }
 
       async render() {
@@ -26,7 +27,7 @@ export default class VideoArticle {
             const wrapper = domsComponent.createDiv({ cssClass: 'video-wrapper' });
 
             const ahref = domsComponent.createAhref({
-                  href: `${this.linkPrefix}/${video._id}`,
+                  href: `/${this.linkPrefix}/${video._id}`,
                   cssClass: `${this.linkPrefix}-link`,
                   attrs: {
                         'data-spa': 'true'
@@ -45,7 +46,9 @@ export default class VideoArticle {
             }
 
             article.appendChild(wrapper);
-            addHoverToScaleEffect(article);
+            if(this.hoverToScale) {
+                  addHoverToScaleEffect(article);
+            }
 
             this.articleElement = article;
             this.ahrefElement = ahref;
