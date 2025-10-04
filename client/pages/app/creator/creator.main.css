@@ -1,0 +1,81 @@
+/* Ẩn khi dùng thuộc tính hidden */
+[data-role="creator-videos"][hidden],
+[data-role="creator-films"][hidden] {
+      display: none !important;
+}
+
+.tab-navigation {
+      border-bottom: 1px solid #606060;/* đường line mờ ngăn cách bên dưới */
+}
+.tab-navigation ul {
+      display: flex;
+      gap: 24px; /* khoảng cách giữa các tab */
+      list-style: none;
+      margin: 0;
+      padding: 0;
+}
+.tab-navigation .tab-item {
+      display: inline-block;
+      padding: 12px 0;
+      font-size: 14px;
+      font-weight: 500;
+      color: #606060;
+      text-decoration: none;
+      position: relative;
+      transition: color 0.2s ease;
+}
+.tab-navigation .tab-item:hover {
+      color: white;
+      cursor: pointer;
+}
+.tab-navigation .tab-item.active {
+      color: white;
+      font-weight: 600;
+}
+.tab-navigation .tab-item.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 100%;
+      height: 3px;
+      background-color: white; /* màu line active */
+      border-radius: 2px 2px 0 0;
+}
+
+#creator-avatar .avatar-image { height: 250px; width: 250px; border-radius: 5px;}
+
+.third-row-wrapper {
+      padding: 10px 0px;
+}
+
+.creator-videos-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 -2px;
+      margin-top: 0px;
+      margin-top: 10px;
+}
+.creator-videos-wrapper .video-article {
+      flex-basis: calc(100%/5);
+      flex-grow: 0;
+      flex-shrink: 0;
+      box-sizing: border-box;
+      padding: 3px;
+}
+
+/* Hiệu ứng fade-in khi đổi tab */
+.fade-in {
+      animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+      from {
+            opacity: 0;
+            transform: translateY(8px);
+      }
+      to {
+            opacity: 1;
+            transform: translateY(0);
+      }
+}

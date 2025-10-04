@@ -10,6 +10,7 @@ const appRoutes = [
       { path: '/', page: 'homepage/home.main' },
       // pages
       { path: '/video/:id', page: 'video/video.main' },
+      { path: '/creator/:id', page: 'creator/creator.main' },
       // sections
       { path: '/section/videos', page: 'homepage/sections/video/video-section.main'},
       { path: '/section/films', page: 'homepage/sections/films/film-section.main'},

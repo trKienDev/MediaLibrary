@@ -57,6 +57,9 @@ async function populateFilmCreator(film) {
             const ahref = domsComponent.createAhref({
                   href: `/creator/${creator._id}`, 
                   text: creator.name,
+                  attrs: {
+                        'data-spa': 'true'
+                  }
             });
             filmCreatorElement.appendChild(ahref);
       });
@@ -65,7 +68,10 @@ async function populateFilmStudio(film) {
       const studio = await apiService.getById(apiEndpoint.studios.getById, film.studio_id);
       const ahref = domsComponent.createAhref({
             href: `/studio/${studio._id}`,
-            text: studio.name
+            text: studio.name,
+            attrs: {
+                  'data-spa': 'true'
+            }
       });
       
       const filmStudioElement = document.getElementById('film-studio');
@@ -89,6 +95,9 @@ async function populateFilmTags(film) {
                   href: `/tag/${tag._id}`,
                   text: tag.name,
                   cssClass: 'tag-box',
+                  attrs: {
+                        'data-spa': 'true'
+                  }
             });
             filmTagsElement.appendChild(ahref);
       });
@@ -142,6 +151,9 @@ async function populateVideoTags(video) {
                   href: `/tag/${tag._id}`,
                   text: tag.name,
                   cssClass: 'tag-box',
+                  attrs: {
+                        'data-spa': 'true'
+                  }
             });
             videoTagsElement.appendChild(ahref);
       });

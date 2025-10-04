@@ -11,7 +11,9 @@ export const AvatarTypes = {
       CREATOR: 'creator',
 }
 // Component-based design theo kiểu factory pattern
-function AvatarComponent() {
+function AvatarComponent(config = {}) {
+      const { enableHoverEffect = true } = config;
+
       const create = async (id, type) => {
             let path = null;
             let imgSrc = null;
@@ -29,12 +31,13 @@ function AvatarComponent() {
             }
             return render(id, imgSrc, type);
       }
+
       const render = ( id, imgSrc, type) => {
             const frame = domsComponent.createDiv({ cssClass: 'avatar-frame'});
             const wrapper = domsComponent.createDiv({cssClass: 'avatar-frame-wrapper'});
             const img = createImgElement({ src: imgSrc, cssClass: 'avatar-image' });
             const link = domsComponent.createAhref({ 
-                  href: `${type}/${id }`,
+                  href: `/${type}/${id }`,
                   attrs: {
                         'data-spa': 'true'
                   }
@@ -43,7 +46,10 @@ function AvatarComponent() {
             link.appendChild(img);
             wrapper.appendChild(link);
             frame.appendChild(wrapper);
-            addHoverToScaleEffect(frame);
+            
+            if(enableHoverEffect) {
+                  addHoverToScaleEffect(frame);
+            }
 
             return frame;
       }

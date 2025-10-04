@@ -1,6 +1,7 @@
 @import url('/assets/css/keyword.css');
 @import url('/assets/css/homepage.main.css');
 @import url('/pages/app/video/video.main.css');
+@import url('/pages/app/creator/creator.main.css');
 
 :root {
       --neon-blue: #1F51FF;
@@ -99,9 +100,8 @@ img {
       background-color: var(--bright-yellow);
 }
 
-.star {
-      color: var(--gold);
-}
+.star { color: var(--gold); }
+.star:hover { color: var(--gold) !important; }
 
 .tag-box {
       background-color: var(--light-pink);
