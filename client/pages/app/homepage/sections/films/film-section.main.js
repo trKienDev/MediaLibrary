@@ -65,7 +65,7 @@ async function loadMoreFilms(elementId, filters = {}) {
             const { films, pagination } = result;
             if(films && films.length > 0) {
                   const filmThumbnail = await Promise.all(films.map( 
-                        async film => filmComponent.createFilmThumbnailFrame(film, ServerFolders.FILMS) 
+                        async film => filmComponent.createFilmThumbnailFrame(film, ServerFolders.FILMS, { hoverZoomEffect: true }) 
                   ));
                   const container = document.getElementById('films-pagination');
                   filmThumbnail.forEach(thumbnail => container.appendChild(thumbnail));

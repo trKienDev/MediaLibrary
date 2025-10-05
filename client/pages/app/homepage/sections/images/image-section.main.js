@@ -66,7 +66,7 @@ async function loadMoreImages(elementId, seed, filters = {}) {
             const { images, pagination } = result;
             if(images && images.length > 0) {
                   const imageFrames = await Promise.all(images.map( 
-                        async image => createImageFrame(image)
+                        async image => createImageFrame(image, `/image/${image._id}`)
                   ));
                   const container = document.getElementById('images-pagination');
                   imageFrames.forEach(image => container.appendChild(image));

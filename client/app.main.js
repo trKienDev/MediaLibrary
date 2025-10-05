@@ -11,6 +11,7 @@ const appRoutes = [
       // pages
       { path: '/video/:id', page: 'video/video.main' },
       { path: '/creator/:id', page: 'creator/creator.main' },
+      { path: '/film/:id', page: 'film/film.main' },
       // sections
       { path: '/section/videos', page: 'homepage/sections/video/video-section.main'},
       { path: '/section/films', page: 'homepage/sections/films/film-section.main'},

@@ -34,8 +34,6 @@ App.spa.render = (function() {
                   window.PageParams = params;
 
                   const modulePath = `/pages/${context}/${pageName}.js?t=${Date.now()}`;
-                  console.log(`Dynamic import module: ${modulePath}`);
-                  
                   const module = await import(modulePath);
                   if(module && typeof module.default === 'function') {
                         await module.default();
@@ -43,7 +41,9 @@ App.spa.render = (function() {
                         console.warn(`Module ${modulePath} does not export default function`);
                   }
             } catch (error) {
-                  _rootElement.innerHTML = '<h1>404 - Không tìm thấy trang</h1>';
+                  if(_rootElement) {
+                        _rootElement.innerHTML = '<h1>404 - Không tìm thấy trang</h1>';
+                  }
                   throw new Error(`Lỗi render trang:', ${error}`);
             }
       }

@@ -11,11 +11,8 @@ import { formatDate } from "../../../utils/date.utils.js";
 const videoId = window.PageParams.id;
 
 export default async function() {
-      console.log('video id: ', videoId);
       const videoInfor = await apiService.getById(apiEndpoint.videos.getById, videoId);
-      console.log('video infor: ', videoInfor);
       const filmInfor = await apiService.getById(apiEndpoint.films.getById, videoInfor.film_id);
-      console.log('film infor: ', filmInfor);
 
       populateFilmInfor(filmInfor);
 

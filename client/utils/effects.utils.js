@@ -6,3 +6,4 @@ export function addHoverToScaleEffect(domElement) {
 
       domElement.classList.add('hover-to-scale');
 }
+

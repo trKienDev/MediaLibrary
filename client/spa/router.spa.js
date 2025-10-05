@@ -67,8 +67,18 @@ App.spa.router = (function() {
             handleLocation();
       }
 
+      function go(path) {
+            const url = new URL(path, window.location.origin);
+            const pathname = url.pathname;
+            if (window.location.pathname !== pathname) {
+                  window.history.pushState({}, '', pathname);
+                  handleLocation();
+            }
+      }
+
       return {
             init,
             handleLocation,
+            go
       };
 })();

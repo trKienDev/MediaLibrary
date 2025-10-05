@@ -68,6 +68,9 @@
 .film-article {
       width: calc((100% - 80px) / 8);
 }
+.film-thumbnail-wrapper {
+      border-radius: 10px;
+}
 .film-thumbnail {
       display: block;
       width: 100%;

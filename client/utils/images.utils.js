@@ -1,6 +1,3 @@
-import { toastNotifier } from "../app.admin.js";
-import NOTIFICATION_TYPES from "../constants/notification-types.constant.js";
-
 export function addEffectHoverToZoomImage(container_element, image_element) {
       if (!(container_element instanceof HTMLElement) || container_element.tagName !== 'DIV') {
             console.error('Error: container_element is not DIV HTML.');
@@ -22,7 +19,7 @@ export function handleUploadImage(imageElementId, fileInputElementId) {
 
       if(!imageEl || !fileInput) {
             console.error("Invalid element Ids provided");
-            toastNotifier.show('error handle uploading image', NOTIFICATION_TYPES.ERROR);
+            alert('error uploading image');
       }
 
       const allowedTypes = ["image/jpeg", "image/png", "image/gif"];

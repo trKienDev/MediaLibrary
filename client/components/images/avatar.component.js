@@ -3,6 +3,7 @@ import apiEndpoint from "../../api/endpoint.api.js";
 import appConfigs from "../../config/app.config.js";
 import { ServerFolders } from "../../constants/folder.constant.js";
 import { addHoverToScaleEffect } from "../../utils/effects.utils.js";
+import { addEffectHoverToZoomImage } from "../../utils/images.utils.js";
 import domsComponent from "../dom.components.js";
 import { createImgElement } from "./image.component.js";
 
@@ -12,7 +13,7 @@ export const AvatarTypes = {
 }
 // Component-based design theo kiểu factory pattern
 function AvatarComponent(config = {}) {
-      const { enableHoverEffect = true } = config;
+      const { enableHoverEffect, hoverZoomEffect } = config;
 
       const create = async (id, type) => {
             let path = null;
@@ -49,6 +50,10 @@ function AvatarComponent(config = {}) {
             
             if(enableHoverEffect) {
                   addHoverToScaleEffect(frame);
+            }
+            console.log('zoom: ', hoverZoomEffect);
+            if(hoverZoomEffect) {
+                  addEffectHoverToZoomImage(wrapper, img);
             }
 
             return frame;

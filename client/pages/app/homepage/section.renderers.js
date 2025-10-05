@@ -60,13 +60,13 @@ export async function renderAnimeVideosSection(data) {
 export async function renderFilmsSection(data) {
       return renderSection(data, {
             wrapperClass: 'films-wrapper',
-            itemFactory: async film => filmComponent.createFilmThumbnailFrame(film, ServerFolders.FILMS)
+            itemFactory: async film => filmComponent.createFilmThumbnailFrame(film, ServerFolders.FILMS, { hoverScaleEffect: true })
       });
 }
 export async function renderAnimeFilmsSection(data) {
       return renderSection(data, {
             wrapperClass: 'films-wrapper',
-            itemFactory: async film => filmComponent.createFilmThumbnailFrame(film, ServerFolders.ANIME_FILMS)
+            itemFactory: async film => filmComponent.createFilmThumbnailFrame(film, ServerFolders.ANIME_FILMS, { hoverScaleEffect: true })
       });
 }
 
@@ -80,7 +80,7 @@ export async function renderMangasSection(data) {
 export async function renderImagesSection(data) {
       return renderSection(data, {
             wrapperClass: 'images-wrapper',
-            itemFactory: async image => createImageFrame(image)
+            itemFactory: async image => createImageFrame(image, `image/${image._id}`)
       });
 }
 

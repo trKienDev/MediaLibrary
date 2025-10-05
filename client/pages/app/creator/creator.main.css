@@ -42,6 +42,22 @@
       background-color: white; /* màu line active */
       border-radius: 2px 2px 0 0;
 }
+/* Hiệu ứng fade-in khi đổi tab */
+.fade-in {
+      animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+      from {
+            opacity: 0;
+            transform: translateY(8px);
+      }
+      to {
+            opacity: 1;
+            transform: translateY(0);
+      }
+}
+
 
 #creator-avatar .avatar-image { height: 250px; width: 250px; border-radius: 5px;}
 
@@ -64,18 +80,33 @@
       padding: 3px;
 }
 
-/* Hiệu ứng fade-in khi đổi tab */
-.fade-in {
-      animation: fadeIn 0.4s ease;
+.creator-films-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px 11px;
+}
+.creator-films-wrapper .film-article {
+      width: calc((100% - 80px) / 8);
 }
 
-@keyframes fadeIn {
-      from {
-            opacity: 0;
-            transform: translateY(8px);
-      }
-      to {
-            opacity: 1;
-            transform: translateY(0);
-      }
+.creator-infor-page .first-row {
+      display: flex;
+      gap: 20px;
+}
+.creator-infor-wrapper .creator-infor-row {
+      margin-bottom: 10px;
+}
+[data-role="creator-name"] {
+      font-weight: bold;
+}
+[data-role="creator-birth"] {
+      color: #606060;
+}
+[data-role="creator-age"] {
+      background-color: var(--hot-pink);
+      width: fit-content;
+      padding: 3px 5px;
+      font-size: 14px;
+      border-radius: 3px;
+      user-select: none;
 }

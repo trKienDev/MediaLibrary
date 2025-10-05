@@ -4,9 +4,9 @@ import { addHoverToScaleEffect } from "../../utils/effects.utils.js";
 import domsComponent from "../dom.components.js";
 import { createImgElement } from "./image.component.js";
 
-export async function createImageFrame(image) {
+export async function createImageFrame(image, href) {
       const wrapper = domsComponent.createDiv({cssClass: 'image-wrapper'});
-      const ahref = domsComponent.createAhref({ href: `idol/${image.idol_id}`});
+      const ahref = domsComponent.createAhref({ href: href });
       const imageSrc = `${appConfigs.SERVER}/${ServerFolders.IMAGES}/${image.image_url}`;
       
       const frame = createImgElement({
