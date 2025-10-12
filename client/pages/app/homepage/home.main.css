@@ -77,6 +77,8 @@
       height: 300px;
       display: block;
       object-fit: cover;
+      border-bottom-left-radius: unset;
+      border-bottom-right-radius: unset;
 }
 #homepage-feeds-content .avatars-wrapper {
       display: flex;

@@ -43,7 +43,7 @@ export default async function() {
                         const fetched = await fetchAndRender(content, loader, seed);
                         attemps++;
                         if(!fetched) break;
-                  } while(document.body.scrollHeight <= window.innerHeight && attemps < maxAttemps);
+                  } while(attemps < 3 && attemps < maxAttemps);
 
                   if(attemps === maxAttemps) {
                         console.warn("Reached max attemps for loadUntilScrollable");

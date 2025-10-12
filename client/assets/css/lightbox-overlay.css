@@ -1,0 +1,61 @@
+/* Lightbox overlay */
+.kit-lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      z-index: 9999;
+}
+
+/* Ảnh trong overlay */
+.kit-lightbox-content {
+      position: relative;
+      max-width: 92vw;
+      max-height: 92vh;
+}
+
+.kit-lightbox-img {
+      max-width: 92vw;
+      max-height: 92vh;
+      display: block;
+      border-radius: 8px;
+      box-shadow: rgba(233, 233, 233, 0.938) 0px 7px 29px 0px;
+      transition: transform 0.3s ease;
+}
+.kit-lightbox-video {
+      height: 90vh;     
+      border-radius: 5px;
+      box-shadow: rgba(233, 233, 233, 0.938) 0px 7px 29px 0px;
+      transition: transform 0.3s ease;
+}
+
+/* Nút đóng */
+.kit-lightbox-close {
+      position: fixed;
+      top: 16px;
+      right: 20px;
+      font-size: 28px;
+      color: white;
+      cursor: pointer;
+      user-select: none;
+      line-height: 1;
+      padding: 8px 12px;
+}
+.kit-lightbox-close:hover {
+      color: red;
+}
+
+/* Optional: chuyển ảnh bằng phím ← → (nếu bạn thêm group sau) */
+.kit-lightbox-overlay.show { 
+      display: flex;
+      opacity: 1;
+      visibility: visible; 
+}
+.kit-lightbox-overlay.show .kit-lightbox-img {
+      transform: scale(1);
+}

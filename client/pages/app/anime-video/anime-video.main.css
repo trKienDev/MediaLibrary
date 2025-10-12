@@ -1,0 +1,40 @@
+#anime-video-page {
+      max-width: 1375px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+}
+
+#anime-video-page .thumbnail-wrapper img {
+      width: 399px;
+      height: 599px;
+      aspect-ratio: auto 399 / 599;
+      border-radius: 10px;
+}
+
+#anime-video-page .film-information .title {
+      color: #aaa;
+}
+#anime-video-page .film-information .film-infor-box {
+      margin-top: 10px;
+      display: flex;
+      gap: 5px;
+}
+#anime-video-page .film-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+}
+#anime-video-page .related-videos {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 10px;
+}
+#anime-video-page .related-videos .video-article {
+      flex-basis: calc(100%/3);
+      flex-grow: 0;
+      flex-shrink: 0;
+      box-sizing: border-box;
+      padding: 3px;
+}

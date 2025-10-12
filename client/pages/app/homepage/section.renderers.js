@@ -24,14 +24,14 @@ async function renderSection(data, {
 
 // ---- Specialized renderers ----
 export async function renderCreatorsSection(data) {
-      const avatarComponent = AvatarComponent();
+      const avatarComponent = AvatarComponent({ hoverZoomEffect: true });
       return renderSection(data, {
             wrapperClass: 'avatars-wrapper',
             itemFactory: async creator => avatarComponent.create(creator._id, AvatarTypes.CREATOR)
       });
 }
 export async function renderIdolsSection(data) {
-      const avatarComponent = AvatarComponent();
+      const avatarComponent = AvatarComponent({ hoverZoomEffect: true });
       return renderSection(data, {
             wrapperClass: 'avatars-wrapper',
             itemFactory: async idol => avatarComponent.create(idol._id, AvatarTypes.IDOL)
@@ -66,7 +66,7 @@ export async function renderFilmsSection(data) {
 export async function renderAnimeFilmsSection(data) {
       return renderSection(data, {
             wrapperClass: 'films-wrapper',
-            itemFactory: async film => filmComponent.createFilmThumbnailFrame(film, ServerFolders.ANIME_FILMS, { hoverScaleEffect: true })
+            itemFactory: async film => filmComponent.createFilmThumbnailFrame(film, ServerFolders.ANIME_FILMS, { hoverScaleEffect: true, prefix: 'anime-film' })
       });
 }
 
@@ -80,7 +80,7 @@ export async function renderMangasSection(data) {
 export async function renderImagesSection(data) {
       return renderSection(data, {
             wrapperClass: 'images-wrapper',
-            itemFactory: async image => createImageFrame(image, `image/${image._id}`)
+            itemFactory: async image => createImageFrame(image, `/idol/${image.idol_id}`, true)
       });
 }
 

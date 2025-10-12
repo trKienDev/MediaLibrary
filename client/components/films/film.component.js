@@ -7,9 +7,9 @@ import { addEffectHoverToZoomImage } from "../../utils/images.utils.js";
 import domsComponent from "../dom.components.js";
 import { createImgElement } from "../images/image.component.js";
 
-function createFilmLink(film) {
+function createFilmLink(film, prefix = 'film') {
       return domsComponent.createAhref({
-            href: `/film/${film._id}`,
+            href: `/${prefix}/${film._id}`,
             cssClass: 'film-link',
             attrs: { 'data-spa': 'true' }
       });
@@ -59,8 +59,9 @@ function createFilmArticle(configs = {}) {
 }
 
 function createFilmThumbnailFrame(film, folder, configs = {}) {
+      const { prefix } = configs;
       const { article, wrapper, enableZoom } = createFilmArticle(configs);
-      const link = createFilmLink(film);
+      const link = createFilmLink(film, prefix);
       const { wrapper: thumbWrapper, image } = createFilmThumbnail(film, folder);
       const infor = createFilmInfor(film);
 

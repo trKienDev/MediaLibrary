@@ -1,6 +1,16 @@
 const apiEndpoint = {
       anime_videos: {
             getUniquePagination: '/api/anime-videos/unique-pagination',
+            getById: '/api/anime-video',
+      },
+      anime_films: {
+            getById: '/api/anime-film',
+      },
+      anime_studios: {
+            getById: '/api/anime-studio',
+      },
+      anime_series: {
+            getById: '/api/anime-series'
       },
       codes: {
             getAll: '/api/codes',
@@ -19,7 +29,10 @@ const apiEndpoint = {
             delete: '/api/creator', // delete
       },
       clips: {
+            getAll: '/api/clips/all',
             getUniquePagination: '/api/clips/unique-pagination',
+            getByIdol: '/api/clips/idol',
+            getById: '/api/clips',
       },
       films: {
             getById: '/api/film',
@@ -31,6 +44,7 @@ const apiEndpoint = {
       },
       images: {
             getRandomPagination: '/api/images/random-pagination',
+            getByIdolId: '/api/images/idol',
       },
       homepageFeeds: 'api/feeds/section',
       mangas: {
@@ -46,6 +60,7 @@ const apiEndpoint = {
             getById: '/api/playlist',
       },
       shorts: {
+            getByIdolId: '/api/shorts/idol',
             getRandomPagination: '/api/shorts/random-pagination',
       },
       studios: {
@@ -60,7 +75,9 @@ const apiEndpoint = {
             increaseViewsByOne: '/api/video/views',
       },
       records: {
-            getAll: ''
+            getAll: '/api/records',
+            getById: '/api/record',
+            getByIdolId: '/api/records/idol',
       }
 }
 export default apiEndpoint;

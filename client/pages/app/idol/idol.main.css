@@ -1,0 +1,42 @@
+#idol-main-page .avatar-image {
+      height: 200px;
+      width: 200px;
+      border-radius: 5px;
+}
+#idol-main-page .first-row {
+      display: flex;
+      gap: 20px;
+}
+#idol-main-page .idol-infor-block {
+      display: flex;
+      gap: 10px;
+      flex-direction: column;
+}
+#idol-main-page .idol-name {
+      font-weight: bold;
+}
+#idol-main-page .idol-identifier {
+      color: #606060;
+}
+#idol-main-page .idol-country {
+      color: var(--light-pink);
+}
+
+#idol-main-page .idol-images-wrapper, #idol-main-page .idol-shorts-wrapper,
+#idol-main-page .idol-records-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 10px 0px;
+}
+#idol-main-page .image-wrapper {
+      width: calc((100% - 52px) / 6);
+      height: fit-content;
+      border-radius: 10px;
+}
+#idol-main-page .short-article {
+      width: calc((100% - 54px) / 6);
+}
+#idol-main-page .video-article {
+      width: calc((100% - 80px) / 4);
+}

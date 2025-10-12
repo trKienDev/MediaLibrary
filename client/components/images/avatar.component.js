@@ -51,7 +51,6 @@ function AvatarComponent(config = {}) {
             if(enableHoverEffect) {
                   addHoverToScaleEffect(frame);
             }
-            console.log('zoom: ', hoverZoomEffect);
             if(hoverZoomEffect) {
                   addEffectHoverToZoomImage(wrapper, img);
             }
